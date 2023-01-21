@@ -23,4 +23,9 @@ public class SingleMatchController {
     public int getPlayerPointsInASingleMatch(@PathVariable long singleMatchId, @PathVariable long playerId) {
         return service.getPlayersPointInASingleMatch(singleMatchId, playerId);
     }
+
+    @GetMapping("/{singleMatchId}/winner")
+    public User getWinnerInASingleMatch(@PathVariable long singleMatchId) {
+        return service.getWinnerInASingleMatch(singleMatchId);
+    }
 }
