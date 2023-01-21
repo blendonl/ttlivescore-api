@@ -7,7 +7,7 @@ import java.util.List;
 
 public class UserDtoMapper {
 
-    public UserDto mapUserToUserDto(User user) {
+    public static UserDto mapUserToUserDto(User user) {
          return UserDto.builder()
                 .name(user.getName())
                 .lastName(user.getLastName())
