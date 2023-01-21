@@ -4,23 +4,26 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "player")
-@Getter
+@Table(name ="users")
 @Setter
-public class Player {
+@Getter
+public class User {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
+    @GeneratedValue
     private Long id;
+    private Byte[] profilePicture;
     private String name;
     private String lastName;
-    private char gender;
     private String email;
     private String password;
-    @ManyToOne()
-    private Team team;
+    private Date birthDate;
+    private char gender;
+    @OneToMany()
+    private List<Role> roles;
 
 }

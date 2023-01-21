@@ -18,9 +18,12 @@ public class SingleMatch {
     private Long id;
     private boolean finished;
     @ManyToOne()
-    private Player player1;
+    private User player1;
     @ManyToOne()
-    private Player player2;
+    private User player2;
+
+    @ManyToOne()
+    private User referee;
 
     @ManyToOne()
     private Event event;

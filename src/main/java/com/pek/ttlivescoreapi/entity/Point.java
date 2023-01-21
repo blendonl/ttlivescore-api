@@ -15,7 +15,8 @@ public class Point {
     private Long id;
 
     @ManyToOne
-    private Player player;
+    private User player;
+
 
     @ManyToOne()
     private SingleMatch singleMatch;
