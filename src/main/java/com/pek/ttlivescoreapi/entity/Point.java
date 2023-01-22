@@ -18,6 +18,6 @@ public class Point {
     private User player;
 
     @ManyToOne()
-    private Match singleMatch;
+    private Match match;
 
 }
