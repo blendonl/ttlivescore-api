@@ -1,9 +1,11 @@
 package com.pek.ttlivescoreapi.service;
 
-import com.pek.ttlivescoreapi.entity.SingleMatch;
+import com.pek.ttlivescoreapi.entity.Match;
 import com.pek.ttlivescoreapi.entity.User;
 import com.pek.ttlivescoreapi.repository.SingleMatchRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class SingleMatchService {
@@ -21,17 +23,24 @@ public class SingleMatchService {
     }
 
     public User getWinnerInASingleMatch(long singleMatchId) {
-        SingleMatch singleMatch = singleMatchRepository.findById(singleMatchId).orElse(null);
+//        Match singleMatch = singleMatchRepository.findById(singleMatchId).orElse(null);
+//
+//        int player1Points = getPlayersPointInASingleMatch(singleMatchId, singleMatch.getPlayer1().getId());
+//        int player2Points = getPlayersPointInASingleMatch(singleMatchId, singleMatch.getPlayer2().getId());
+//
+//        if(player1Points > player2Points) {
+//            return singleMatch.getPlayer1();
+//        }
+//
+//        return singleMatch.getPlayer2();
 
+        return null;
 
-        int player1Points = getPlayersPointInASingleMatch(singleMatchId, singleMatch.getPlayer1().getId());
-        int player2Points = getPlayersPointInASingleMatch(singleMatchId, singleMatch.getPlayer2().getId());
+    }
 
-        if(player1Points > player2Points) {
-            return singleMatch.getPlayer1();
-        }
+    public List<Match> findSingleMatchByPlayer1IdAndPlayer2Id(long player1Id, long player2Id) {
+//        return singleMatchleMatchRepository.findAllByPlayer1IdAndPlayer2Id(player1Id, player2Id);
 
-        return singleMatch.getPlayer2();
-
+        return null;
     }
 }

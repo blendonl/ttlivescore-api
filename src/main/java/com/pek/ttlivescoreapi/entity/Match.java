@@ -1,6 +1,6 @@
 package com.pek.ttlivescoreapi.entity;
 
-
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,23 +10,19 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-public class TeamMatch {
-
+public class Match {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", nullable = false)
     private Long id;
 
+    private boolean finished;
+
+    @ManyToOne()
+    private User referee;
 
     @ManyToOne()
     private Event event;
 
-    @ManyToOne()
-    private Team team1;
-
-    @ManyToOne()
-    private Team team2;
-
-    @OneToMany()
-    private List<Match> matches;
 
 }
