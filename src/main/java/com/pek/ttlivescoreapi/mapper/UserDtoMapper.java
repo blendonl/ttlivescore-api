@@ -23,4 +23,14 @@ public class UserDtoMapper {
     }
 
 
+    public static User mapUserDtoToUser(UserDto userDto) {
+        return User.builder()
+                .name(userDto.getName())
+                .lastName(userDto.getLastName())
+                .email(userDto.getEmail())
+                .password(userDto.getPassword())
+                .birthDate(userDto.getBirthDate())
+                .gender(userDto.getGender())
+                .build();
+    }
 }

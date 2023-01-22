@@ -1,7 +1,6 @@
 package com.pek.ttlivescoreapi.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -11,6 +10,9 @@ import java.util.List;
 @Table(name ="users")
 @Setter
 @Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
     @Id

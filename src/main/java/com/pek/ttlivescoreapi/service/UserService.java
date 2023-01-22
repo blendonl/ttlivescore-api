@@ -1,5 +1,6 @@
 package com.pek.ttlivescoreapi.service;
 
+import com.pek.ttlivescoreapi.config.exception.UserNotFoundException;
 import com.pek.ttlivescoreapi.entity.User;
 import com.pek.ttlivescoreapi.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -23,13 +24,11 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public boolean deleteById(long id) {
+    public void deleteById(long id) throws UserNotFoundException {
 
         if(!userRepository.existsById(id))
-            return false;
+            throw new UserNotFoundException();
         userRepository.deleteById(id);
-
-        return true;
     }
 
 
