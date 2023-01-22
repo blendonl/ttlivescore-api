@@ -19,5 +19,18 @@ public class UserService {
         return userRepository.findAllByRole(role);
     }
 
+    public User save(User user) {
+        return userRepository.save(user);
+    }
+
+    public boolean deleteById(long id) {
+
+        if(!userRepository.existsById(id))
+            return false;
+        userRepository.deleteById(id);
+
+        return true;
+    }
+
 
 }
