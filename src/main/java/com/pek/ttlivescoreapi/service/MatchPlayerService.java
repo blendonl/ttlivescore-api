@@ -19,4 +19,5 @@ public class MatchPlayerService {
     public List<MatchPlayer> findAllByMatchId(long matchId) {
         return matchPlayerRepository.findAllByMatchId(matchId);
     }
+
 }

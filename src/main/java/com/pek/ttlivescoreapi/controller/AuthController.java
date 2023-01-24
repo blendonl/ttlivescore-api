@@ -1,6 +1,9 @@
 package com.pek.ttlivescoreapi.controller;
 
+import com.pek.ttlivescoreapi.dto.SignupRequestDto;
 import com.pek.ttlivescoreapi.service.AuthService;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,5 +15,10 @@ public class AuthController {
 
     public AuthController(AuthService authService) {
         this.authService = authService;
+    }
+
+    @PostMapping("signup")
+    public void signup(@RequestBody SignupRequestDto request) {
+        authService.signup(request, "PLAYER");
     }
 }

@@ -22,4 +22,7 @@ public class Team {
     @ManyToOne()
     private League league;
 
+    @OneToMany()
+    private List<User> users;
+
 }

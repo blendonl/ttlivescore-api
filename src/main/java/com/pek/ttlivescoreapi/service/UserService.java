@@ -17,12 +17,14 @@ public class UserService {
     }
 
     public List<User> findAllByRole(String role) {
-        return userRepository.findAllByRole(role);
+        return userRepository.findAllByRoleName(role);
     }
+
 
     public User save(User user) {
         return userRepository.save(user);
     }
+
 
     public void deleteById(long id) throws UserNotFoundException {
 
@@ -30,6 +32,22 @@ public class UserService {
             throw new UserNotFoundException();
         userRepository.deleteById(id);
     }
+
+    public User findById(long id) throws UserNotFoundException {
+        return userRepository.findById(id).orElseThrow(UserNotFoundException::new);
+    }
+
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    public List<User> findAllByTeamId(long teamId) {
+        return userRepository.findAllByTeamId(teamId);
+    }
+    public List<User> findAllByTeamName(String team) {
+        return userRepository.findAllByTeamName(team);
+    }
+
 
 
 }

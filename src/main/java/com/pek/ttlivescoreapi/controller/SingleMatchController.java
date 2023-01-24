@@ -25,7 +25,8 @@ public class SingleMatchController {
 
     @GetMapping("/{singleMatchId}/{playerId}")
     public int getPlayerPointsInASingleMatch(@PathVariable long singleMatchId, @PathVariable long playerId) {
-        return service.getPlayersPointInASingleMatch(singleMatchId, playerId);
+//        return service.getPlayersPointInASingleMatch(singleMatchId, playerId);
+        return 0;
     }
 
     @GetMapping("/{singleMatchId}/winner")
@@ -38,7 +39,8 @@ public class SingleMatchController {
 
     @GetMapping("find/{player1Id}/{player2Id}")
     public List<Match> getSingleMatchesByPlayer1IdAndPlayer2Id(@PathVariable long player1Id, @PathVariable long player2Id) {
-        return service.findSingleMatchByPlayer1IdAndPlayer2Id(player1Id, player2Id);
+//        return service.findSingleMatchByPlayer1IdAndPlayer2Id(player1Id, player2Id);
 
+        return null;
     }
 }

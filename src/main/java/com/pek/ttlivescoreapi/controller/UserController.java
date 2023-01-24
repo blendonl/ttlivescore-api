@@ -1,23 +1,27 @@
 package com.pek.ttlivescoreapi.controller;
 
 
+import com.pek.ttlivescoreapi.config.exception.UserNotFoundException;
 import com.pek.ttlivescoreapi.dto.UserDto;
 import com.pek.ttlivescoreapi.entity.User;
 import com.pek.ttlivescoreapi.mapper.UserDtoMapper;
+import com.pek.ttlivescoreapi.repository.UserRepository;
 import com.pek.ttlivescoreapi.service.UserService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
 
     private UserService userService;
+    private final UserRepository userRepository;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService,
+                          UserRepository userRepository) {
         this.userService = userService;
+        this.userRepository = userRepository;
     }
 
 
@@ -29,4 +33,22 @@ public class UserController {
 
         return userDto;
     }
+
+    @GetMapping("/{userId}")
+    public UserDto getUserById(@PathVariable long userId) throws UserNotFoundException {
+
+        User user = userService.findById(userId);
+        return UserDtoMapper.mapUserToUserDto(user);
+    }
+
+    @GetMapping("/players")
+    public List<UserDto> getAllPlayers() {
+
+        List<User> users = userService.findAllByRole("PLAYER");
+
+        return UserDtoMapper.mapUsersToUsersDto(users);
+    }
+
+
+
 }
