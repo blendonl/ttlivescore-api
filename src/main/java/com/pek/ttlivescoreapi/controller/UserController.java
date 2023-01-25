@@ -16,12 +16,9 @@ import java.util.List;
 public class UserController {
 
     private UserService userService;
-    private final UserRepository userRepository;
 
-    public UserController(UserService userService,
-                          UserRepository userRepository) {
+    public UserController(UserService userService) {
         this.userService = userService;
-        this.userRepository = userRepository;
     }
 
 
@@ -47,6 +44,15 @@ public class UserController {
         List<User> users = userService.findAllByRole("PLAYER");
 
         return UserDtoMapper.mapUsersToUsersDto(users);
+    }
+
+    @GetMapping("find/{email}")
+    public UserDto findByEmail(@PathVariable String email) {
+
+        User user = userService.findByEmail(email);
+
+        return UserDtoMapper.mapUserToUserDto(user);
+
     }
 
 
