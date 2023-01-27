@@ -2,12 +2,16 @@ package com.pek.ttlivescoreapi.controller;
 
 import com.pek.ttlivescoreapi.config.exception.TeamNotFoundException;
 import com.pek.ttlivescoreapi.dto.TeamDto;
+import com.pek.ttlivescoreapi.dto.UserDto;
 import com.pek.ttlivescoreapi.entity.Team;
+import com.pek.ttlivescoreapi.entity.User;
 import com.pek.ttlivescoreapi.mapper.TeamDtoMapper;
 import com.pek.ttlivescoreapi.mapper.UserDtoMapper;
 import com.pek.ttlivescoreapi.service.TeamService;
 import com.pek.ttlivescoreapi.service.UserService;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("teams")
@@ -40,6 +44,14 @@ public class TeamController {
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable long id) throws TeamNotFoundException {
         teamService.deleteById(id);
+    }
+
+    @GetMapping("{teamName}/players")
+    public List<UserDto> findAllPlayerByTeamName(@PathVariable String teamName) {
+
+        List<UserDto> users = UserDtoMapper.mapUsersToUsersDto(userService.findAllByTeamName(teamName));
+
+        return users;
     }
 
 
