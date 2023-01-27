@@ -24,6 +24,21 @@ public class TeamService {
         return repository.findByName(name).orElseThrow(TeamNotFoundException::new);
     }
 
+    public Team save(Team team) {
+        return repository.save(team);
+    }
+
+    public void deleteById(long id) throws TeamNotFoundException {
+        if(!repository.existsById(id)) {
+            throw new TeamNotFoundException();
+        }
+
+        repository.deleteById(id);
+    }
+
+
+
+
     public List<Team> findAllByLeagueId(long leagueId) {
         return repository.findAllByLeagueId(leagueId);
     }
