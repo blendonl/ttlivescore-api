@@ -32,7 +32,7 @@ public class SingleMatchController {
     @GetMapping("/{singleMatchId}/winner")
     public UserDto getWinnerInASingleMatch(@PathVariable long singleMatchId) {
 
-        UserDto user = UserDtoMapper.mapUserToUserDto(service.getWinnerInASingleMatch(singleMatchId));
+        UserDto user = UserDtoMapper.userToUserDto(service.getWinnerInASingleMatch(singleMatchId));
 
         return user;
     }

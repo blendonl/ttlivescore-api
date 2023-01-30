@@ -23,7 +23,7 @@ public class UserController {
 
     @PostMapping
     public UserDto saveUser(@RequestBody UserDto userDto) {
-        User user = UserDtoMapper.mapUserDtoToUser(userDto);
+        User user = UserDtoMapper.userDtoToUser(userDto);
 
         user = userService.save(user);
 
@@ -34,7 +34,7 @@ public class UserController {
     public UserDto getUserById(@PathVariable long userId) throws UserNotFoundException {
 
         User user = userService.findById(userId);
-        return UserDtoMapper.mapUserToUserDto(user);
+        return UserDtoMapper.userToUserDto(user);
     }
 
     @GetMapping("/players")
@@ -42,7 +42,7 @@ public class UserController {
 
         List<User> users = userService.findAllByRole("PLAYER");
 
-        return UserDtoMapper.mapUsersToUsersDto(users);
+        return UserDtoMapper.usersToUsersDto(users);
     }
 
     @GetMapping("find/{email}")
@@ -50,7 +50,7 @@ public class UserController {
 
         User user = userService.findByEmail(email);
 
-        return UserDtoMapper.mapUserToUserDto(user);
+        return UserDtoMapper.userToUserDto(user);
 
     }
 

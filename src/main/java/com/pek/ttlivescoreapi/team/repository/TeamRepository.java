@@ -1,6 +1,6 @@
-package com.pek.ttlivescoreapi.repository;
+package com.pek.ttlivescoreapi.team.repository;
 
-import com.pek.ttlivescoreapi.entity.Team;
+import com.pek.ttlivescoreapi.team.Team;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

@@ -1,4 +1,4 @@
-package com.pek.ttlivescoreapi.dto;
+package com.pek.ttlivescoreapi.team.dto;
 
 import lombok.*;
 

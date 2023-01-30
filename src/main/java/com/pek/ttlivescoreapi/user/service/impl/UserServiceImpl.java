@@ -18,12 +18,12 @@ public class UserServiceImpl implements UserService {
     }
 
     public List<UserDto> findAllByRole(String role) {
-        return UserDtoMapper.mapUsersToUsersDto(userRepository.findAllByRoleName(role));
+        return UserDtoMapper.usersToUsersDto(userRepository.findAllByRoleName(role));
     }
 
 
     public UserDto save(User user) {
-         return UserDtoMapper.mapUserToUserDto(userRepository.save(user));
+         return UserDtoMapper.userToUserDto(userRepository.save(user));
     }
 
 
@@ -37,22 +37,22 @@ public class UserServiceImpl implements UserService {
     public UserDto findById(long id) throws UserNotFoundException {
         User user = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
 
-        return UserDtoMapper.mapUserToUserDto(user);
+        return UserDtoMapper.userToUserDto(user);
     }
 
     public UserDto findByEmail(String email) throws UserNotFoundException {
 
         User user = userRepository.findByEmail(email).orElseThrow(UserNotFoundException::new);
 
-        return UserDtoMapper.mapUserToUserDto(user);
+        return UserDtoMapper.userToUserDto(user);
     }
 
     public List<UserDto> findAllByTeamId(long teamId) {
-        return UserDtoMapper.mapUsersToUsersDto( userRepository.findAllByTeamId(teamId));
+        return UserDtoMapper.usersToUsersDto( userRepository.findAllByTeamId(teamId));
     }
     public List<UserDto> findAllByTeamName(String team) {
 
-        return UserDtoMapper.mapUsersToUsersDto(userRepository.findAllByTeamName(team));
+        return UserDtoMapper.usersToUsersDto(userRepository.findAllByTeamName(team));
     }
 
 

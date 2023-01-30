@@ -1,5 +1,6 @@
-package com.pek.ttlivescoreapi.entity;
+package com.pek.ttlivescoreapi.team;
 
+import com.pek.ttlivescoreapi.entity.League;
 import com.pek.ttlivescoreapi.user.User;
 import lombok.*;
 

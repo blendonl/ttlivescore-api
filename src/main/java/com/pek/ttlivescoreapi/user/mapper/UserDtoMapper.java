@@ -7,7 +7,7 @@ import java.util.List;
 
 public class UserDtoMapper {
 
-    public static UserDto mapUserToUserDto(User user) {
+    public static UserDto userToUserDto(User user) {
          return UserDto.builder()
                 .name(user.getName())
                 .lastName(user.getLastName())
@@ -17,12 +17,12 @@ public class UserDtoMapper {
                 .build();
     }
 
-    public static List<UserDto> mapUsersToUsersDto(List<User> users) {
-        return users.stream().map(UserDtoMapper::mapUserToUserDto).toList();
+    public static List<UserDto> usersToUsersDto(List<User> users) {
+        return users.stream().map(UserDtoMapper::userToUserDto).toList();
     }
 
 
-    public static User mapUserDtoToUser(UserDto userDto) {
+    public static User userDtoToUser(UserDto userDto) {
         return User.builder()
                 .name(userDto.getName())
                 .lastName(userDto.getLastName())

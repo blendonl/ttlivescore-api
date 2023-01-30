@@ -1,12 +1,11 @@
-package com.pek.ttlivescoreapi.controller;
+package com.pek.ttlivescoreapi.team.controller;
 
-import com.pek.ttlivescoreapi.config.exception.TeamNotFoundException;
-import com.pek.ttlivescoreapi.dto.TeamDto;
+import com.pek.ttlivescoreapi.team.exception.TeamNotFoundException;
+import com.pek.ttlivescoreapi.team.dto.TeamDto;
 import com.pek.ttlivescoreapi.user.dto.UserDto;
-import com.pek.ttlivescoreapi.entity.Team;
-import com.pek.ttlivescoreapi.mapper.TeamDtoMapper;
-import com.pek.ttlivescoreapi.user.mapper.UserDtoMapper;
-import com.pek.ttlivescoreapi.service.TeamService;
+import com.pek.ttlivescoreapi.team.Team;
+import com.pek.ttlivescoreapi.team.mapper.TeamDtoMapper;
+import com.pek.ttlivescoreapi.team.service.TeamService;
 import com.pek.ttlivescoreapi.user.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,10 +46,7 @@ public class TeamController {
 
     @GetMapping("{teamName}/players")
     public List<UserDto> findAllPlayerByTeamName(@PathVariable String teamName) {
-
-        List<UserDto> users = UserDtoMapper.mapUsersToUsersDto(userService.findAllByTeamName(teamName));
-
-        return users;
+        return userService.findAllByTeamName(teamName);
     }
 
 

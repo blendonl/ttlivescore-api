@@ -1,18 +1,17 @@
-package com.pek.ttlivescoreapi.service;
+package com.pek.ttlivescoreapi.team.service.impl;
 
-import com.pek.ttlivescoreapi.config.exception.TeamNotFoundException;
-import com.pek.ttlivescoreapi.entity.Team;
-import com.pek.ttlivescoreapi.repository.TeamRepository;
-import org.springframework.stereotype.Service;
+import com.pek.ttlivescoreapi.team.Team;
+import com.pek.ttlivescoreapi.team.exception.TeamNotFoundException;
+import com.pek.ttlivescoreapi.team.repository.TeamRepository;
+import com.pek.ttlivescoreapi.team.service.TeamService;
 
 import java.util.List;
 
-@Service
-public class TeamService {
+public class TeamServiceImpl implements TeamService {
 
     private TeamRepository repository;
 
-    public TeamService(TeamRepository repository) {
+    public TeamServiceImpl(TeamRepository repository) {
         this.repository = repository;
     }
 
