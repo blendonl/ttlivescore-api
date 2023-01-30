@@ -1,6 +1,6 @@
 package com.pek.ttlivescoreapi.team.controller;
 
-import com.pek.ttlivescoreapi.team.dto.TeamDto;
+import com.pek.ttlivescoreapi.team.tansport.TeamTransport;
 import com.pek.ttlivescoreapi.team.exception.TeamNotFoundException;
 import com.pek.ttlivescoreapi.team.mapper.TeamMapper;
 import com.pek.ttlivescoreapi.team.service.TeamService;
@@ -25,18 +25,15 @@ public class TeamController {
     }
 
     @GetMapping("/{name}")
-    public TeamDto findByTeamName(@PathVariable String name) throws TeamNotFoundException {
-        Team team = teamService.findByName(name);
-
-        return TeamMapper.mapTeamToTeamDto(team);
-
+    public TeamTransport findByTeamName(@PathVariable String name) throws TeamNotFoundException {
+        return teamService.findByName(name);
     }
 
     @PostMapping("")
-    public TeamDto save(@RequestBody TeamDto teamDto) {
-        Team team = TeamMapper.mapTeamDtoToTeam(teamDto);
+    public TeamTransport save(@RequestBody TeamTransport teamTransport) {
+        Team team = TeamMapper.mapToTeam(teamTransport);
 
-        return TeamMapper.mapTeamToTeamDto(teamService.save(team));
+        return teamService.save(team);
     }
 
     @DeleteMapping("/{id}")

@@ -1,4 +1,4 @@
-package com.pek.ttlivescoreapi.team.dto;
+package com.pek.ttlivescoreapi.team.tansport;
 
 import lombok.*;
 
@@ -7,7 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class TeamDto {
+public class TeamTransport {
 
     private String name;
     private String leagueName;
