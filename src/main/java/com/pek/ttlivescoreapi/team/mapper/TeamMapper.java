@@ -7,7 +7,7 @@ import com.pek.ttlivescoreapi.team.Team;
 
 import java.util.List;
 
-public class TeamDtoMapper {
+public class TeamMapper {
 
     public static TeamDto mapTeamToTeamDto(Team team) {
         return TeamDto
@@ -18,7 +18,7 @@ public class TeamDtoMapper {
     }
 
     public static List<TeamDto> mapTeamsToTeamsDto(List<Team> team) {
-        return team.stream().map(TeamDtoMapper::mapTeamToTeamDto).toList();
+        return team.stream().map(TeamMapper::mapTeamToTeamDto).toList();
     }
 
 

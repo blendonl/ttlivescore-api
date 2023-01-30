@@ -3,8 +3,8 @@ package com.pek.ttlivescoreapi.user.controller;
 
 import com.pek.ttlivescoreapi.user.exception.UserNotFoundException;
 import com.pek.ttlivescoreapi.user.dto.UserDto;
-import com.pek.ttlivescoreapi.user.User;
-import com.pek.ttlivescoreapi.user.mapper.UserDtoMapper;
+import com.pek.ttlivescoreapi.user.entity.User;
+import com.pek.ttlivescoreapi.user.mapper.UserMapper;
 import com.pek.ttlivescoreapi.user.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +23,7 @@ public class UserController {
 
     @PostMapping
     public UserDto saveUser(@RequestBody UserDto userDto) {
-        User user = UserDtoMapper.userDtoToUser(userDto);
+        User user = UserMapper.userDtoToUser(userDto);
 
         user = userService.save(user);
 
@@ -34,7 +34,7 @@ public class UserController {
     public UserDto getUserById(@PathVariable long userId) throws UserNotFoundException {
 
         User user = userService.findById(userId);
-        return UserDtoMapper.userToUserDto(user);
+        return UserMapper.userToUserDto(user);
     }
 
     @GetMapping("/players")
@@ -42,7 +42,7 @@ public class UserController {
 
         List<User> users = userService.findAllByRole("PLAYER");
 
-        return UserDtoMapper.usersToUsersDto(users);
+        return UserMapper.usersToUsersDto(users);
     }
 
     @GetMapping("find/{email}")
@@ -50,7 +50,7 @@ public class UserController {
 
         User user = userService.findByEmail(email);
 
-        return UserDtoMapper.userToUserDto(user);
+        return UserMapper.userToUserDto(user);
 
     }
 

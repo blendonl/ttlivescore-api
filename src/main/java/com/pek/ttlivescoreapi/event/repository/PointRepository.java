@@ -1,4 +1,4 @@
-package com.pek.ttlivescoreapi.repository;
+package com.pek.ttlivescoreapi.event.repository;
 
 import com.pek.ttlivescoreapi.match.entity.Point;
 import org.springframework.data.repository.CrudRepository;

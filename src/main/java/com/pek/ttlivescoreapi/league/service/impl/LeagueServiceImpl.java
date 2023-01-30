@@ -3,7 +3,7 @@ package com.pek.ttlivescoreapi.league.service.impl;
 import com.pek.ttlivescoreapi.league.exception.LeagueNotFoundException;
 import com.pek.ttlivescoreapi.league.dto.LeagueDto;
 import com.pek.ttlivescoreapi.league.League;
-import com.pek.ttlivescoreapi.league.LeagueMapper;
+import com.pek.ttlivescoreapi.league.mapper.LeagueMapper;
 import com.pek.ttlivescoreapi.league.repository.LeagueRepository;
 import com.pek.ttlivescoreapi.league.service.LeagueService;
 import org.springframework.stereotype.Service;

@@ -1,30 +1,23 @@
-package com.pek.ttlivescoreapi.team;
+package com.pek.ttlivescoreapi.event.entity;
 
 import com.pek.ttlivescoreapi.league.League;
-import com.pek.ttlivescoreapi.user.entity.User;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
+import java.sql.Date;
 
 @Entity
-@Table(name = "team")
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class Team {
+public class Season extends Event {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
-    private String name;
-
     @ManyToOne()
     private League league;
-
-    @OneToMany()
-    private List<User> users;
 
 }

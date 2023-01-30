@@ -1,11 +1,11 @@
 package com.pek.ttlivescoreapi.user.mapper;
 
 import com.pek.ttlivescoreapi.user.dto.UserDto;
-import com.pek.ttlivescoreapi.user.User;
+import com.pek.ttlivescoreapi.user.entity.User;
 
 import java.util.List;
 
-public class UserDtoMapper {
+public class UserMapper {
 
     public static UserDto userToUserDto(User user) {
          return UserDto.builder()
@@ -18,7 +18,7 @@ public class UserDtoMapper {
     }
 
     public static List<UserDto> usersToUsersDto(List<User> users) {
-        return users.stream().map(UserDtoMapper::userToUserDto).toList();
+        return users.stream().map(UserMapper::userToUserDto).toList();
     }
 
 

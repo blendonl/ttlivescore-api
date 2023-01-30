@@ -1,9 +1,9 @@
-package com.pek.ttlivescoreapi.controller;
+package com.pek.ttlivescoreapi.match.controller;
 
 
 import com.pek.ttlivescoreapi.user.dto.UserDto;
 import com.pek.ttlivescoreapi.match.entity.Match;
-import com.pek.ttlivescoreapi.user.mapper.UserDtoMapper;
+import com.pek.ttlivescoreapi.user.mapper.UserMapper;
 import com.pek.ttlivescoreapi.match.service.MatchService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,7 +32,7 @@ public class SingleMatchController {
     @GetMapping("/{singleMatchId}/winner")
     public UserDto getWinnerInASingleMatch(@PathVariable long singleMatchId) {
 
-        UserDto user = UserDtoMapper.userToUserDto(service.getWinnerInASingleMatch(singleMatchId));
+        UserDto user = UserMapper.userToUserDto(service.getWinnerInASingleMatch(singleMatchId));
 
         return user;
     }

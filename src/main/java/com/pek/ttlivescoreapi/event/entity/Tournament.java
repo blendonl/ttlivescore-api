@@ -1,7 +1,6 @@
 package com.pek.ttlivescoreapi.event.entity;
 
-import com.pek.ttlivescoreapi.entity.Category;
-import com.pek.ttlivescoreapi.event.entity.Event;
+import com.pek.ttlivescoreapi.user.entity.Category;
 import lombok.Getter;
 import lombok.Setter;
 

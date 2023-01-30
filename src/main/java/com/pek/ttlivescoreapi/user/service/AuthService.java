@@ -1,4 +1,4 @@
-package com.pek.ttlivescoreapi.service;
+package com.pek.ttlivescoreapi.user.service;
 
 import com.pek.ttlivescoreapi.user.dto.SignupRequestDto;
 import com.pek.ttlivescoreapi.user.service.UserService;
