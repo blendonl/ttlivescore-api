@@ -1,5 +1,6 @@
-package com.pek.ttlivescoreapi.entity;
+package com.pek.ttlivescoreapi.match.entity;
 
+import com.pek.ttlivescoreapi.match.entity.Match;
 import com.pek.ttlivescoreapi.user.User;
 import lombok.Getter;
 import lombok.Setter;

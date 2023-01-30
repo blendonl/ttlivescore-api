@@ -1,6 +1,6 @@
-package com.pek.ttlivescoreapi.repository;
+package com.pek.ttlivescoreapi.match.repository;
 
-import com.pek.ttlivescoreapi.entity.Match;
+import com.pek.ttlivescoreapi.match.entity.Match;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

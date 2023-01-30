@@ -1,6 +1,6 @@
 package com.pek.ttlivescoreapi.service;
 
-import com.pek.ttlivescoreapi.entity.MatchPlayer;
+import com.pek.ttlivescoreapi.match.entity.MatchPlayer;
 import com.pek.ttlivescoreapi.repository.MatchPlayerRepository;
 import org.springframework.stereotype.Service;
 

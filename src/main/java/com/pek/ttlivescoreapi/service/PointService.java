@@ -1,6 +1,6 @@
 package com.pek.ttlivescoreapi.service;
 
-import com.pek.ttlivescoreapi.entity.Point;
+import com.pek.ttlivescoreapi.match.entity.Point;
 import com.pek.ttlivescoreapi.repository.PointRepository;
 import org.springframework.stereotype.Service;
 
