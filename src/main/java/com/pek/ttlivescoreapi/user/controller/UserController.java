@@ -3,7 +3,7 @@ package com.pek.ttlivescoreapi.user.controller;
 
 import com.pek.ttlivescoreapi.user.exception.UserNotFoundException;
 import com.pek.ttlivescoreapi.user.dto.UserDto;
-import com.pek.ttlivescoreapi.user.User;
+import com.pek.ttlivescoreapi.user.entity.User;
 import com.pek.ttlivescoreapi.user.mapper.UserDtoMapper;
 import com.pek.ttlivescoreapi.user.service.UserService;
 import org.springframework.web.bind.annotation.*;

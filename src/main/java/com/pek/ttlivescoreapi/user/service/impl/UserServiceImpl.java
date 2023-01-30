@@ -1,6 +1,6 @@
 package com.pek.ttlivescoreapi.user.service.impl;
 
-import com.pek.ttlivescoreapi.user.User;
+import com.pek.ttlivescoreapi.user.entity.User;
 import com.pek.ttlivescoreapi.user.dto.UserDto;
 import com.pek.ttlivescoreapi.user.exception.UserNotFoundException;
 import com.pek.ttlivescoreapi.user.mapper.UserDtoMapper;

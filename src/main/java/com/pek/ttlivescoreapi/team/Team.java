@@ -1,7 +1,7 @@
 package com.pek.ttlivescoreapi.team;
 
 import com.pek.ttlivescoreapi.league.League;
-import com.pek.ttlivescoreapi.user.User;
+import com.pek.ttlivescoreapi.user.entity.User;
 import lombok.*;
 
 import javax.persistence.*;

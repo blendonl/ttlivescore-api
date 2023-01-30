@@ -1,4 +1,4 @@
-package com.pek.ttlivescoreapi.repository;
+package com.pek.ttlivescoreapi.match.repository;
 
 import com.pek.ttlivescoreapi.match.entity.MatchPlayer;
 import org.springframework.data.jpa.repository.Query;

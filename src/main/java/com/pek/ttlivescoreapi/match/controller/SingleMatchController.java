@@ -1,4 +1,4 @@
-package com.pek.ttlivescoreapi.controller;
+package com.pek.ttlivescoreapi.match.controller;
 
 
 import com.pek.ttlivescoreapi.user.dto.UserDto;

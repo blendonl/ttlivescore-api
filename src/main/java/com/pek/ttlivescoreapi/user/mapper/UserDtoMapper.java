@@ -1,7 +1,7 @@
 package com.pek.ttlivescoreapi.user.mapper;
 
 import com.pek.ttlivescoreapi.user.dto.UserDto;
-import com.pek.ttlivescoreapi.user.User;
+import com.pek.ttlivescoreapi.user.entity.User;
 
 import java.util.List;
 
