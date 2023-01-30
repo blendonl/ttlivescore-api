@@ -1,7 +1,7 @@
 package com.pek.ttlivescoreapi.user.service.impl;
 
 import com.pek.ttlivescoreapi.user.entity.User;
-import com.pek.ttlivescoreapi.user.dto.UserDto;
+import com.pek.ttlivescoreapi.user.transport.UserTransport;
 import com.pek.ttlivescoreapi.user.exception.UserNotFoundException;
 import com.pek.ttlivescoreapi.user.mapper.UserMapper;
 import com.pek.ttlivescoreapi.user.repository.UserRepository;
@@ -17,13 +17,13 @@ public class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
     }
 
-    public List<UserDto> findAllByRole(String role) {
-        return UserMapper.usersToUsersDto(userRepository.findAllByRoleName(role));
+    public List<UserTransport> findAllByRole(String role) {
+        return UserMapper.mapToUsersTransport(userRepository.findAllByRoleName(role));
     }
 
 
-    public UserDto save(User user) {
-         return UserMapper.userToUserDto(userRepository.save(user));
+    public UserTransport save(User user) {
+         return UserMapper.mapToUserTransport(userRepository.save(user));
     }
 
 
@@ -34,25 +34,25 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(id);
     }
 
-    public UserDto findById(long id) throws UserNotFoundException {
+    public UserTransport findById(long id) throws UserNotFoundException {
         User user = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
 
-        return UserMapper.userToUserDto(user);
+        return UserMapper.mapToUserTransport(user);
     }
 
-    public UserDto findByEmail(String email) throws UserNotFoundException {
+    public UserTransport findByEmail(String email) throws UserNotFoundException {
 
         User user = userRepository.findByEmail(email).orElseThrow(UserNotFoundException::new);
 
-        return UserMapper.userToUserDto(user);
+        return UserMapper.mapToUserTransport(user);
     }
 
-    public List<UserDto> findAllByTeamId(long teamId) {
-        return UserMapper.usersToUsersDto( userRepository.findAllByTeamId(teamId));
+    public List<UserTransport> findAllByTeamId(long teamId) {
+        return UserMapper.mapToUsersTransport( userRepository.findAllByTeamId(teamId));
     }
-    public List<UserDto> findAllByTeamName(String team) {
+    public List<UserTransport> findAllByTeamName(String team) {
 
-        return UserMapper.usersToUsersDto(userRepository.findAllByTeamName(team));
+        return UserMapper.mapToUsersTransport(userRepository.findAllByTeamName(team));
     }
 
 

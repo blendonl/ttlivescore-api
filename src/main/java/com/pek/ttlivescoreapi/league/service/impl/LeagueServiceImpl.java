@@ -1,7 +1,7 @@
 package com.pek.ttlivescoreapi.league.service.impl;
 
 import com.pek.ttlivescoreapi.league.exception.LeagueNotFoundException;
-import com.pek.ttlivescoreapi.league.dto.LeagueDto;
+import com.pek.ttlivescoreapi.league.transport.LeagueTransport;
 import com.pek.ttlivescoreapi.league.League;
 import com.pek.ttlivescoreapi.league.mapper.LeagueMapper;
 import com.pek.ttlivescoreapi.league.repository.LeagueRepository;
@@ -21,7 +21,7 @@ public class LeagueServiceImpl implements LeagueService {
 
 
     @Override
-    public LeagueDto save(LeagueDto leagueDto) {
+    public LeagueTransport save(LeagueTransport leagueDto) {
 
         League league = LeagueMapper.toLeague(leagueDto);
 
@@ -31,7 +31,7 @@ public class LeagueServiceImpl implements LeagueService {
     }
 
     @Override
-    public List<LeagueDto> findAll() {
+    public List<LeagueTransport> findAll() {
         List<League> leagues = (List<League>) leagueRepository.findAll();
         return LeagueMapper.toLeaguesDto(leagues);
     }
@@ -46,7 +46,7 @@ public class LeagueServiceImpl implements LeagueService {
     }
 
     @Override
-    public LeagueDto findById(long id) {
+    public LeagueTransport findById(long id) {
 
         League league = leagueRepository.findById(id).orElseThrow();
 

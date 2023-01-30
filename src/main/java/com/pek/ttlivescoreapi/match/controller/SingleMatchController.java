@@ -1,7 +1,7 @@
 package com.pek.ttlivescoreapi.match.controller;
 
 
-import com.pek.ttlivescoreapi.user.dto.UserDto;
+import com.pek.ttlivescoreapi.user.transport.UserTransport;
 import com.pek.ttlivescoreapi.match.entity.Match;
 import com.pek.ttlivescoreapi.user.mapper.UserMapper;
 import com.pek.ttlivescoreapi.match.service.MatchService;
@@ -30,9 +30,9 @@ public class SingleMatchController {
     }
 
     @GetMapping("/{singleMatchId}/winner")
-    public UserDto getWinnerInASingleMatch(@PathVariable long singleMatchId) {
+    public UserTransport getWinnerInASingleMatch(@PathVariable long singleMatchId) {
 
-        UserDto user = UserMapper.userToUserDto(service.getWinnerInASingleMatch(singleMatchId));
+        UserTransport user = UserMapper.mapToUserTransport(service.getWinnerInASingleMatch(singleMatchId));
 
         return user;
     }

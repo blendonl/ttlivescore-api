@@ -1,7 +1,6 @@
 package com.pek.ttlivescoreapi.user.service;
 
-import com.pek.ttlivescoreapi.user.dto.SignupRequestDto;
-import com.pek.ttlivescoreapi.user.service.UserService;
+import com.pek.ttlivescoreapi.user.transport.SignUpRequestTransport;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,7 +12,7 @@ public class AuthService {
         this.userService = userService;
     }
 
-    public void signup(SignupRequestDto request, String role) {
+    public void signup(SignUpRequestTransport request, String role) {
 
     }
 }

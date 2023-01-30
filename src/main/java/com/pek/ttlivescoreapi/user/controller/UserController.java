@@ -2,7 +2,7 @@ package com.pek.ttlivescoreapi.user.controller;
 
 
 import com.pek.ttlivescoreapi.user.exception.UserNotFoundException;
-import com.pek.ttlivescoreapi.user.dto.UserDto;
+import com.pek.ttlivescoreapi.user.transport.UserTransport;
 import com.pek.ttlivescoreapi.user.entity.User;
 import com.pek.ttlivescoreapi.user.mapper.UserMapper;
 import com.pek.ttlivescoreapi.user.service.UserService;
@@ -22,35 +22,35 @@ public class UserController {
 
 
     @PostMapping
-    public UserDto saveUser(@RequestBody UserDto userDto) {
-        User user = UserMapper.userDtoToUser(userDto);
+    public UserTransport saveUser(@RequestBody UserTransport userTransport) {
+        User user = UserMapper.mapToUser(userTransport);
 
         user = userService.save(user);
 
-        return userDto;
+        return userTransport;
     }
 
     @GetMapping("/{userId}")
-    public UserDto getUserById(@PathVariable long userId) throws UserNotFoundException {
+    public UserTransport getUserById(@PathVariable long userId) throws UserNotFoundException {
 
         User user = userService.findById(userId);
-        return UserMapper.userToUserDto(user);
+        return UserMapper.mapToUserTransport(user);
     }
 
     @GetMapping("/players")
-    public List<UserDto> getAllPlayers() {
+    public List<UserTransport> getAllPlayers() {
 
         List<User> users = userService.findAllByRole("PLAYER");
 
-        return UserMapper.usersToUsersDto(users);
+        return UserMapper.mapToUsersTransport(users);
     }
 
     @GetMapping("find/{email}")
-    public UserDto findByEmail(@PathVariable String email) {
+    public UserTransport findByEmail(@PathVariable String email) {
 
         User user = userService.findByEmail(email);
 
-        return UserMapper.userToUserDto(user);
+        return UserMapper.mapToUserTransport(user);
 
     }
 

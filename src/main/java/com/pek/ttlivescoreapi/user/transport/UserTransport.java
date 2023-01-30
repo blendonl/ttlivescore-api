@@ -1,4 +1,4 @@
-package com.pek.ttlivescoreapi.user.dto;
+package com.pek.ttlivescoreapi.user.transport;
 
 import lombok.*;
 
@@ -9,7 +9,7 @@ import java.sql.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserDto {
+public class UserTransport {
 
     private String name;
     private String lastName;
