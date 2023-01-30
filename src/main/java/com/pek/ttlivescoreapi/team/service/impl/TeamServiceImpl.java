@@ -1,7 +1,9 @@
 package com.pek.ttlivescoreapi.team.service.impl;
 
 import com.pek.ttlivescoreapi.team.Team;
+import com.pek.ttlivescoreapi.team.dto.TeamDto;
 import com.pek.ttlivescoreapi.team.exception.TeamNotFoundException;
+import com.pek.ttlivescoreapi.team.mapper.TeamDtoMapper;
 import com.pek.ttlivescoreapi.team.repository.TeamRepository;
 import com.pek.ttlivescoreapi.team.service.TeamService;
 
@@ -15,16 +17,20 @@ public class TeamServiceImpl implements TeamService {
         this.repository = repository;
     }
 
-    public Team findById(long id) throws TeamNotFoundException {
-        return repository.findById(id).orElseThrow(TeamNotFoundException::new);
+    public TeamDto findById(long id) throws TeamNotFoundException {
+        Team team = repository.findById(id).orElseThrow(TeamNotFoundException::new);
+
+        return TeamDtoMapper.mapTeamToTeamDto(team);
     }
 
-    public Team findByName(String name) throws TeamNotFoundException {
-        return repository.findByName(name).orElseThrow(TeamNotFoundException::new);
+    public TeamDto findByName(String name) throws TeamNotFoundException {
+        Team team = repository.findByName(name).orElseThrow(TeamNotFoundException::new);
+
+        return TeamDtoMapper.mapTeamToTeamDto(team);
     }
 
-    public Team save(Team team) {
-        return repository.save(team);
+    public TeamDto save(Team team) {
+        return TeamDtoMapper.mapTeamToTeamDto(repository.save(team));
     }
 
     public void deleteById(long id) throws TeamNotFoundException {
@@ -38,7 +44,7 @@ public class TeamServiceImpl implements TeamService {
 
 
 
-    public List<Team> findAllByLeagueId(long leagueId) {
-        return repository.findAllByLeagueId(leagueId);
+    public List<TeamDto> findAllByLeagueId(long leagueId) {
+        return TeamDtoMapper.mapTeamsToTeamsDto(repository.findAllByLeagueId(leagueId));
     }
 }

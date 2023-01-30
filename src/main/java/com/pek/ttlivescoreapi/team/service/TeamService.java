@@ -1,5 +1,6 @@
 package com.pek.ttlivescoreapi.team.service;
 
+import com.pek.ttlivescoreapi.team.dto.TeamDto;
 import com.pek.ttlivescoreapi.team.exception.TeamNotFoundException;
 import com.pek.ttlivescoreapi.team.Team;
 import com.pek.ttlivescoreapi.team.repository.TeamRepository;
@@ -9,13 +10,13 @@ import java.util.List;
 
 @Service
 public interface TeamService {
-    Team findById(long id) throws TeamNotFoundException;
+    TeamDto findById(long id) throws TeamNotFoundException;
 
-    Team findByName(String name) throws TeamNotFoundException;
+    TeamDto findByName(String name) throws TeamNotFoundException;
 
-    Team save(Team team);
+    TeamDto save(Team team);
 
     void deleteById(long id) throws TeamNotFoundException;
 
-    List<Team> findAllByLeagueId(long leagueId);
+    List<TeamDto> findAllByLeagueId(long leagueId);
 }
