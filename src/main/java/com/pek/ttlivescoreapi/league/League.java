@@ -1,5 +1,6 @@
-package com.pek.ttlivescoreapi.entity;
+package com.pek.ttlivescoreapi.league;
 
+import com.pek.ttlivescoreapi.entity.Category;
 import lombok.*;
 
 import javax.persistence.*;

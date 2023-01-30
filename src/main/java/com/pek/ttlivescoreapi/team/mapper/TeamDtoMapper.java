@@ -2,7 +2,7 @@ package com.pek.ttlivescoreapi.team.mapper;
 
 
 import com.pek.ttlivescoreapi.team.dto.TeamDto;
-import com.pek.ttlivescoreapi.entity.League;
+import com.pek.ttlivescoreapi.league.League;
 import com.pek.ttlivescoreapi.team.Team;
 
 import java.util.List;

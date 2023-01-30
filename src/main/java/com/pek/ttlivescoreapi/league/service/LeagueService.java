@@ -1,7 +1,7 @@
-package com.pek.ttlivescoreapi.service;
+package com.pek.ttlivescoreapi.league.service;
 
 
-import com.pek.ttlivescoreapi.dto.LeagueDto;
+import com.pek.ttlivescoreapi.league.dto.LeagueDto;
 
 import java.util.List;
 

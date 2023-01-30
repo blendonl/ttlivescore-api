@@ -1,7 +1,7 @@
-package com.pek.ttlivescoreapi.repository;
+package com.pek.ttlivescoreapi.league.repository;
 
 
-import com.pek.ttlivescoreapi.entity.League;
+import com.pek.ttlivescoreapi.league.League;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

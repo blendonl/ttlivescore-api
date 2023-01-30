@@ -1,7 +1,7 @@
-package com.pek.ttlivescoreapi.controller;
+package com.pek.ttlivescoreapi.league.controller;
 
-import com.pek.ttlivescoreapi.dto.LeagueDto;
-import com.pek.ttlivescoreapi.service.LeagueService;
+import com.pek.ttlivescoreapi.league.dto.LeagueDto;
+import com.pek.ttlivescoreapi.league.service.LeagueService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

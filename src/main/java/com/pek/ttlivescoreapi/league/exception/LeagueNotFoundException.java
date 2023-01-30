@@ -1,4 +1,4 @@
-package com.pek.ttlivescoreapi.config.exception;
+package com.pek.ttlivescoreapi.league.exception;
 
 public class LeagueNotFoundException extends RuntimeException {
 }

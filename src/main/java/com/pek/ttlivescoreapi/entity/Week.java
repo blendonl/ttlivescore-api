@@ -1,6 +1,7 @@
 package com.pek.ttlivescoreapi.entity;
 
 
+import com.pek.ttlivescoreapi.league.League;
 import lombok.Getter;
 import lombok.Setter;
 
