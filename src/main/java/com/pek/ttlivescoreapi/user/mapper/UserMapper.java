@@ -1,14 +1,14 @@
 package com.pek.ttlivescoreapi.user.mapper;
 
-import com.pek.ttlivescoreapi.user.dto.UserDto;
+import com.pek.ttlivescoreapi.user.transport.UserTransport;
 import com.pek.ttlivescoreapi.user.entity.User;
 
 import java.util.List;
 
 public class UserMapper {
 
-    public static UserDto userToUserDto(User user) {
-         return UserDto.builder()
+    public static UserTransport mapToUserTransport(User user) {
+         return UserTransport.builder()
                 .name(user.getName())
                 .lastName(user.getLastName())
                 .email(user.getEmail())
@@ -17,19 +17,19 @@ public class UserMapper {
                 .build();
     }
 
-    public static List<UserDto> usersToUsersDto(List<User> users) {
-        return users.stream().map(UserMapper::userToUserDto).toList();
+    public static List<UserTransport> mapToUsersTransport(List<User> users) {
+        return users.stream().map(UserMapper::mapToUserTransport).toList();
     }
 
 
-    public static User userDtoToUser(UserDto userDto) {
+    public static User mapToUser(UserTransport userTransport) {
         return User.builder()
-                .name(userDto.getName())
-                .lastName(userDto.getLastName())
-                .email(userDto.getEmail())
-                .password(userDto.getPassword())
-                .birthDate(userDto.getBirthDate())
-                .gender(userDto.getGender())
+                .name(userTransport.getName())
+                .lastName(userTransport.getLastName())
+                .email(userTransport.getEmail())
+                .password(userTransport.getPassword())
+                .birthDate(userTransport.getBirthDate())
+                .gender(userTransport.getGender())
                 .build();
     }
 }

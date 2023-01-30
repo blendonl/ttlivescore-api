@@ -4,7 +4,7 @@ import com.pek.ttlivescoreapi.team.tansport.TeamTransport;
 import com.pek.ttlivescoreapi.team.exception.TeamNotFoundException;
 import com.pek.ttlivescoreapi.team.mapper.TeamMapper;
 import com.pek.ttlivescoreapi.team.service.TeamService;
-import com.pek.ttlivescoreapi.user.dto.UserDto;
+import com.pek.ttlivescoreapi.user.transport.UserTransport;
 import com.pek.ttlivescoreapi.team.Team;
 import com.pek.ttlivescoreapi.user.service.UserService;
 import org.springframework.web.bind.annotation.*;
@@ -42,7 +42,7 @@ public class TeamController {
     }
 
     @GetMapping("{teamName}/players")
-    public List<UserDto> findAllPlayerByTeamName(@PathVariable String teamName) {
+    public List<UserTransport> findAllPlayerByTeamName(@PathVariable String teamName) {
         return userService.findAllByTeamName(teamName);
     }
 

@@ -1,4 +1,4 @@
-package com.pek.ttlivescoreapi.user.dto;
+package com.pek.ttlivescoreapi.user.transport;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,7 +7,7 @@ import java.sql.Date;
 
 @Getter
 @Setter
-public class SignupRequestDto {
+public class SignUpRequestTransport {
     private String firstName;
     private String lastName;
     private Date birthDate;
