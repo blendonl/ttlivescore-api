@@ -1,8 +1,7 @@
 package com.pek.ttlivescoreapi.match.entity;
 
 
-import com.pek.ttlivescoreapi.entity.Event;
-import com.pek.ttlivescoreapi.match.entity.Match;
+import com.pek.ttlivescoreapi.event.entity.Event;
 import com.pek.ttlivescoreapi.team.Team;
 import lombok.Getter;
 import lombok.Setter;
