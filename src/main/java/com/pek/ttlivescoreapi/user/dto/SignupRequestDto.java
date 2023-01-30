@@ -1,4 +1,4 @@
-package com.pek.ttlivescoreapi.dto;
+package com.pek.ttlivescoreapi.user.dto;
 
 import lombok.Getter;
 import lombok.Setter;

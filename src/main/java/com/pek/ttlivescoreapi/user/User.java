@@ -1,5 +1,6 @@
-package com.pek.ttlivescoreapi.entity;
+package com.pek.ttlivescoreapi.user;
 
+import com.pek.ttlivescoreapi.entity.Role;
 import lombok.*;
 
 import javax.persistence.*;

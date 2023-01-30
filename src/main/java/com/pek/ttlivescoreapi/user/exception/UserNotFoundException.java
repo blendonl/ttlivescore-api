@@ -1,4 +1,4 @@
-package com.pek.ttlivescoreapi.config.exception;
+package com.pek.ttlivescoreapi.user.exception;
 
 import lombok.Getter;
 import lombok.Setter;

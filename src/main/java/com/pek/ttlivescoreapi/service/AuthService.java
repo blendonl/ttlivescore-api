@@ -1,6 +1,7 @@
 package com.pek.ttlivescoreapi.service;
 
-import com.pek.ttlivescoreapi.dto.SignupRequestDto;
+import com.pek.ttlivescoreapi.user.dto.SignupRequestDto;
+import com.pek.ttlivescoreapi.user.service.UserService;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -1,6 +1,5 @@
-package com.pek.ttlivescoreapi.dto;
+package com.pek.ttlivescoreapi.user.dto;
 
-import com.pek.ttlivescoreapi.entity.User;
 import lombok.*;
 
 import java.sql.Date;

@@ -1,6 +1,6 @@
 package com.pek.ttlivescoreapi.controller;
 
-import com.pek.ttlivescoreapi.dto.SignupRequestDto;
+import com.pek.ttlivescoreapi.user.dto.SignupRequestDto;
 import com.pek.ttlivescoreapi.service.AuthService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

@@ -1,9 +1,8 @@
-package com.pek.ttlivescoreapi.mapper;
+package com.pek.ttlivescoreapi.user.mapper;
 
-import com.pek.ttlivescoreapi.dto.UserDto;
-import com.pek.ttlivescoreapi.entity.User;
+import com.pek.ttlivescoreapi.user.dto.UserDto;
+import com.pek.ttlivescoreapi.user.User;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class UserDtoMapper {

@@ -1,5 +1,6 @@
 package com.pek.ttlivescoreapi.entity;
 
+import com.pek.ttlivescoreapi.user.User;
 import lombok.Getter;
 import lombok.Setter;
 

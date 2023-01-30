@@ -1,9 +1,9 @@
 package com.pek.ttlivescoreapi.controller;
 
 
-import com.pek.ttlivescoreapi.dto.UserDto;
+import com.pek.ttlivescoreapi.user.dto.UserDto;
 import com.pek.ttlivescoreapi.entity.Match;
-import com.pek.ttlivescoreapi.mapper.UserDtoMapper;
+import com.pek.ttlivescoreapi.user.mapper.UserDtoMapper;
 import com.pek.ttlivescoreapi.service.MatchService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
