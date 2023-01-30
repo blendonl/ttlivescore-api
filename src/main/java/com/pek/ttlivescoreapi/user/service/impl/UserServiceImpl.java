@@ -3,7 +3,7 @@ package com.pek.ttlivescoreapi.user.service.impl;
 import com.pek.ttlivescoreapi.user.entity.User;
 import com.pek.ttlivescoreapi.user.dto.UserDto;
 import com.pek.ttlivescoreapi.user.exception.UserNotFoundException;
-import com.pek.ttlivescoreapi.user.mapper.UserDtoMapper;
+import com.pek.ttlivescoreapi.user.mapper.UserMapper;
 import com.pek.ttlivescoreapi.user.repository.UserRepository;
 import com.pek.ttlivescoreapi.user.service.UserService;
 
@@ -18,12 +18,12 @@ public class UserServiceImpl implements UserService {
     }
 
     public List<UserDto> findAllByRole(String role) {
-        return UserDtoMapper.usersToUsersDto(userRepository.findAllByRoleName(role));
+        return UserMapper.usersToUsersDto(userRepository.findAllByRoleName(role));
     }
 
 
     public UserDto save(User user) {
-         return UserDtoMapper.userToUserDto(userRepository.save(user));
+         return UserMapper.userToUserDto(userRepository.save(user));
     }
 
 
@@ -37,22 +37,22 @@ public class UserServiceImpl implements UserService {
     public UserDto findById(long id) throws UserNotFoundException {
         User user = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
 
-        return UserDtoMapper.userToUserDto(user);
+        return UserMapper.userToUserDto(user);
     }
 
     public UserDto findByEmail(String email) throws UserNotFoundException {
 
         User user = userRepository.findByEmail(email).orElseThrow(UserNotFoundException::new);
 
-        return UserDtoMapper.userToUserDto(user);
+        return UserMapper.userToUserDto(user);
     }
 
     public List<UserDto> findAllByTeamId(long teamId) {
-        return UserDtoMapper.usersToUsersDto( userRepository.findAllByTeamId(teamId));
+        return UserMapper.usersToUsersDto( userRepository.findAllByTeamId(teamId));
     }
     public List<UserDto> findAllByTeamName(String team) {
 
-        return UserDtoMapper.usersToUsersDto(userRepository.findAllByTeamName(team));
+        return UserMapper.usersToUsersDto(userRepository.findAllByTeamName(team));
     }
 
 

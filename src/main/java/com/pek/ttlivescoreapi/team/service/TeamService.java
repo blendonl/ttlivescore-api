@@ -3,7 +3,6 @@ package com.pek.ttlivescoreapi.team.service;
 import com.pek.ttlivescoreapi.team.dto.TeamDto;
 import com.pek.ttlivescoreapi.team.exception.TeamNotFoundException;
 import com.pek.ttlivescoreapi.team.Team;
-import com.pek.ttlivescoreapi.team.repository.TeamRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
