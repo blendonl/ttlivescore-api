@@ -44,4 +44,13 @@ public class LeagueServiceImpl implements LeagueService {
 
         leagueRepository.deleteById(id);
     }
+
+    @Override
+    public LeagueDto findById(long id) {
+
+        League league = leagueRepository.findById(id).orElseThrow();
+
+        return LeagueMapper.toLeagueDto(league);
+
+    }
 }
