@@ -2,7 +2,7 @@ package com.pek.ttlivescoreapi.match.service;
 
 import com.pek.ttlivescoreapi.match.entity.MatchPlayer;
 import com.pek.ttlivescoreapi.user.entity.User;
-import com.pek.ttlivescoreapi.match.repository.MatchRepository;
+import com.pek.ttlivescoreapi.event.repository.MatchRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
