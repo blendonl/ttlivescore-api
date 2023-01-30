@@ -1,6 +1,6 @@
 package com.pek.ttlivescoreapi.league.controller;
 
-import com.pek.ttlivescoreapi.league.dto.LeagueDto;
+import com.pek.ttlivescoreapi.league.transport.LeagueTransport;
 import com.pek.ttlivescoreapi.league.service.LeagueService;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +15,7 @@ public class LeagueController {
     }
 
     @GetMapping("{id}")
-    public LeagueDto get(@PathVariable long id) {
+    public LeagueTransport get(@PathVariable long id) {
         return leagueService.findById(id);
     }
 

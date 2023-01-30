@@ -1,15 +1,15 @@
 package com.pek.ttlivescoreapi.league.service;
 
 
-import com.pek.ttlivescoreapi.league.dto.LeagueDto;
+import com.pek.ttlivescoreapi.league.transport.LeagueTransport;
 
 import java.util.List;
 
 public interface LeagueService {
 
-    LeagueDto save(LeagueDto leagueDto);
-    List<LeagueDto> findAll();
+    LeagueTransport save(LeagueTransport leagueDto);
+    List<LeagueTransport> findAll();
     void deleteById(long id);
 
-    LeagueDto findById(long id);
+    LeagueTransport findById(long id);
 }

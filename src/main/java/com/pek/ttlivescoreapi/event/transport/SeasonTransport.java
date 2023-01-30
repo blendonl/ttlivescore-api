@@ -1,7 +1,6 @@
 package com.pek.ttlivescoreapi.event.transport;
 
-import com.pek.ttlivescoreapi.league.League;
-import com.pek.ttlivescoreapi.league.dto.LeagueDto;
+import com.pek.ttlivescoreapi.league.transport.LeagueTransport;
 import lombok.*;
 
 import java.sql.Date;
@@ -14,5 +13,5 @@ import java.sql.Date;
 public class SeasonTransport {
     private String name;
     private Date date;
-    private LeagueDto leagueDto;
+    private LeagueTransport leagueTransport;
 }
