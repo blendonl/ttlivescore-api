@@ -6,18 +6,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-public class MatchPlayerService {
+public interface MatchPlayerService {
 
-    private MatchPlayerRepository matchPlayerRepository;
-
-
-    public MatchPlayerService(MatchPlayerRepository matchPlayerRepository) {
-        this.matchPlayerRepository = matchPlayerRepository;
-    }
-
-    public List<MatchPlayer> findAllByMatchId(long matchId) {
-        return matchPlayerRepository.findAllByMatchId(matchId);
-    }
+    List<MatchPlayer> findAllByMatchId(long matchId);
 
 }
