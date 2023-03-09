@@ -3,7 +3,6 @@ package com.pek.ttlivescoreapi.match.service.impl;
 import com.pek.ttlivescoreapi.event.repository.MatchPlayerRepository;
 import com.pek.ttlivescoreapi.match.entity.MatchPlayer;
 import com.pek.ttlivescoreapi.match.service.MatchPlayerService;
-import com.pek.ttlivescoreapi.match.service.MatchService;
 
 import java.util.List;
 
