@@ -5,6 +5,7 @@ import com.pek.ttlivescoreapi.match.entity.MatchPlayer;
 import com.pek.ttlivescoreapi.match.service.MatchPlayerService;
 import com.pek.ttlivescoreapi.match.service.MatchService;
 import com.pek.ttlivescoreapi.match.service.PointService;
+import com.pek.ttlivescoreapi.match.transport.MatchPlayerTransport;
 import com.pek.ttlivescoreapi.user.mapper.UserMapper;
 import com.pek.ttlivescoreapi.user.transport.UserTransport;
 
@@ -25,15 +26,15 @@ public class MatchServiceImpl implements MatchService {
     @Override
     public UserTransport getWinnerInASingleMatch(long singleMatchId) {
 
-        List<MatchPlayer> players = matchPlayerService.findAllByMatchId(singleMatchId);
+        List<MatchPlayerTransport> players = matchPlayerService.findAllByMatchId(singleMatchId);
 
-        int player1Points = pointService.findAllByMatchIdAndPlayerId(singleMatchId, players.get(0).getId());
-        int player2Points = pointService.findAllByMatchIdAndPlayerId(singleMatchId, players.get(1).getId());
+        int player1Points = pointService.findAllByMatchIdAndPlayerId(singleMatchId, players.get(0).getPlayer().getId());
+        int player2Points = pointService.findAllByMatchIdAndPlayerId(singleMatchId, players.get(1).getPlayer().getId());
 
         if(player1Points > player2Points) {
-            return UserMapper.mapToUserTransport(players.get(0).getPlayer());
+            return (players.get(0).getPlayer());
         }
 
-        return UserMapper.mapToUserTransport(players.get(1).getPlayer());
+        return players.get(1).getPlayer();
     }
 }
