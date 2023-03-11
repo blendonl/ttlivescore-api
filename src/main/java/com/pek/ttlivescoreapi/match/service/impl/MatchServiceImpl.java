@@ -1,12 +1,14 @@
 package com.pek.ttlivescoreapi.match.service.impl;
 
-import com.pek.ttlivescoreapi.event.repository.MatchRepository;
-import com.pek.ttlivescoreapi.match.entity.MatchPlayer;
+import com.pek.ttlivescoreapi.match.repository.MatchRepository;
+import com.pek.ttlivescoreapi.match.entity.Match;
+import com.pek.ttlivescoreapi.match.exception.MatchNotFoundException;
+import com.pek.ttlivescoreapi.match.mapper.MatchMapper;
 import com.pek.ttlivescoreapi.match.service.MatchPlayerService;
 import com.pek.ttlivescoreapi.match.service.MatchService;
 import com.pek.ttlivescoreapi.match.service.PointService;
 import com.pek.ttlivescoreapi.match.transport.MatchPlayerTransport;
-import com.pek.ttlivescoreapi.user.mapper.UserMapper;
+import com.pek.ttlivescoreapi.match.transport.MatchTransport;
 import com.pek.ttlivescoreapi.user.transport.UserTransport;
 
 import java.util.List;
@@ -21,6 +23,40 @@ public class MatchServiceImpl implements MatchService {
         this.matchRepository = matchRepository;
         this.matchPlayerService = matchPlayerService;
         this.pointService = pointService;
+    }
+
+    @Override
+    public MatchTransport findById(long matchId) {
+        Match match = matchRepository.findById(matchId).orElseThrow(MatchNotFoundException::new);
+        return MatchMapper.toMatchTransport(match);
+    }
+
+    @Override
+    public MatchTransport save(MatchTransport matchTransport) {
+        Match match = MatchMapper.toMatch(matchTransport);
+        match = matchRepository.save(match);
+        return MatchMapper.toMatchTransport(match);
+    }
+
+    @Override
+    public MatchTransport update(MatchTransport matchTransport) {
+        Match match = MatchMapper.toMatch(matchTransport);
+        match = matchRepository.save(match);
+        return MatchMapper.toMatchTransport(match);
+    }
+
+    @Override
+    public void deleteById(long matchId) {
+
+        if(!matchRepository.existsById(matchId))
+            throw new MatchNotFoundException();
+
+        matchRepository.deleteById(matchId);
+    }
+
+    @Override
+    public List<MatchTransport> findAllByEventId(long eventId) {
+        return MatchMapper.toMatchTransports(matchRepository.findAllByEventId(eventId));
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.pek.ttlivescoreapi.match.service.impl;
 
-import com.pek.ttlivescoreapi.event.repository.PointRepository;
+import com.pek.ttlivescoreapi.match.repository.PointRepository;
 import com.pek.ttlivescoreapi.match.service.PointService;
 
 public class PointServiceImpl implements PointService {

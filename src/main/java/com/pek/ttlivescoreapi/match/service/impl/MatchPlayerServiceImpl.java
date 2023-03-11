@@ -1,6 +1,6 @@
 package com.pek.ttlivescoreapi.match.service.impl;
 
-import com.pek.ttlivescoreapi.event.repository.MatchPlayerRepository;
+import com.pek.ttlivescoreapi.match.repository.MatchPlayerRepository;
 import com.pek.ttlivescoreapi.match.mapper.MatchPlayerMapper;
 import com.pek.ttlivescoreapi.match.service.MatchPlayerService;
 import com.pek.ttlivescoreapi.match.transport.MatchPlayerTransport;
