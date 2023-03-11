@@ -60,6 +60,16 @@ public class MatchServiceImpl implements MatchService {
     }
 
     @Override
+    public List<MatchTransport> findAllSingleByEventId(long eventId) {
+        return null;
+    }
+
+    @Override
+    public List<MatchTransport> findAllDoubleByEventId(long eventId) {
+        return null;
+    }
+
+    @Override
     public UserTransport getWinnerInASingleMatch(long singleMatchId) {
 
         List<MatchPlayerTransport> players = matchPlayerService.findAllByMatchId(singleMatchId);

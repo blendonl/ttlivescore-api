@@ -20,6 +20,11 @@ public interface MatchService {
 
     List<MatchTransport> findAllByEventId(long eventId);
 
+    List<MatchTransport> findAllSingleByEventId(long eventId);
+
+    List<MatchTransport> findAllDoubleByEventId(long eventId);
+
+
 
     UserTransport getWinnerInASingleMatch(long singleMatchId);
 

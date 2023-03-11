@@ -1,6 +1,7 @@
 package com.pek.ttlivescoreapi.match.controller;
 
 
+import com.pek.ttlivescoreapi.match.transport.MatchTransport;
 import com.pek.ttlivescoreapi.user.transport.UserTransport;
 import com.pek.ttlivescoreapi.match.entity.Match;
 import com.pek.ttlivescoreapi.user.mapper.UserMapper;
@@ -20,6 +21,11 @@ public class SingleMatchController {
 
     public SingleMatchController(MatchService service) {
         this.service = service;
+    }
+
+    @GetMapping("{matchId}")
+    public MatchTransport getMatchById(@PathVariable long matchId) {
+        return service.findById(matchId);
     }
 
 
