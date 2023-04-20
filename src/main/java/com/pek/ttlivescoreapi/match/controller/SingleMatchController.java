@@ -29,6 +29,11 @@ public class SingleMatchController {
         return service.update(matchTransport);
     }
 
+    @DeleteMapping("{id}")
+    public void deleteById(@PathVariable long id) {
+        service.deleteById(id);
+    }
+
 
     @GetMapping("{matchId}")
     public MatchTransport getMatchById(@PathVariable long matchId) {
