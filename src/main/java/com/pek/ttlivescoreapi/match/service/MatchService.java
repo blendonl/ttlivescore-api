@@ -24,6 +24,8 @@ public interface MatchService {
 
     List<MatchTransport> findAllDoubleByEventId(long eventId);
 
+    List<MatchTransport> findALlByPlayer1IdAndPlayer2Id(long player1Id, long player2Id);
+
 
 
     UserTransport getWinnerInASingleMatch(long singleMatchId);

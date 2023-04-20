@@ -70,6 +70,11 @@ public class MatchServiceImpl implements MatchService {
     }
 
     @Override
+    public List<MatchTransport> findALlByPlayer1IdAndPlayer2Id(long player1Id, long player2Id) {
+        return MatchMapper.toMatchTransports(matchRepository.findAllByPlayer1IdAndPLayer2Id(player1Id, player2Id));
+    }
+
+    @Override
     public UserTransport getWinnerInASingleMatch(long singleMatchId) {
 
         List<MatchPlayerTransport> players = matchPlayerService.findAllByMatchId(singleMatchId);

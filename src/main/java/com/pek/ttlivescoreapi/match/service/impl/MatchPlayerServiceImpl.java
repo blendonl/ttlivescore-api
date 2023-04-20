@@ -4,6 +4,7 @@ import com.pek.ttlivescoreapi.match.repository.MatchPlayerRepository;
 import com.pek.ttlivescoreapi.match.mapper.MatchPlayerMapper;
 import com.pek.ttlivescoreapi.match.service.MatchPlayerService;
 import com.pek.ttlivescoreapi.match.transport.MatchPlayerTransport;
+import com.pek.ttlivescoreapi.match.transport.MatchTransport;
 
 import java.util.List;
 
@@ -20,4 +21,5 @@ public class MatchPlayerServiceImpl implements MatchPlayerService {
     public List<MatchPlayerTransport> findAllByMatchId(long matchId) {
         return MatchPlayerMapper.toMatchPlayerTransports(matchPlayerRepository.findAllByMatchId(matchId));
     }
+
 }

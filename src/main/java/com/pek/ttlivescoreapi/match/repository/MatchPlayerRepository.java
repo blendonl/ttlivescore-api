@@ -15,4 +15,7 @@ public interface MatchPlayerRepository extends CrudRepository<MatchPlayer, Long>
 
     @Query(value = "select doubles from match_player where match_id = :matchId", nativeQuery = true)
     boolean isSingleByMatchId(long matchId);
+
+
+
 }
