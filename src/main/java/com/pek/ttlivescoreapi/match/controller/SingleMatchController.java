@@ -4,7 +4,6 @@ package com.pek.ttlivescoreapi.match.controller;
 import com.pek.ttlivescoreapi.match.transport.MatchTransport;
 import com.pek.ttlivescoreapi.user.transport.UserTransport;
 import com.pek.ttlivescoreapi.match.entity.Match;
-import com.pek.ttlivescoreapi.user.mapper.UserMapper;
 import com.pek.ttlivescoreapi.match.service.MatchService;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +22,11 @@ public class SingleMatchController {
     @PostMapping("")
     public MatchTransport save(@RequestBody MatchTransport matchTransport) {
         return service.save(matchTransport);
+    }
+
+    @PatchMapping( )
+    public MatchTransport update(@RequestBody MatchTransport matchTransport) {
+        return service.update(matchTransport);
     }
 
 
