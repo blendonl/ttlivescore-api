@@ -6,10 +6,7 @@ import com.pek.ttlivescoreapi.user.transport.UserTransport;
 import com.pek.ttlivescoreapi.match.entity.Match;
 import com.pek.ttlivescoreapi.user.mapper.UserMapper;
 import com.pek.ttlivescoreapi.match.service.MatchService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,6 +19,12 @@ public class SingleMatchController {
     public SingleMatchController(MatchService service) {
         this.service = service;
     }
+
+    @PostMapping("")
+    public MatchTransport save(@RequestBody MatchTransport matchTransport) {
+        return service.save(matchTransport);
+    }
+
 
     @GetMapping("{matchId}")
     public MatchTransport getMatchById(@PathVariable long matchId) {
