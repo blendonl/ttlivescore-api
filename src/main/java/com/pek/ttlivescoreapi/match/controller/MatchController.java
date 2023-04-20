@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController()
-@RequestMapping("singleMatch")
-public class SingleMatchController {
+@RequestMapping("match")
+public class MatchController {
 
     private MatchService service;
 
-    public SingleMatchController(MatchService service) {
+    public MatchController(MatchService service) {
         this.service = service;
     }
 
