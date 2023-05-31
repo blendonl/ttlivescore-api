@@ -25,32 +25,28 @@ public class UserController {
     public UserTransport saveUser(@RequestBody UserTransport userTransport) {
         User user = UserMapper.mapToUser(userTransport);
 
-        user = userService.save(user);
+        return userService.save(user);
 
-        return userTransport;
     }
 
     @GetMapping("/{userId}")
     public UserTransport getUserById(@PathVariable long userId) throws UserNotFoundException {
 
-        User user = userService.findById(userId);
-        return UserMapper.mapToUserTransport(user);
+        return userService.findById(userId);
     }
 
     @GetMapping("/players")
     public List<UserTransport> getAllPlayers() {
 
-        List<User> users = userService.findAllByRole("PLAYER");
+        return userService.findAllByRole("PLAYER");
 
-        return UserMapper.mapToUsersTransport(users);
     }
 
     @GetMapping("find/{email}")
-    public UserTransport findByEmail(@PathVariable String email) {
+    public UserTransport findByEmail(@PathVariable String email) throws UserNotFoundException {
 
-        User user = userService.findByEmail(email);
+        return userService.findByEmail(email);
 
-        return UserMapper.mapToUserTransport(user);
 
     }
 
