@@ -4,7 +4,6 @@ package com.pek.ttlivescoreapi.match.controller;
 import com.pek.ttlivescoreapi.match.service.MatchPlayerService;
 import com.pek.ttlivescoreapi.match.transport.MatchTransport;
 import com.pek.ttlivescoreapi.user.transport.UserTransport;
-import com.pek.ttlivescoreapi.match.entity.Match;
 import com.pek.ttlivescoreapi.match.service.MatchService;
 import org.springframework.web.bind.annotation.*;
 
