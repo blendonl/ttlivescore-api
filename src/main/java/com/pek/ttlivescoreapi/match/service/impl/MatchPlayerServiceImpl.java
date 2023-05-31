@@ -5,9 +5,11 @@ import com.pek.ttlivescoreapi.match.mapper.MatchPlayerMapper;
 import com.pek.ttlivescoreapi.match.service.MatchPlayerService;
 import com.pek.ttlivescoreapi.match.transport.MatchPlayerTransport;
 import com.pek.ttlivescoreapi.match.transport.MatchTransport;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class MatchPlayerServiceImpl implements MatchPlayerService {
 
     private MatchPlayerRepository matchPlayerRepository;

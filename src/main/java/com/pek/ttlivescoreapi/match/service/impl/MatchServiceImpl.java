@@ -10,9 +10,11 @@ import com.pek.ttlivescoreapi.match.service.PointService;
 import com.pek.ttlivescoreapi.match.transport.MatchPlayerTransport;
 import com.pek.ttlivescoreapi.match.transport.MatchTransport;
 import com.pek.ttlivescoreapi.user.transport.UserTransport;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class MatchServiceImpl implements MatchService {
 
     private MatchRepository matchRepository;

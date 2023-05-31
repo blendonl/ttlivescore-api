@@ -6,9 +6,11 @@ import com.pek.ttlivescoreapi.team.mapper.TeamMapper;
 import com.pek.ttlivescoreapi.team.service.TeamService;
 import com.pek.ttlivescoreapi.team.Team;
 import com.pek.ttlivescoreapi.team.repository.TeamRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class TeamServiceImpl implements TeamService {
 
     private TeamRepository repository;

@@ -6,8 +6,10 @@ import com.pek.ttlivescoreapi.user.exception.UserNotFoundException;
 import com.pek.ttlivescoreapi.user.mapper.UserMapper;
 import com.pek.ttlivescoreapi.user.repository.UserRepository;
 import com.pek.ttlivescoreapi.user.service.UserService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+@Service
 
 public class UserServiceImpl implements UserService {
 
