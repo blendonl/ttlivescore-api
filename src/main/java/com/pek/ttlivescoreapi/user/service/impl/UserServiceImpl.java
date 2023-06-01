@@ -20,7 +20,8 @@ public class UserServiceImpl implements UserService {
     }
 
     public List<UserTransport> findAllByRole(String role) {
-        return UserMapper.mapToUsersTransport(userRepository.findAllByRoleName(role));
+        List<User> users = userRepository.findAllByRoleName(role);
+        return UserMapper.mapToUsersTransport(users);
     }
 
 

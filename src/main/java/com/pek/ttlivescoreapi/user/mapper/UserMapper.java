@@ -9,10 +9,11 @@ public class UserMapper {
 
     public static UserTransport mapToUserTransport(User user) {
          return UserTransport.builder()
-                .name(user.getName())
+                .firstName(user.getName())
                 .lastName(user.getLastName())
                 .email(user.getEmail())
                 .birthDate(user.getBirthDate())
+                 .teamName(user.getTeam().getName())
                 .gender(user.getGender())
                 .build();
     }
@@ -24,7 +25,7 @@ public class UserMapper {
 
     public static User mapToUser(UserTransport userTransport) {
         return User.builder()
-                .name(userTransport.getName())
+                .name(userTransport.getFirstName())
                 .lastName(userTransport.getLastName())
                 .email(userTransport.getEmail())
                 .password(userTransport.getPassword())

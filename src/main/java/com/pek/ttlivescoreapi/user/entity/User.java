@@ -1,5 +1,6 @@
 package com.pek.ttlivescoreapi.user.entity;
 
+import com.pek.ttlivescoreapi.team.Team;
 import lombok.*;
 
 import javax.persistence.*;
@@ -25,7 +26,10 @@ public class User {
     private String password;
     private Date birthDate;
     private char gender;
-    @OneToMany()
-    private List<Role> roles;
+    @OneToMany(mappedBy = "user")
+    private List<UserRole> roles;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Team team;
 
 }
