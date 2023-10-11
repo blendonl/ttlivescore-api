@@ -6,8 +6,10 @@ import com.pek.ttlivescoreapi.user.exception.UserNotFoundException;
 import com.pek.ttlivescoreapi.user.mapper.UserMapper;
 import com.pek.ttlivescoreapi.user.repository.UserRepository;
 import com.pek.ttlivescoreapi.user.service.UserService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+@Service
 
 public class UserServiceImpl implements UserService {
 
@@ -18,7 +20,8 @@ public class UserServiceImpl implements UserService {
     }
 
     public List<UserTransport> findAllByRole(String role) {
-        return UserMapper.mapToUsersTransport(userRepository.findAllByRoleName(role));
+        List<User> users = userRepository.findAllByRoleName(role);
+        return UserMapper.mapToUsersTransport(users);
     }
 
 

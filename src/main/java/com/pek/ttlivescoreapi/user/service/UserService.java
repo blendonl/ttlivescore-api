@@ -25,6 +25,7 @@ public interface UserService {
 
     UserTransport findByEmail(String email) throws UserNotFoundException;
 
+
     List<UserTransport> findAllByTeamId(long teamId);
     List<UserTransport> findAllByTeamName(String team);
 

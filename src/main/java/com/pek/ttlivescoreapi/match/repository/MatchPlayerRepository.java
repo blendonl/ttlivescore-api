@@ -1,4 +1,4 @@
-package com.pek.ttlivescoreapi.event.repository;
+package com.pek.ttlivescoreapi.match.repository;
 
 import com.pek.ttlivescoreapi.match.entity.MatchPlayer;
 import org.springframework.data.jpa.repository.Query;
@@ -15,4 +15,7 @@ public interface MatchPlayerRepository extends CrudRepository<MatchPlayer, Long>
 
     @Query(value = "select doubles from match_player where match_id = :matchId", nativeQuery = true)
     boolean isSingleByMatchId(long matchId);
+
+
+
 }

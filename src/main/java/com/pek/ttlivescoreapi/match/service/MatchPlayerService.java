@@ -1,23 +1,14 @@
 package com.pek.ttlivescoreapi.match.service;
 
-import com.pek.ttlivescoreapi.match.entity.MatchPlayer;
-import com.pek.ttlivescoreapi.event.repository.MatchPlayerRepository;
+import com.pek.ttlivescoreapi.match.transport.MatchPlayerTransport;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class MatchPlayerService {
+public interface MatchPlayerService {
 
-    private MatchPlayerRepository matchPlayerRepository;
+    List<MatchPlayerTransport> findAllByMatchId(long matchId);
 
-
-    public MatchPlayerService(MatchPlayerRepository matchPlayerRepository) {
-        this.matchPlayerRepository = matchPlayerRepository;
-    }
-
-    public List<MatchPlayer> findAllByMatchId(long matchId) {
-        return matchPlayerRepository.findAllByMatchId(matchId);
-    }
 
 }

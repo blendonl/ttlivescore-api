@@ -24,7 +24,7 @@ public class Team {
     @ManyToOne()
     private League league;
 
-    @OneToMany()
+    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<User> users;
 
 }
