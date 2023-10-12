@@ -90,4 +90,10 @@ public class MatchServiceImpl implements MatchService {
 
         return players.get(1).getPlayer();
     }
+
+    @Override
+    public List<MatchTransport> findAll() {
+
+        return MatchMapper.toMatchTransports((List<Match>) matchRepository.findAll());
+    }
 }

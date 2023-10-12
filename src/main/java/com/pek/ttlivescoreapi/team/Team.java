@@ -1,5 +1,6 @@
 package com.pek.ttlivescoreapi.team;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pek.ttlivescoreapi.league.League;
 import com.pek.ttlivescoreapi.user.entity.User;
 import lombok.*;
@@ -25,6 +26,7 @@ public class Team {
     private League league;
 
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Transient
     private List<User> users;
 
 }

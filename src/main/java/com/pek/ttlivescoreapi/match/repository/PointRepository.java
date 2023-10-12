@@ -10,4 +10,6 @@ import java.util.List;
 public interface PointRepository extends CrudRepository<Point, Long> {
 
     List<Point> findAllByMatchIdAndPlayerId(long matchId, long playerId);
+
+    List<Point> findAllByMatchId(long matchId);
 }

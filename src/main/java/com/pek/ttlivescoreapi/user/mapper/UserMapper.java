@@ -9,6 +9,7 @@ public class UserMapper {
 
     public static UserTransport mapToUserTransport(User user) {
          return UserTransport.builder()
+                 .id(user.getId())
                 .firstName(user.getName())
                 .lastName(user.getLastName())
                 .email(user.getEmail())
@@ -25,6 +26,7 @@ public class UserMapper {
 
     public static User mapToUser(UserTransport userTransport) {
         return User.builder()
+                .id(userTransport.getId())
                 .name(userTransport.getFirstName())
                 .lastName(userTransport.getLastName())
                 .email(userTransport.getEmail())

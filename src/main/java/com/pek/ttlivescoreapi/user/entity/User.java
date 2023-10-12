@@ -29,7 +29,7 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<UserRole> roles;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Team team;
 
 }

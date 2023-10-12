@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 
-@Service
 public interface MatchService {
 
     MatchTransport findById(long matchId);
@@ -29,5 +28,7 @@ public interface MatchService {
 
 
     UserTransport getWinnerInASingleMatch(long singleMatchId);
+
+    List<MatchTransport> findAll();
 
 }
