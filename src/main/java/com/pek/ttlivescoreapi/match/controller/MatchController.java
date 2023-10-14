@@ -1,17 +1,12 @@
 package com.pek.ttlivescoreapi.match.controller;
 
 
-import com.pek.ttlivescoreapi.match.entity.Point;
 import com.pek.ttlivescoreapi.match.service.MatchPlayerService;
 import com.pek.ttlivescoreapi.match.service.PointService;
 import com.pek.ttlivescoreapi.match.transport.MatchTransport;
 import com.pek.ttlivescoreapi.match.transport.PointTransport;
 import com.pek.ttlivescoreapi.user.transport.UserTransport;
 import com.pek.ttlivescoreapi.match.service.MatchService;
-import org.springframework.messaging.handler.annotation.DestinationVariable;
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.Payload;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
@@ -22,11 +17,13 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @RequestMapping("match")
 public class MatchController {
 
-    private final CopyOnWriteArrayList<SseEmitter> emitters = new CopyOnWriteArrayList<>();
+    private final CopyOnWriteArrayList<SseEmitter> pointsEmitters = new CopyOnWriteArrayList<>();
+    private final CopyOnWriteArrayList<SseEmitter> matchesEmitters = new CopyOnWriteArrayList<>();
 
-    private MatchService matchService;
 
-    private PointService pointService;
+    private final MatchService matchService;
+
+    private final PointService pointService;
     private MatchPlayerService matchPlayerService;
 
 
@@ -40,34 +37,53 @@ public class MatchController {
     @GetMapping("{matchId}/rt")
     public SseEmitter pointsRt(@PathVariable long matchId) {
         SseEmitter emitter = new SseEmitter();
-        emitters.add(emitter);
+        pointsEmitters.add(emitter);
 
         System.out.println(matchId);
 
 
 
-        emitter.onCompletion(() -> emitters.remove(emitter));
-        emitter.onTimeout(() -> emitters.remove(emitter));
+        emitter.onCompletion(() -> pointsEmitters.remove(emitter));
+        emitter.onTimeout(() -> pointsEmitters.remove(emitter));
 
         return emitter;
     }
 
-    @GetMapping("{matchId}")
+    @GetMapping("{matchId}/points")
     public List<PointTransport> points(@PathVariable long matchId) {
 
         return pointService.findAllByMatchId(matchId);
 
     }
 
-    public void sendDataToClients(PointTransport data) {
+    public void sendPointsToEmitters(PointTransport data) {
         for (SseEmitter emmiter :
-                emitters) {
+                pointsEmitters) {
             try {
                 emmiter.send(data);
             }catch (Exception ignored) {
 
             }
         }
+    }
+
+    public void sendMatchesToEmitters(List<MatchTransport> matchTransports) {
+        for (SseEmitter emmiter :
+                pointsEmitters) {
+            try {
+                emmiter.send(matchTransports);
+            }catch (Exception ignored) {
+
+            }
+        }
+    }
+
+    @PostMapping("{matchId}")
+    public PointTransport savePoint(@RequestBody PointTransport pointTransport, @PathVariable long matchId) {
+        pointTransport = pointService.save(pointTransport);
+        sendPointsToEmitters(pointTransport);
+        sendMatchesToEmitters(matchService.findAll());
+        return pointTransport;
     }
 
     @PostMapping("")
@@ -113,12 +129,6 @@ public class MatchController {
     }
 
 
-    @PostMapping("{matchId}")
-    public PointTransport savePoint(@RequestBody PointTransport pointTransport, @PathVariable long matchId) {
-        pointTransport = pointService.save(pointTransport);
-        sendDataToClients(pointTransport);
-        return pointTransport;
-    }
 
 
     @GetMapping()
