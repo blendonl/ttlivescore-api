@@ -1,9 +1,9 @@
 package com.pek.ttlivescoreapi.league;
 
 import com.pek.ttlivescoreapi.user.entity.Category;
+import jakarta.persistence.*;
 import lombok.*;
 
-import javax.persistence.*;
 
 @Entity
 @Table(name = "league")

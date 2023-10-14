@@ -1,10 +1,9 @@
 package com.pek.ttlivescoreapi.event.entity;
 
 import com.pek.ttlivescoreapi.league.League;
+import jakarta.persistence.*;
 import lombok.*;
 
-import javax.persistence.*;
-import java.sql.Date;
 
 @Entity
 @Getter

@@ -1,8 +1,8 @@
 package com.pek.ttlivescoreapi.match.entity;
 
+import jakarta.persistence.*;
 import lombok.*;
 
-import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -15,10 +15,12 @@ import java.util.List;
 public class Set {
 
     @Id()
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @ManyToOne
     @Id
+    @JoinColumn(nullable = false)
     private Match match;
 
     @OneToMany(mappedBy = "set")

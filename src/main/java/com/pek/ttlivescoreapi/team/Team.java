@@ -3,9 +3,9 @@ package com.pek.ttlivescoreapi.team;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pek.ttlivescoreapi.league.League;
 import com.pek.ttlivescoreapi.user.entity.User;
+import jakarta.persistence.*;
 import lombok.*;
 
-import javax.persistence.*;
 import java.util.List;
 
 @Entity

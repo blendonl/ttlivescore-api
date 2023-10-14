@@ -1,11 +1,11 @@
 package com.pek.ttlivescoreapi.user.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import lombok.Getter;
 import lombok.Setter;
+import jakarta.persistence.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 
 @Entity
 @Getter

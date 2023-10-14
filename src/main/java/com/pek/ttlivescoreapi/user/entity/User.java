@@ -1,9 +1,9 @@
 package com.pek.ttlivescoreapi.user.entity;
 
 import com.pek.ttlivescoreapi.team.Team;
+import jakarta.persistence.*;
 import lombok.*;
 
-import javax.persistence.*;
 import java.sql.Date;
 import java.util.List;
 
@@ -19,7 +19,8 @@ public class User {
     @Id
     @GeneratedValue
     private Long id;
-    private Byte[] profilePicture;
+    @Column(nullable = true)
+    private byte[] profilePicture;
     private String name;
     private String lastName;
     private String email;

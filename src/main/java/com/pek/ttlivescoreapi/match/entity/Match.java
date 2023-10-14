@@ -2,9 +2,9 @@ package com.pek.ttlivescoreapi.match.entity;
 
 import com.pek.ttlivescoreapi.event.entity.Event;
 import com.pek.ttlivescoreapi.user.entity.User;
+import jakarta.persistence.*;
 import lombok.*;
 
-import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -36,6 +36,9 @@ public class Match {
 
     @OneToMany(mappedBy = "match")
     private List<MatchPlayer> matchPlayers;
+
+    @OneToMany(mappedBy = "match")
+    private List<Set> sets;
 
 
 }

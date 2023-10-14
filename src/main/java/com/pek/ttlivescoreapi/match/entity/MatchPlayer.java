@@ -2,9 +2,11 @@ package com.pek.ttlivescoreapi.match.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pek.ttlivescoreapi.user.entity.User;
+import jakarta.persistence.*;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.ManyToOne;
 import lombok.*;
 
-import javax.persistence.*;
 
 @Entity
 @Getter

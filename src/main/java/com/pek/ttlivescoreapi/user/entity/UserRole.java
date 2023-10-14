@@ -1,7 +1,7 @@
 package com.pek.ttlivescoreapi.user.entity;
 
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 public class UserRole {
