@@ -13,4 +13,6 @@ public class PointTransport {
     private long id;
     private UserTransport player;
     private MatchTransport match;
+    private SetTransport set;
+    private boolean isTeamA;
 }

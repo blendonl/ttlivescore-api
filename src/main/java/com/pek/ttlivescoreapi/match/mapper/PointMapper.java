@@ -14,20 +14,23 @@ public class PointMapper {
     public static PointTransport toPointTransport(Point point) {
         return PointTransport
                 .builder()
+                .player(UserMapper.mapToUserTransport(point.getPlayer()))
+                .match(MatchMapper.toMatchTransport(point.getMatch()))
+                .isTeamA(point.isTeamA())
                 .id(point.getId())
                 .player(UserMapper.mapToUserTransport(point.getPlayer()))
                 .match(MatchMapper.toMatchTransport(point.getMatch()))
         .build();
     }
 
-    public static Match toMatch(MatchTransport matchTransport) {
-        return new Match();
-    }
 
     public static List<PointTransport> toPointsTransport(List<Point> points) {
         return points.stream().map(PointMapper::toPointTransport).toList();
     }
 
+    public static List<Point> toPoints(List<PointTransport> points) {
+        return points.stream().map(PointMapper::toPoint).toList();
+    }
     public static Point toPoint(PointTransport pointTransport) {
         return Point
                 .builder()

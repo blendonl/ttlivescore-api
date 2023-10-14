@@ -23,4 +23,10 @@ public class Point {
     @ManyToOne()
     private Match match;
 
+    @ManyToOne()
+    private Set set;
+
+    private boolean isTeamA;
+
+
 }

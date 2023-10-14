@@ -1,9 +1,5 @@
 package com.pek.ttlivescoreapi.match.transport;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.pek.ttlivescoreapi.match.entity.MatchPlayer;
-import com.pek.ttlivescoreapi.user.entity.User;
 import com.pek.ttlivescoreapi.user.transport.UserTransport;
 import lombok.*;
 
@@ -18,7 +14,7 @@ import java.util.List;
 public class MatchTransport {
 
     private long id;
-    private boolean finished;
+    private boolean isFinished;
     private List<MatchPlayerTransport> matchPlayers = new ArrayList<>();
     private UserTransport referee;
 }
