@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.1.4</version>
+        <version>3.1.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.pek</groupId>
@@ -13,12 +13,6 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>TTLiveScoreApi</name>
     <description>TTLiveScoreApi</description>
-    <properties>
-        <java.version>21</java.version>
-        <flyway.user>databaseUser</flyway.user>
-        <flyway.password>databasePassword</flyway.password>
-        <flyway.schemas>schemaName</flyway.schemas>
-    </properties>
     <dependencies>
 
         <dependency>
@@ -38,14 +32,6 @@
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-websocket</artifactId>
-        </dependency>
-
-
-
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
             <optional>true</optional>
@@ -53,6 +39,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <version>1.18.28</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
