@@ -12,7 +12,7 @@ public class MatchMapper {
         return MatchTransport.builder()
                 .id(match.getId())
                 .matchPlayers(MatchPlayerMapper.toMatchPlayerTransports(match.getMatchPlayers()))
-                .finished(match.isFinished())
+                .isFinished(match.isFinished())
                 .referee(UserMapper.mapToUserTransport(match.getReferee()))
                 .build();
     }

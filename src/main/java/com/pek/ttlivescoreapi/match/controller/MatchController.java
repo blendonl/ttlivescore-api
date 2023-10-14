@@ -34,7 +34,7 @@ public class MatchController {
 
 
 
-    @GetMapping("{matchId}/rt")
+    @GetMapping("{matchId}/points/rt")
     public SseEmitter pointsRt(@PathVariable long matchId) {
         SseEmitter emitter = new SseEmitter();
         pointsEmitters.add(emitter);
@@ -45,6 +45,16 @@ public class MatchController {
 
         emitter.onCompletion(() -> pointsEmitters.remove(emitter));
         emitter.onTimeout(() -> pointsEmitters.remove(emitter));
+
+        return emitter;
+    }
+    @GetMapping("set/rt")
+    public SseEmitter setRt() {
+        SseEmitter emitter = new SseEmitter();
+        matchesEmitters.add(emitter);
+
+        emitter.onCompletion(() -> matchesEmitters.remove(emitter));
+        emitter.onTimeout(() -> matchesEmitters.remove(emitter));
 
         return emitter;
     }
