@@ -1,5 +1,7 @@
 package com.pek.ttlivescoreapi.user.mapper;
 
+import com.pek.ttlivescoreapi.match.mapper.MatchMapper;
+import com.pek.ttlivescoreapi.match.transport.PlayerMatchTransport;
 import com.pek.ttlivescoreapi.user.transport.UserTransport;
 import com.pek.ttlivescoreapi.user.entity.User;
 
@@ -15,6 +17,18 @@ public class UserMapper {
                 .email(user.getEmail())
                 .birthDate(user.getBirthDate())
                  .teamName(user.getTeam().getName())
+                .gender(user.getGender())
+                .build();
+    }
+
+    public static UserTransport mapToUserTransportWithoutMatches(User user) {
+        return UserTransport.builder()
+                .id(user.getId())
+                .firstName(user.getName())
+                .lastName(user.getLastName())
+                .email(user.getEmail())
+                .birthDate(user.getBirthDate())
+                .teamName(user.getTeam().getName())
                 .gender(user.getGender())
                 .build();
     }

@@ -1,5 +1,9 @@
 package com.pek.ttlivescoreapi.user.service.impl;
 
+import com.pek.ttlivescoreapi.match.entity.Match;
+import com.pek.ttlivescoreapi.match.service.MatchService;
+import com.pek.ttlivescoreapi.match.transport.MatchPlayerTransport;
+import com.pek.ttlivescoreapi.match.transport.MatchTransport;
 import com.pek.ttlivescoreapi.user.entity.User;
 import com.pek.ttlivescoreapi.user.transport.UserTransport;
 import com.pek.ttlivescoreapi.user.exception.UserNotFoundException;
@@ -14,14 +18,16 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
+    private MatchService matchService;
 
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, MatchService matchService) {
         this.userRepository = userRepository;
+        this.matchService = matchService;
     }
 
     public List<UserTransport> findAllByRole(String role) {
-        List<User> users = userRepository.findAllByRoleName(role);
-        return UserMapper.mapToUsersTransport(users);
+//        List<User> users = userRepository.findAllByRolesContaining(Role.builder().name(role).build());
+        return UserMapper.mapToUsersTransport((List<User>) userRepository.findAll());
     }
 
 
@@ -56,6 +62,11 @@ public class UserServiceImpl implements UserService {
     public List<UserTransport> findAllByTeamName(String team) {
 
         return UserMapper.mapToUsersTransport(userRepository.findAllByTeamName(team));
+    }
+
+    @Override
+    public List<UserTransport> findAllOpponents(long playerId) {
+        return null;
     }
 
 

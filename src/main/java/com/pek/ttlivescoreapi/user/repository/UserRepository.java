@@ -1,5 +1,6 @@
 package com.pek.ttlivescoreapi.user.repository;
 
+import com.pek.ttlivescoreapi.user.entity.Role;
 import com.pek.ttlivescoreapi.user.entity.User;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -11,8 +12,7 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
 
-    @Query(value = "Select * from users u inner join team t on t.id = u.team_id inner join user_role ur on u.id = ur.user_id inner join role r on ur.role_id = r.id where r.name = :role", nativeQuery = true)
-    List<User> findAllByRoleName(String role);
+    List<User> findAllByRolesContaining(Role role);
 
     Optional<User> findByEmail(String email);
 

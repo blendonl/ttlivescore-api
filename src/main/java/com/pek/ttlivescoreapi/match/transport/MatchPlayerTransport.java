@@ -12,7 +12,7 @@ import lombok.*;
 @Builder
 public class MatchPlayerTransport {
 
-    private UserTransport player;
+    private long playerId;
     private long matchId;
     private boolean isDouble;
     private boolean side;

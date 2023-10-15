@@ -1,8 +1,13 @@
 package com.pek.ttlivescoreapi.user.transport;
 
+import com.pek.ttlivescoreapi.match.transport.MatchPlayerTransport;
+import com.pek.ttlivescoreapi.match.transport.MatchTransport;
+import com.pek.ttlivescoreapi.match.transport.PlayerMatchTransport;
 import lombok.*;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -19,7 +24,5 @@ public class UserTransport {
     private Date birthDate;
     private char gender;
     private String teamName;
-
-
-
+    private List<PlayerMatchTransport> matches = new ArrayList<>();
 }

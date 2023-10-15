@@ -19,14 +19,13 @@ public class Match {
         this.id = id;
     }
 
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    private boolean finished;
+    private boolean isFinished;
+    private boolean isDouble;
 
     @ManyToOne()
     private User referee;
@@ -35,7 +34,7 @@ public class Match {
     private Event event;
 
     @OneToMany(mappedBy = "match")
-    private List<MatchPlayer> matchPlayers;
+    private List<Group> players;
 
     @OneToMany(mappedBy = "match")
     private List<Set> sets;

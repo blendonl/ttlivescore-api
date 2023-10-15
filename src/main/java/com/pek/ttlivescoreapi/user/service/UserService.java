@@ -29,6 +29,8 @@ public interface UserService {
     List<UserTransport> findAllByTeamId(long teamId);
     List<UserTransport> findAllByTeamName(String team);
 
+    List<UserTransport> findAllOpponents(long playerId);
+
 
 
 }

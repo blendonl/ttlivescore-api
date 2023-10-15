@@ -1,10 +1,15 @@
 package com.pek.ttlivescoreapi.user.entity;
 
+import com.pek.ttlivescoreapi.match.entity.Match;
+import com.pek.ttlivescoreapi.match.entity.Point;
+import com.pek.ttlivescoreapi.match.transport.MatchTransport;
+import com.pek.ttlivescoreapi.match.transport.PointTransport;
 import com.pek.ttlivescoreapi.team.Team;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -27,10 +32,15 @@ public class User {
     private String password;
     private Date birthDate;
     private char gender;
-    @OneToMany(mappedBy = "user")
-    private List<UserRole> roles;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    private List<Role> roles;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Team team;
+
+    @OneToMany(mappedBy = "player", fetch = FetchType.LAZY)
+    private List<Point> points;
+
 
 }

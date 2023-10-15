@@ -1,7 +1,6 @@
 package com.pek.ttlivescoreapi.match.controller;
 
 
-import com.pek.ttlivescoreapi.match.service.MatchPlayerService;
 import com.pek.ttlivescoreapi.match.service.PointService;
 import com.pek.ttlivescoreapi.match.transport.MatchTransport;
 import com.pek.ttlivescoreapi.match.transport.PointTransport;
@@ -24,12 +23,13 @@ public class MatchController {
     private final MatchService matchService;
 
     private final PointService pointService;
-    private MatchPlayerService matchPlayerService;
+//    private MatchPlayerService matchPlayerService;
 
 
     public MatchController(MatchService service, PointService pointService) {
         this.matchService = service;
         this.pointService = pointService;
+//        this.matchPlayerService = matchPlayerService;
     }
 
 
@@ -65,6 +65,8 @@ public class MatchController {
         return pointService.findAllByMatchId(matchId);
 
     }
+
+
 
     public void sendPointsToEmitters(PointTransport data) {
         for (SseEmitter emmiter :
@@ -145,6 +147,15 @@ public class MatchController {
     public List<MatchTransport> getMatches() {
 
         return matchService.findAll();
+
+    }
+
+    @PostMapping("{matchId}/players")
+    public UserTransport addPlayer(@PathVariable long matchId, @RequestBody UserTransport user) {
+
+//        matchPlayerService.save(matchId, user);
+
+        return null;
 
     }
 
