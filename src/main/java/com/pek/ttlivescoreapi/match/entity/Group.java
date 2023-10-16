@@ -18,11 +18,11 @@ public class Group {
     private Long id;
 
     @ManyToOne()
-    @JoinColumn(name = "player1", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "player1_id", referencedColumnName = "id", nullable = false)
     private User player1;
 
     @ManyToOne( )
-    @JoinColumn(name = "player2", referencedColumnName = "id")
+    @JoinColumn(name = "player2_id", referencedColumnName = "id")
     private User player2;
 
     @ManyToOne()

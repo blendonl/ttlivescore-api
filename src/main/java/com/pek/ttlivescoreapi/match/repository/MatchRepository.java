@@ -14,12 +14,18 @@ public interface MatchRepository extends CrudRepository<Match, Long> {
 
     List<Match> findAllByEventId(long eventId);
 
-    @Query(value = "SELECT * from match m inner join public.match_player mp on m.id = mp.match_id where mp.player_id = :playerId", nativeQuery = true)
+
+
+    @Query(value = "SELECT m from Match m " +
+            "inner join fetch m.players g " +
+            "where g.player1.id = :player1Id and :player2Id = (select g1.player1.id from Group g1 where g1.match.id = g.match.id and g1.player1.id != :player1Id) " +
+            "or g.player1.id = :player2Id and :player1Id = (select g2.player1.id from Group g2 where g2.match.id = g.match.id and g2.player1.id != :player2Id)")
+    List<Match> findAllByPlayer1IdAndPLayer2Id(long player1Id, long player2Id);
+
+
+    @Query(value = "SELECT m from Match m inner join Group g on m.id = g.match.id where g.player1.id = :playerId or g.player2.id = :playerId")
     List<Match> findAllByPlayerId(long playerId);
 
-
-    @Query(value = "SELECT * from match m inner join match_player mp on m.id = mp.match_id where mp.player_id = :player1Id and (select match_id from match inner join match_player on match.id = match_player.match_id where mp.player_id = :player2Id)", nativeQuery = true)
-    List<Match> findAllByPlayer1IdAndPLayer2Id(long player1Id, long player2Id);
 
 
 }

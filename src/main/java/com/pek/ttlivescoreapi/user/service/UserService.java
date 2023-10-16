@@ -1,5 +1,7 @@
 package com.pek.ttlivescoreapi.user.service;
 
+import com.pek.ttlivescoreapi.user.transport.PlayerTransport;
+import com.pek.ttlivescoreapi.user.transport.UserSignupTransport;
 import com.pek.ttlivescoreapi.user.transport.UserTransport;
 import com.pek.ttlivescoreapi.user.exception.UserNotFoundException;
 import com.pek.ttlivescoreapi.user.entity.User;
@@ -15,7 +17,7 @@ public interface UserService {
     List<UserTransport> findAllByRole(String role);
 
 
-    UserTransport save(User user);
+    UserTransport save(UserSignupTransport user);
 
 
     void deleteById(long id) throws UserNotFoundException;

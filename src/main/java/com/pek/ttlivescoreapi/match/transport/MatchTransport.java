@@ -17,6 +17,7 @@ public class MatchTransport {
 
     private long id;
     private boolean isFinished;
+    private boolean isDouble;
     private List<String> players = new ArrayList<>();
     private UserTransport referee;
 }

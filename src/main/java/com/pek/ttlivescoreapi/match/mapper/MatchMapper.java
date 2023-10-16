@@ -3,7 +3,6 @@ package com.pek.ttlivescoreapi.match.mapper;
 import com.pek.ttlivescoreapi.match.entity.Match;
 import com.pek.ttlivescoreapi.match.transport.MatchTransport;
 import com.pek.ttlivescoreapi.user.mapper.UserMapper;
-import com.pek.ttlivescoreapi.user.transport.UserTransport;
 
 import java.util.List;
 
@@ -12,7 +11,8 @@ public class MatchMapper {
     public static MatchTransport toMatchTransport(Match match) {
         return MatchTransport.builder()
                 .id(match.getId())
-//                .players(match.getMatchPlayers().stream().map(mp -> mp.getPlayer().getEmail()).toList())
+                .players(match.getPlayers().stream().map(mp -> mp.getPlayer1().getEmail()).toList())
+                .isDouble(match.isDouble())
                 .isFinished(match.isFinished())
 //                .referee(UserMapper.mapToUserTransport(match.getReferee()))
                 .build();
@@ -22,8 +22,10 @@ public class MatchMapper {
 
         return Match.builder()
                 .id(matchTransport.getId())
-//                .finished(matchTransport.isFinished())
+//                .players(matchTransport.getPlayers().stream().map(m -> Group.builder().player1()))
                 .referee(UserMapper.mapToUser(matchTransport.getReferee()))
+                .isDouble(matchTransport.isDouble())
+                .isFinished(matchTransport.isFinished())
                 .build();
     }
 

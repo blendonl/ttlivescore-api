@@ -7,7 +7,9 @@ import com.pek.ttlivescoreapi.match.transport.PointTransport;
 import com.pek.ttlivescoreapi.team.Team;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Type;
 
+import java.sql.Blob;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +27,8 @@ public class User {
     @GeneratedValue
     private Long id;
     @Column(nullable = true)
+
+    @Lob
     private byte[] profilePicture;
     private String name;
     private String lastName;
