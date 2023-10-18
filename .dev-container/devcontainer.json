@@ -1,0 +1,8 @@
+{
+  "name": "TTLiveScore-Api",
+  "dockerFile": "Dockerfile",
+  "service": "app",
+  "appPort": [8080],
+  "forwardPorts": [5438],
+  "postCreateCommand": "mvn clean install",
+}
