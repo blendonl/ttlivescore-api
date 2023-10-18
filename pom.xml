@@ -10,9 +10,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.pek</groupId>
-    <artifactId>TTLiveScoreApi</artifactId>
+    <artifactId>tt-live-score-api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>TTLiveScoreApi</name>
+    <name>tt-live-score-api</name>
     <description>TTLiveScoreApi</description>
     <dependencies>
 
