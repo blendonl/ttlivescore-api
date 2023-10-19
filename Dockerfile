@@ -1,9 +1,9 @@
 
 
 FROM maven:latest
-WORKDIR /workspace
+WORKDIR /workspaces
 EXPOSE 8080
-COPY ../ api
+COPY . /workspaces
 CMD ["mvn", "spring-boot:run"]
 
 #RUN --mount=type=cache,target=/root/.m2 ./mvnw -f pom.xml clean package
