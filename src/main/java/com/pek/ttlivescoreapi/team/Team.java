@@ -25,8 +25,7 @@ public class Team {
     @ManyToOne()
     private League league;
 
-    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Transient
+    @ManyToMany(mappedBy = "teams", cascade = {CascadeType.MERGE})
     private List<User> users;
 
 }

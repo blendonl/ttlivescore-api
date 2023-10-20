@@ -47,7 +47,9 @@ public class UserServiceImpl implements UserService {
         User user = UserMapper.mapUserSignupToUser(userTransport);
 
 
-        user.setTeam(teamRepository.findByName(user.getTeam().getName()).get());
+        user.getTeams().get(0).setId(teamRepository.findByName(user.getTeams().get(0).getName()).get().getId());
+
+        System.out.println(user.getTeams().get(0).getId());
 
         UserTransport userT = UserMapper.mapToUserTransport(userRepository.save(user));
 

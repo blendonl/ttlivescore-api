@@ -6,6 +6,9 @@ import com.pek.ttlivescoreapi.user.transport.UserTransport;
 import com.pek.ttlivescoreapi.user.entity.User;
 import lombok.SneakyThrows;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 public class UserMapper {
@@ -22,7 +25,7 @@ public class UserMapper {
                 .lastName(user.getLastName())
                 .email(user.getEmail())
                 .birthDate(user.getBirthDate())
-                 .teamName(user.getTeam().getName())
+                 .teamName(user.getTeams().get(user.getTeams().size() - 1).getName())
                 .gender(user.getGender())
                 .build();
     }
@@ -34,7 +37,7 @@ public class UserMapper {
                 .profilePicture(user.getProfilePicture().getBytes())
                 .name(user.getFirstName())
                 .lastName(user.getLastName())
-                .team(Team.builder().name(user.getTeamName()).build())
+                .teams(Arrays.stream(new Team[]{Team.builder().name(user.getTeamName()).build()}).toList())
                 .email(user.getEmail())
                 .password(user.getPassword())
                 .birthDate(user.getBirthDate())
@@ -52,7 +55,7 @@ public class UserMapper {
                 .lastName(user.getLastName())
                 .email(user.getEmail())
                 .birthDate(user.getBirthDate())
-                .teamName(user.getTeam().getName())
+//                .teamName(user.getTeam().getName())
                 .gender(user.getGender())
                 .build();
     }
@@ -69,7 +72,7 @@ public class UserMapper {
                 .profilePicture(userTransport.getProfilePicture())
                 .name(userTransport.getFirstName())
                 .lastName(userTransport.getLastName())
-                .team(Team.builder().name(userTransport.getTeamName()).build())
+               .teams(Arrays.stream(new Team[]{Team.builder().name(userTransport.getTeamName()).build()}).toList())
                 .email(userTransport.getEmail())
                 .password(userTransport.getPassword())
                 .birthDate(userTransport.getBirthDate())

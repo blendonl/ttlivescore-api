@@ -26,7 +26,6 @@ public class User {
     @Id
     @GeneratedValue
     private Long id;
-    @Column(nullable = true)
 
     @Lob
     private byte[] profilePicture;
@@ -40,8 +39,10 @@ public class User {
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Role> roles;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Team team;
+    @ManyToMany(cascade = {CascadeType.MERGE})
+    @JoinTable(name = "users_teams", joinColumns = { @JoinColumn(name = "user_id") },
+            inverseJoinColumns = { @JoinColumn(name = "team_id")})
+    private List<Team> teams;
 
     @OneToMany(mappedBy = "player", fetch = FetchType.LAZY)
     private List<Point> points;

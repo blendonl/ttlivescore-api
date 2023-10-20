@@ -2,8 +2,7 @@
 
 FROM maven:latest
 WORKDIR /workspaces
-EXPOSE 8080
-COPY . /workspaces
+COPY ../.. /workspaces
 CMD ["mvn", "spring-boot:run"]
 
 #RUN --mount=type=cache,target=/root/.m2 ./mvnw -f pom.xml clean package
@@ -14,7 +13,3 @@ CMD ["mvn", "spring-boot:run"]
 ##EXPOSE 8080
 ##ENTRYPOINT java -jar /app/runner.jar
 #
-
-
-
-

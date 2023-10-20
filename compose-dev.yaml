@@ -25,7 +25,7 @@ services:
   api:
     build:
       context: .
-      dockerfile: ../Dockerfile
+      dockerfile: Dockerfile
     container_name: ttlivscore-api
     #    network_mode: host
     hostname: localhost
@@ -34,7 +34,7 @@ services:
     ports:
       - '8080:8080'
     volumes:
-      - .:/workspaces:cached
+      - ..:/workspaces
     depends_on:
       - postgres
 
