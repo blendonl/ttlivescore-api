@@ -4,7 +4,6 @@ import com.pek.ttlivescoreapi.match.repository.MatchRepository;
 import com.pek.ttlivescoreapi.match.entity.Match;
 import com.pek.ttlivescoreapi.match.exception.MatchNotFoundException;
 import com.pek.ttlivescoreapi.match.mapper.MatchMapper;
-import com.pek.ttlivescoreapi.match.service.MatchPlayerService;
 import com.pek.ttlivescoreapi.match.service.MatchService;
 import com.pek.ttlivescoreapi.match.service.PointService;
 import com.pek.ttlivescoreapi.match.transport.MatchPlayerTransport;
@@ -18,12 +17,10 @@ import java.util.List;
 public class MatchServiceImpl implements MatchService {
 
     private MatchRepository matchRepository;
-    private MatchPlayerService matchPlayerService;
     private PointService pointService;
 
-    public MatchServiceImpl(MatchRepository matchRepository, MatchPlayerService matchPlayerService, PointService pointService) {
+    public MatchServiceImpl(MatchRepository matchRepository, PointService pointService) {
         this.matchRepository = matchRepository;
-        this.matchPlayerService = matchPlayerService;
         this.pointService = pointService;
     }
 
@@ -77,17 +74,31 @@ public class MatchServiceImpl implements MatchService {
     }
 
     @Override
+    public List<MatchTransport> findAllByPlayerId(long playerId) {
+
+        return MatchMapper.toMatchTransports( this.matchRepository.findAllByPlayerId(playerId));
+
+    }
+
+    @Override
     public UserTransport getWinnerInASingleMatch(long singleMatchId) {
 
-        List<MatchPlayerTransport> players = matchPlayerService.findAllByMatchId(singleMatchId);
+//        List<MatchPlayerTransport> players = matchPlayerService.findAllByMatchId(singleMatchId);
+//
+//        int player1Points = pointService.findAllByMatchIdAndPlayerId(singleMatchId, players.get(0).getPlayerId());
+//        int player2Points = pointService.findAllByMatchIdAndPlayerId(singleMatchId, players.get(1).getPlayerId());
+//
+//        if(player1Points > player2Points) {
+//            return null;
+//        }
 
-        int player1Points = pointService.findAllByMatchIdAndPlayerId(singleMatchId, players.get(0).getPlayer().getId());
-        int player2Points = pointService.findAllByMatchIdAndPlayerId(singleMatchId, players.get(1).getPlayer().getId());
+        return null;
 
-        if(player1Points > player2Points) {
-            return (players.get(0).getPlayer());
-        }
+    }
 
-        return players.get(1).getPlayer();
+    @Override
+    public List<MatchTransport> findAll() {
+
+        return MatchMapper.toMatchTransports((List<Match>) matchRepository.findAll());
     }
 }

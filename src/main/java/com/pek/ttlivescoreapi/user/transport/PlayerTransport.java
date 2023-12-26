@@ -14,5 +14,6 @@ public class PlayerTransport {
     private char gender;
     private String email;
     private String teamName;
+    private byte[] profilePicture;
 
 }

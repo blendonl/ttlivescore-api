@@ -1,0 +1,46 @@
+version: '3.7'
+
+services:
+  postgres:
+    container_name: ttlivescore-db
+    image: postgres:latest
+    networks:
+      - my-network
+#    network_mode: host
+    hostname: localhost
+    restart: always
+    environment:
+      - POSTGRES_USER=username
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=ttlivescore
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+    ports:
+      - '5432:5432'
+    volumes:
+      - .:/workspaces/postgres-data:/var/lib/postgresql/data
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ttlivscore-api
+    #    network_mode: host
+    hostname: localhost
+    networks:
+      - my-network
+    ports:
+      - '8080:8080'
+    volumes:
+      - ..:/workspaces
+    depends_on:
+      - postgres
+
+
+volumes:
+  workspaces:
+  postgres-data:
+networks:
+  my-network:

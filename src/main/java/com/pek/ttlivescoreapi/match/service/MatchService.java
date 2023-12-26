@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 
-@Service
 public interface MatchService {
 
     MatchTransport findById(long matchId);
@@ -26,8 +25,12 @@ public interface MatchService {
 
     List<MatchTransport> findALlByPlayer1IdAndPlayer2Id(long player1Id, long player2Id);
 
+    List<MatchTransport> findAllByPlayerId(long playerId);
+
 
 
     UserTransport getWinnerInASingleMatch(long singleMatchId);
+
+    List<MatchTransport> findAll();
 
 }

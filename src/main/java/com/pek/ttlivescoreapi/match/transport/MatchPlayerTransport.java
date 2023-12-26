@@ -1,6 +1,7 @@
 package com.pek.ttlivescoreapi.match.transport;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pek.ttlivescoreapi.user.transport.UserTransport;
 import lombok.*;
 
@@ -11,5 +12,8 @@ import lombok.*;
 @Builder
 public class MatchPlayerTransport {
 
-    private UserTransport player;
+    private long playerId;
+    private long matchId;
+    private boolean isDouble;
+    private boolean side;
 }

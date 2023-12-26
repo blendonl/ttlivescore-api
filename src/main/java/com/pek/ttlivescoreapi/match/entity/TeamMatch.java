@@ -3,10 +3,13 @@ package com.pek.ttlivescoreapi.match.entity;
 
 import com.pek.ttlivescoreapi.event.entity.Event;
 import com.pek.ttlivescoreapi.team.Team;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.*;
+import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
 import java.util.List;
 
 @Entity
