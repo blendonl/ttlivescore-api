@@ -6,8 +6,10 @@ import com.pek.ttlivescoreapi.match.transport.MatchPlayerTransport;
 import com.pek.ttlivescoreapi.match.transport.MatchTransport;
 import com.pek.ttlivescoreapi.team.repository.TeamRepository;
 import com.pek.ttlivescoreapi.user.entity.User;
+import com.pek.ttlivescoreapi.user.mapper.UserShortMapper;
 import com.pek.ttlivescoreapi.user.service.DecodedMultipartFile;
 import com.pek.ttlivescoreapi.user.transport.PlayerTransport;
+import com.pek.ttlivescoreapi.user.transport.UserShortTransport;
 import com.pek.ttlivescoreapi.user.transport.UserSignupTransport;
 import com.pek.ttlivescoreapi.user.transport.UserTransport;
 import com.pek.ttlivescoreapi.user.exception.UserNotFoundException;
@@ -33,6 +35,16 @@ public class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
         this.matchService = matchService;
         this.teamRepository = teamRepository;
+    }
+
+    @Override
+    public List<UserShortTransport> findAll(String query) throws Exception {
+        if(query == null) {
+            throw new Exception("bad query");
+        }
+
+        return UserShortMapper.mapToUserShortsTransport((List<User>) userRepository.findAll());
+
     }
 
     @SneakyThrows

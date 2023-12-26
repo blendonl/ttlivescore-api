@@ -1,6 +1,7 @@
 package com.pek.ttlivescoreapi.user.service;
 
 import com.pek.ttlivescoreapi.user.transport.PlayerTransport;
+import com.pek.ttlivescoreapi.user.transport.UserShortTransport;
 import com.pek.ttlivescoreapi.user.transport.UserSignupTransport;
 import com.pek.ttlivescoreapi.user.transport.UserTransport;
 import com.pek.ttlivescoreapi.user.exception.UserNotFoundException;
@@ -11,6 +12,8 @@ import java.util.List;
 
 @Service
 public interface UserService {
+
+    List<UserShortTransport> findAll(String query) throws Exception;
 
 
 

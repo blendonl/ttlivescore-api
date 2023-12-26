@@ -5,12 +5,14 @@ import com.pek.ttlivescoreapi.match.service.MatchService;
 import com.pek.ttlivescoreapi.match.transport.MatchTransport;
 import com.pek.ttlivescoreapi.user.exception.UserNotFoundException;
 import com.pek.ttlivescoreapi.user.transport.PlayerTransport;
+import com.pek.ttlivescoreapi.user.transport.UserShortTransport;
 import com.pek.ttlivescoreapi.user.transport.UserSignupTransport;
 import com.pek.ttlivescoreapi.user.transport.UserTransport;
 import com.pek.ttlivescoreapi.user.entity.User;
 import com.pek.ttlivescoreapi.user.mapper.UserMapper;
 import com.pek.ttlivescoreapi.user.service.UserService;
 import jakarta.transaction.Transactional;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,14 +22,20 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
 
-    private UserService userService;
-    private MatchService matchService;
+    private final UserService userService;
+    private final MatchService matchService;
 
     public UserController(UserService userService, MatchService matchService) {
         this.userService = userService;
         this.matchService = matchService;
     }
 
+    @GetMapping
+    public List<UserShortTransport> findAll() throws Exception {
+        // TODO add query
+        return this.userService.findAll(null);
+
+    }
 
     @PostMapping
     public UserTransport saveUser(@ModelAttribute UserSignupTransport userTransport) {

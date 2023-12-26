@@ -14,6 +14,9 @@ import java.util.Optional;
 @Transactional
 public interface UserRepository extends CrudRepository<User, Long> {
 
+    @Query(value = "select * from users", nativeQuery = true)
+    List<User> findAllWithQuery();
+
     List<User> findAllByRolesContaining(Role role);
 
     Optional<User> findByEmail(String email);
