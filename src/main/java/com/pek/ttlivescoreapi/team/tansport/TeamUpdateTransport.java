@@ -5,9 +5,8 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class TeamCreateTransport {
+@NoArgsConstructor
+public class TeamUpdateTransport {
     private String name;
-
 }

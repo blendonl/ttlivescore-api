@@ -3,10 +3,7 @@ package com.pek.ttlivescoreapi.team.controller;
 import com.pek.ttlivescoreapi.team.exception.TeamAlreadyExistException;
 import com.pek.ttlivescoreapi.team.exception.TeamNotFoundException;
 import com.pek.ttlivescoreapi.team.service.TeamService;
-import com.pek.ttlivescoreapi.team.tansport.TeamCreateTransport;
-import com.pek.ttlivescoreapi.team.tansport.TeamQueryTransport;
-import com.pek.ttlivescoreapi.team.tansport.TeamShortTransport;
-import com.pek.ttlivescoreapi.team.tansport.TeamTransport;
+import com.pek.ttlivescoreapi.team.tansport.*;
 import com.pek.ttlivescoreapi.user.service.UserService;
 import com.pek.ttlivescoreapi.user.transport.UserTransport;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +32,7 @@ public class TeamController {
         return teamService.findAll(query);
     }
 
-    @GetMapping("/{name}")
+    @GetMapping("find/{name}")
     public TeamTransport findByTeamName(@PathVariable String name) throws TeamNotFoundException {
         return teamService.findByName(name);
     }
@@ -53,6 +50,11 @@ public class TeamController {
     @GetMapping("{teamName}/players")
     public List<UserTransport> findAllPlayerByTeamName(@PathVariable String teamName) {
         return userService.findAllByTeamName(teamName);
+    }
+
+    @PatchMapping("{teamId}")
+    public TeamShortTransport update(@PathVariable() long teamId, @RequestBody TeamUpdateTransport team) throws TeamNotFoundException, TeamAlreadyExistException {
+        return this.teamService.update(teamId, team);
     }
 
 

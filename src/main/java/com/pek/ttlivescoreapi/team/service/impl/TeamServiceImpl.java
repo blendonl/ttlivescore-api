@@ -3,14 +3,12 @@ package com.pek.ttlivescoreapi.team.service.impl;
 import com.pek.ttlivescoreapi.team.Team;
 import com.pek.ttlivescoreapi.team.exception.TeamAlreadyExistException;
 import com.pek.ttlivescoreapi.team.exception.TeamNotFoundException;
+import com.pek.ttlivescoreapi.team.mapper.TeamCreateMapper;
 import com.pek.ttlivescoreapi.team.mapper.TeamMapper;
 import com.pek.ttlivescoreapi.team.mapper.TeamShortMapper;
 import com.pek.ttlivescoreapi.team.repository.TeamRepository;
 import com.pek.ttlivescoreapi.team.service.TeamService;
-import com.pek.ttlivescoreapi.team.tansport.TeamCreateTransport;
-import com.pek.ttlivescoreapi.team.tansport.TeamQueryTransport;
-import com.pek.ttlivescoreapi.team.tansport.TeamShortTransport;
-import com.pek.ttlivescoreapi.team.tansport.TeamTransport;
+import com.pek.ttlivescoreapi.team.tansport.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,7 +39,21 @@ public class TeamServiceImpl implements TeamService {
             throw new TeamAlreadyExistException("team already exist");
         }
 
-        Team team = TeamCreateTransport.toTeam(newTeam);
+        Team team = TeamCreateMapper.toTeam(newTeam);
+
+        return TeamShortMapper.toTeamShort(repository.save(team));
+    }
+
+    @Override
+    public TeamShortTransport update(long id, TeamUpdateTransport newTeam) throws TeamNotFoundException, TeamAlreadyExistException {
+
+        Team team = this.repository.findById(id).orElseThrow(TeamNotFoundException::new);
+
+        if (this.repository.findByName(newTeam.getName()).orElse(null) != null) {
+            throw new TeamAlreadyExistException("team with that name already exist");
+        }
+
+        team.setName(newTeam.getName());
 
         return TeamShortMapper.toTeamShort(repository.save(team));
     }

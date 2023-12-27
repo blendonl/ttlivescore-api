@@ -18,4 +18,7 @@ public interface TeamRepository extends CrudRepository<Team, Long> {
 
     @Query(value = "select * from team t where t.name = :query.name", nativeQuery = true)
     List<Team> findAllByQuery(TeamQueryTransport query);
+
+    @Query(value = "select case when count(*) = 1 then TRUE else FALSE end from team t where t.id = :id", nativeQuery = true)
+    boolean existById(long id);
 }

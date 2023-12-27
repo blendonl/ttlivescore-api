@@ -2,10 +2,8 @@ package com.pek.ttlivescoreapi.team.service;
 
 import com.pek.ttlivescoreapi.team.exception.TeamAlreadyExistException;
 import com.pek.ttlivescoreapi.team.exception.TeamNotFoundException;
-import com.pek.ttlivescoreapi.team.tansport.TeamCreateTransport;
-import com.pek.ttlivescoreapi.team.tansport.TeamQueryTransport;
-import com.pek.ttlivescoreapi.team.tansport.TeamShortTransport;
-import com.pek.ttlivescoreapi.team.tansport.TeamTransport;
+import com.pek.ttlivescoreapi.team.tansport.*;
+import com.pek.ttlivescoreapi.user.transport.UserShortTransport;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,9 +16,14 @@ public interface TeamService {
 
     TeamShortTransport save(TeamCreateTransport newTeam) throws TeamAlreadyExistException;
 
+    TeamShortTransport update(long id, TeamUpdateTransport team) throws TeamAlreadyExistException, TeamNotFoundException;
+
     void deleteById(long id) throws TeamNotFoundException;
 
     List<TeamTransport> findAllByLeagueId(long leagueId);
 
     List<TeamShortTransport> findAll(TeamQueryTransport query);
+
+    TeamShortTransport addPlayer(long id, UserShortTransport user);
+
 }
