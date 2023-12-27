@@ -1,11 +1,14 @@
 package com.pek.ttlivescoreapi.team.service.impl;
 
-import com.pek.ttlivescoreapi.team.tansport.TeamTransport;
+import com.pek.ttlivescoreapi.team.Team;
 import com.pek.ttlivescoreapi.team.exception.TeamNotFoundException;
 import com.pek.ttlivescoreapi.team.mapper.TeamMapper;
-import com.pek.ttlivescoreapi.team.service.TeamService;
-import com.pek.ttlivescoreapi.team.Team;
+import com.pek.ttlivescoreapi.team.mapper.TeamShortMapper;
 import com.pek.ttlivescoreapi.team.repository.TeamRepository;
+import com.pek.ttlivescoreapi.team.service.TeamService;
+import com.pek.ttlivescoreapi.team.tansport.TeamQueryTransport;
+import com.pek.ttlivescoreapi.team.tansport.TeamShortTransport;
+import com.pek.ttlivescoreapi.team.tansport.TeamTransport;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,7 +16,7 @@ import java.util.List;
 @Service
 public class TeamServiceImpl implements TeamService {
 
-    private TeamRepository repository;
+    private final TeamRepository repository;
 
     public TeamServiceImpl(TeamRepository repository) {
         this.repository = repository;
@@ -36,7 +39,7 @@ public class TeamServiceImpl implements TeamService {
     }
 
     public void deleteById(long id) throws TeamNotFoundException {
-        if(!repository.existsById(id)) {
+        if (!repository.existsById(id)) {
             throw new TeamNotFoundException();
         }
 
@@ -44,9 +47,13 @@ public class TeamServiceImpl implements TeamService {
     }
 
 
-
-
     public List<TeamTransport> findAllByLeagueId(long leagueId) {
         return TeamMapper.mapToTeamsTransport(repository.findAllByLeagueId(leagueId));
+    }
+
+    @Override
+    public List<TeamShortTransport> findAll(TeamQueryTransport query) {
+        return TeamShortMapper.toTeamsShort(repository.findAllByQuery(query));
+
     }
 }

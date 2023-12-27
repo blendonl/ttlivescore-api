@@ -1,12 +1,14 @@
 package com.pek.ttlivescoreapi.team.controller;
 
-import com.pek.ttlivescoreapi.team.tansport.TeamTransport;
+import com.pek.ttlivescoreapi.team.Team;
 import com.pek.ttlivescoreapi.team.exception.TeamNotFoundException;
 import com.pek.ttlivescoreapi.team.mapper.TeamMapper;
 import com.pek.ttlivescoreapi.team.service.TeamService;
-import com.pek.ttlivescoreapi.user.transport.UserTransport;
-import com.pek.ttlivescoreapi.team.Team;
+import com.pek.ttlivescoreapi.team.tansport.TeamQueryTransport;
+import com.pek.ttlivescoreapi.team.tansport.TeamShortTransport;
+import com.pek.ttlivescoreapi.team.tansport.TeamTransport;
 import com.pek.ttlivescoreapi.user.service.UserService;
+import com.pek.ttlivescoreapi.user.transport.UserTransport;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,13 +17,18 @@ import java.util.List;
 @RequestMapping("teams")
 public class TeamController {
 
-    private TeamService teamService;
-    private UserService userService;
+    private final TeamService teamService;
+    private final UserService userService;
 
 
     public TeamController(TeamService teamService, UserService userService) {
         this.teamService = teamService;
         this.userService = userService;
+    }
+
+    @GetMapping("")
+    public List<TeamShortTransport> findAll(@RequestParam(required = false) TeamQueryTransport query) {
+        return teamService.findAll(query);
     }
 
     @GetMapping("/{name}")
