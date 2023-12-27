@@ -75,7 +75,6 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    @Transactional
     public UserTransport findById(long id) throws UserNotFoundException {
         User user = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
 

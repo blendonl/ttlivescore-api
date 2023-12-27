@@ -74,7 +74,6 @@ public class UserMapper {
                 .lastName(userTransport.getLastName())
                .teams(Arrays.stream(new Team[]{Team.builder().name(userTransport.getTeamName()).build()}).toList())
                 .email(userTransport.getEmail())
-                .password(userTransport.getPassword())
                 .birthDate(userTransport.getBirthDate())
                 .gender(userTransport.getGender());
 
