@@ -1,31 +1,32 @@
 package com.pek.ttlivescoreapi.user.service.impl;
 
-import com.pek.ttlivescoreapi.match.entity.Match;
 import com.pek.ttlivescoreapi.match.service.MatchService;
-import com.pek.ttlivescoreapi.match.transport.MatchPlayerTransport;
-import com.pek.ttlivescoreapi.match.transport.MatchTransport;
+import com.pek.ttlivescoreapi.team.Team;
+import com.pek.ttlivescoreapi.team.exception.TeamNotFoundException;
 import com.pek.ttlivescoreapi.team.repository.TeamRepository;
 import com.pek.ttlivescoreapi.user.entity.User;
-import com.pek.ttlivescoreapi.user.mapper.UserShortMapper;
-import com.pek.ttlivescoreapi.user.service.DecodedMultipartFile;
-import com.pek.ttlivescoreapi.user.transport.*;
 import com.pek.ttlivescoreapi.user.exception.UserNotFoundException;
 import com.pek.ttlivescoreapi.user.mapper.UserMapper;
+import com.pek.ttlivescoreapi.user.mapper.UserShortMapper;
 import com.pek.ttlivescoreapi.user.repository.UserRepository;
 import com.pek.ttlivescoreapi.user.service.UserService;
+import com.pek.ttlivescoreapi.user.transport.UserQueryTransport;
+import com.pek.ttlivescoreapi.user.transport.UserShortTransport;
+import com.pek.ttlivescoreapi.user.transport.UserSignupTransport;
+import com.pek.ttlivescoreapi.user.transport.UserTransport;
 import jakarta.transaction.Transactional;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
+
 @Service
 
 public class UserServiceImpl implements UserService {
 
-    private UserRepository userRepository;
-    private MatchService matchService;
     private final TeamRepository teamRepository;
+    private final UserRepository userRepository;
+    private final MatchService matchService;
 
     public UserServiceImpl(UserRepository userRepository, MatchService matchService,
                            TeamRepository teamRepository) {
@@ -36,11 +37,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserShortTransport> findAll(UserQueryTransport query) throws Exception {
-        if(query == null) {
+        if (query == null) {
             throw new Exception("bad query");
         }
 
-        return UserShortMapper.mapToUserShortsTransport((List<User>) userRepository.findAllWithQuery(query));
+        return UserShortMapper.mapToUserShortsTransport(userRepository.findAllWithQuery(query));
 
     }
 
@@ -52,25 +53,21 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    public UserTransport save(UserSignupTransport userTransport) {
-        User user = UserMapper.mapUserSignupToUser(userTransport);
+    public UserTransport save(UserSignupTransport newUser) throws TeamNotFoundException {
+        User user = UserMapper.mapUserSignupToUser(newUser);
 
+        Team team = teamRepository.findByName(newUser.getTeamName()).orElseThrow(TeamNotFoundException::new);
 
-        user.getTeams().get(0).setId(teamRepository.findByName(user.getTeams().get(0).getName()).get().getId());
+        user.getTeams().get(0).setId(team.getId());
 
-        System.out.println(user.getTeams().get(0).getId());
-
-        UserTransport userT = UserMapper.mapToUserTransport(userRepository.save(user));
-
-        return userT;
+        return UserMapper.mapToUserTransport(userRepository.save(user));
 
     }
 
-
     public void deleteById(long id) throws UserNotFoundException {
-
-        if(!userRepository.existsById(id))
+        if (!userRepository.existsById(id))
             throw new UserNotFoundException();
+
         userRepository.deleteById(id);
     }
 
@@ -89,8 +86,9 @@ public class UserServiceImpl implements UserService {
     }
 
     public List<UserTransport> findAllByTeamId(long teamId) {
-        return UserMapper.mapToUsersTransport( userRepository.findAllByTeamId(teamId));
+        return UserMapper.mapToUsersTransport(userRepository.findAllByTeamId(teamId));
     }
+
     public List<UserTransport> findAllByTeamName(String team) {
 
         return UserMapper.mapToUsersTransport(userRepository.findAllByTeamName(team));

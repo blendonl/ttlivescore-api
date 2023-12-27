@@ -3,15 +3,14 @@ package com.pek.ttlivescoreapi.user.controller;
 
 import com.pek.ttlivescoreapi.match.service.MatchService;
 import com.pek.ttlivescoreapi.match.transport.MatchTransport;
+import com.pek.ttlivescoreapi.team.exception.TeamNotFoundException;
 import com.pek.ttlivescoreapi.user.exception.UserNotFoundException;
-import com.pek.ttlivescoreapi.user.transport.*;
-import com.pek.ttlivescoreapi.user.entity.User;
-import com.pek.ttlivescoreapi.user.mapper.UserMapper;
 import com.pek.ttlivescoreapi.user.service.UserService;
-import jakarta.transaction.Transactional;
-import org.springframework.data.jpa.repository.Query;
+import com.pek.ttlivescoreapi.user.transport.UserQueryTransport;
+import com.pek.ttlivescoreapi.user.transport.UserShortTransport;
+import com.pek.ttlivescoreapi.user.transport.UserSignupTransport;
+import com.pek.ttlivescoreapi.user.transport.UserTransport;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -30,11 +29,10 @@ public class UserController {
     @GetMapping
     public List<UserShortTransport> findAll(@RequestParam(required = false) UserQueryTransport query) throws Exception {
         return this.userService.findAll(query);
-
     }
 
     @PostMapping
-    public UserTransport saveUser(@ModelAttribute UserSignupTransport userTransport) {
+    public UserTransport saveUser(@ModelAttribute UserSignupTransport userTransport) throws TeamNotFoundException {
         return userService.save(userTransport);
     }
 
@@ -63,6 +61,12 @@ public class UserController {
         return matchService.findALlByPlayer1IdAndPlayer2Id(userId, 2);
     }
 
+    @DeleteMapping("{userId}")
+    public void deleteById(@PathVariable long userId) throws UserNotFoundException {
+
+        userService.deleteById(userId);
+
+    }
 
 
 }
