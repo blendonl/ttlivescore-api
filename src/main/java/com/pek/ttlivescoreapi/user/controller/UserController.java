@@ -3,16 +3,12 @@ package com.pek.ttlivescoreapi.user.controller;
 
 import com.pek.ttlivescoreapi.match.service.MatchService;
 import com.pek.ttlivescoreapi.match.transport.MatchTransport;
+import com.pek.ttlivescoreapi.team.exception.TeamNotFoundException;
+import com.pek.ttlivescoreapi.user.exception.UserAlreadyExistException;
 import com.pek.ttlivescoreapi.user.exception.UserNotFoundException;
-import com.pek.ttlivescoreapi.user.transport.PlayerTransport;
-import com.pek.ttlivescoreapi.user.transport.UserSignupTransport;
-import com.pek.ttlivescoreapi.user.transport.UserTransport;
-import com.pek.ttlivescoreapi.user.entity.User;
-import com.pek.ttlivescoreapi.user.mapper.UserMapper;
 import com.pek.ttlivescoreapi.user.service.UserService;
-import jakarta.transaction.Transactional;
+import com.pek.ttlivescoreapi.user.transport.*;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -20,17 +16,21 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
 
-    private UserService userService;
-    private MatchService matchService;
+    private final UserService userService;
+    private final MatchService matchService;
 
     public UserController(UserService userService, MatchService matchService) {
         this.userService = userService;
         this.matchService = matchService;
     }
 
+    @GetMapping
+    public List<UserShortTransport> findAll(@RequestParam(required = false) UserQueryTransport query) throws Exception {
+        return this.userService.findAll(query);
+    }
 
     @PostMapping
-    public UserTransport saveUser(@ModelAttribute UserSignupTransport userTransport) {
+    public UserTransport saveUser(@ModelAttribute UserSignupTransport userTransport) throws TeamNotFoundException, UserAlreadyExistException {
         return userService.save(userTransport);
     }
 
@@ -59,6 +59,19 @@ public class UserController {
         return matchService.findALlByPlayer1IdAndPlayer2Id(userId, 2);
     }
 
+    @DeleteMapping("{userId}")
+    public void deleteById(@PathVariable long userId) throws UserNotFoundException {
+        userService.deleteById(userId);
+    }
 
+    @DeleteMapping("find/{userEmail}")
+    public void deleteByEmail(@PathVariable String userEmail) throws UserNotFoundException {
+        userService.deleteByEmail(userEmail);
+    }
+
+    @PatchMapping("{id}")
+    public UserTransport update(@PathVariable long id, @RequestBody UserUpdateTransport user) throws UserNotFoundException {
+        return userService.update(id, user);
+    }
 
 }
