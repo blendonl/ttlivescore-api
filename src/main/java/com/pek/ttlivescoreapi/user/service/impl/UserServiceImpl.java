@@ -8,10 +8,7 @@ import com.pek.ttlivescoreapi.team.repository.TeamRepository;
 import com.pek.ttlivescoreapi.user.entity.User;
 import com.pek.ttlivescoreapi.user.mapper.UserShortMapper;
 import com.pek.ttlivescoreapi.user.service.DecodedMultipartFile;
-import com.pek.ttlivescoreapi.user.transport.PlayerTransport;
-import com.pek.ttlivescoreapi.user.transport.UserShortTransport;
-import com.pek.ttlivescoreapi.user.transport.UserSignupTransport;
-import com.pek.ttlivescoreapi.user.transport.UserTransport;
+import com.pek.ttlivescoreapi.user.transport.*;
 import com.pek.ttlivescoreapi.user.exception.UserNotFoundException;
 import com.pek.ttlivescoreapi.user.mapper.UserMapper;
 import com.pek.ttlivescoreapi.user.repository.UserRepository;
@@ -38,12 +35,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserShortTransport> findAll(String query) throws Exception {
+    public List<UserShortTransport> findAll(UserQueryTransport query) throws Exception {
         if(query == null) {
             throw new Exception("bad query");
         }
 
-        return UserShortMapper.mapToUserShortsTransport((List<User>) userRepository.findAll());
+        return UserShortMapper.mapToUserShortsTransport((List<User>) userRepository.findAllWithQuery(query));
 
     }
 

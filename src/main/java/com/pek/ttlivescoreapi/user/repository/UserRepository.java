@@ -2,6 +2,7 @@ package com.pek.ttlivescoreapi.user.repository;
 
 import com.pek.ttlivescoreapi.user.entity.Role;
 import com.pek.ttlivescoreapi.user.entity.User;
+import com.pek.ttlivescoreapi.user.transport.UserQueryTransport;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -14,8 +15,8 @@ import java.util.Optional;
 @Transactional
 public interface UserRepository extends CrudRepository<User, Long> {
 
-    @Query(value = "select * from users", nativeQuery = true)
-    List<User> findAllWithQuery();
+    @Query(value = "select * from users where users.name = :query.firstName or users.last_name = :query.lastName or users.email = :query.email", nativeQuery = true)
+    List<User> findAllWithQuery(UserQueryTransport query);
 
     List<User> findAllByRolesContaining(Role role);
 

@@ -4,10 +4,7 @@ package com.pek.ttlivescoreapi.user.controller;
 import com.pek.ttlivescoreapi.match.service.MatchService;
 import com.pek.ttlivescoreapi.match.transport.MatchTransport;
 import com.pek.ttlivescoreapi.user.exception.UserNotFoundException;
-import com.pek.ttlivescoreapi.user.transport.PlayerTransport;
-import com.pek.ttlivescoreapi.user.transport.UserShortTransport;
-import com.pek.ttlivescoreapi.user.transport.UserSignupTransport;
-import com.pek.ttlivescoreapi.user.transport.UserTransport;
+import com.pek.ttlivescoreapi.user.transport.*;
 import com.pek.ttlivescoreapi.user.entity.User;
 import com.pek.ttlivescoreapi.user.mapper.UserMapper;
 import com.pek.ttlivescoreapi.user.service.UserService;
@@ -31,9 +28,8 @@ public class UserController {
     }
 
     @GetMapping
-    public List<UserShortTransport> findAll() throws Exception {
-        // TODO add query
-        return this.userService.findAll(null);
+    public List<UserShortTransport> findAll(@RequestParam(required = false) UserQueryTransport query) throws Exception {
+        return this.userService.findAll(query);
 
     }
 

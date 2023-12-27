@@ -1,11 +1,7 @@
 package com.pek.ttlivescoreapi.user.service;
 
-import com.pek.ttlivescoreapi.user.transport.PlayerTransport;
-import com.pek.ttlivescoreapi.user.transport.UserShortTransport;
-import com.pek.ttlivescoreapi.user.transport.UserSignupTransport;
-import com.pek.ttlivescoreapi.user.transport.UserTransport;
+import com.pek.ttlivescoreapi.user.transport.*;
 import com.pek.ttlivescoreapi.user.exception.UserNotFoundException;
-import com.pek.ttlivescoreapi.user.entity.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,7 +9,7 @@ import java.util.List;
 @Service
 public interface UserService {
 
-    List<UserShortTransport> findAll(String query) throws Exception;
+    List<UserShortTransport> findAll(UserQueryTransport query) throws Exception;
 
 
 
