@@ -71,6 +71,13 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(id);
     }
 
+    public void deleteByEmail(String email) throws UserNotFoundException {
+        if (!userRepository.existsByEmail(email))
+            throw new UserNotFoundException();
+
+        userRepository.deleteByEmail(email);
+    }
+
 
     public UserTransport findById(long id) throws UserNotFoundException {
         User user = userRepository.findById(id).orElseThrow(UserNotFoundException::new);

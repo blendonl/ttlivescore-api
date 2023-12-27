@@ -29,4 +29,9 @@ public interface UserRepository extends CrudRepository<User, Long> {
     @Query(value = "select * from users inner join team t on t.id = users.team_id where t.name = :team", nativeQuery = true)
     List<User> findAllByTeamName(String team);
 
+    @Query(value = "select case when count(*) = 1 then 'TRUE' else 'FALSE' end from users where users.email = :email", nativeQuery = true)
+    boolean existsByEmail(String email);
+
+    @Query(value = "delete from users where users.email = :email", nativeQuery = true)
+    void deleteByEmail(String email);
 }

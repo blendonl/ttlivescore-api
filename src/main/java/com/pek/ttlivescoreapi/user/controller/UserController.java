@@ -63,10 +63,12 @@ public class UserController {
 
     @DeleteMapping("{userId}")
     public void deleteById(@PathVariable long userId) throws UserNotFoundException {
-
         userService.deleteById(userId);
-
     }
 
+    @DeleteMapping("find/{userEmail}")
+    public void deleteByEmail(@PathVariable long userEmail) throws UserNotFoundException {
+        userService.deleteById(userEmail);
+    }
 
 }
