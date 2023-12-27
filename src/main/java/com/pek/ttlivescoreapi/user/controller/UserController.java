@@ -4,12 +4,10 @@ package com.pek.ttlivescoreapi.user.controller;
 import com.pek.ttlivescoreapi.match.service.MatchService;
 import com.pek.ttlivescoreapi.match.transport.MatchTransport;
 import com.pek.ttlivescoreapi.team.exception.TeamNotFoundException;
+import com.pek.ttlivescoreapi.user.exception.UserAlreadyExistException;
 import com.pek.ttlivescoreapi.user.exception.UserNotFoundException;
 import com.pek.ttlivescoreapi.user.service.UserService;
-import com.pek.ttlivescoreapi.user.transport.UserQueryTransport;
-import com.pek.ttlivescoreapi.user.transport.UserShortTransport;
-import com.pek.ttlivescoreapi.user.transport.UserSignupTransport;
-import com.pek.ttlivescoreapi.user.transport.UserTransport;
+import com.pek.ttlivescoreapi.user.transport.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,7 +30,7 @@ public class UserController {
     }
 
     @PostMapping
-    public UserTransport saveUser(@ModelAttribute UserSignupTransport userTransport) throws TeamNotFoundException {
+    public UserTransport saveUser(@ModelAttribute UserSignupTransport userTransport) throws TeamNotFoundException, UserAlreadyExistException {
         return userService.save(userTransport);
     }
 
@@ -67,8 +65,13 @@ public class UserController {
     }
 
     @DeleteMapping("find/{userEmail}")
-    public void deleteByEmail(@PathVariable long userEmail) throws UserNotFoundException {
-        userService.deleteById(userEmail);
+    public void deleteByEmail(@PathVariable String userEmail) throws UserNotFoundException {
+        userService.deleteByEmail(userEmail);
+    }
+
+    @PatchMapping("{id}")
+    public UserTransport update(@PathVariable long id, @RequestBody UserUpdateTransport user) throws UserNotFoundException {
+        return userService.update(id, user);
     }
 
 }

@@ -5,15 +5,13 @@ import com.pek.ttlivescoreapi.team.Team;
 import com.pek.ttlivescoreapi.team.exception.TeamNotFoundException;
 import com.pek.ttlivescoreapi.team.repository.TeamRepository;
 import com.pek.ttlivescoreapi.user.entity.User;
+import com.pek.ttlivescoreapi.user.exception.UserAlreadyExistException;
 import com.pek.ttlivescoreapi.user.exception.UserNotFoundException;
 import com.pek.ttlivescoreapi.user.mapper.UserMapper;
 import com.pek.ttlivescoreapi.user.mapper.UserShortMapper;
 import com.pek.ttlivescoreapi.user.repository.UserRepository;
 import com.pek.ttlivescoreapi.user.service.UserService;
-import com.pek.ttlivescoreapi.user.transport.UserQueryTransport;
-import com.pek.ttlivescoreapi.user.transport.UserShortTransport;
-import com.pek.ttlivescoreapi.user.transport.UserSignupTransport;
-import com.pek.ttlivescoreapi.user.transport.UserTransport;
+import com.pek.ttlivescoreapi.user.transport.*;
 import jakarta.transaction.Transactional;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
@@ -49,14 +47,19 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public List<UserTransport> findAllByRole(String role) {
 //        List<User> users = userRepository.findAllByRolesContaining(Role.builder().name(role).build());
-        return UserMapper.mapToUsersTransport((List<User>) userRepository.findAll());
+        return UserMapper.mapToUsersTransport(userRepository.findAll());
     }
 
 
-    public UserTransport save(UserSignupTransport newUser) throws TeamNotFoundException {
+    public UserTransport save(UserSignupTransport newUser) throws TeamNotFoundException, UserAlreadyExistException {
         User user = UserMapper.mapUserSignupToUser(newUser);
 
+        if (userRepository.existsByEmail(user.getEmail())) {
+            throw new UserAlreadyExistException("user already exist");
+        }
+
         Team team = teamRepository.findByName(newUser.getTeamName()).orElseThrow(TeamNotFoundException::new);
+
 
         user.getTeams().get(0).setId(team.getId());
 
@@ -106,5 +109,18 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
+
+    public UserTransport update(long id, UserUpdateTransport newUser) throws UserNotFoundException {
+        User user = this.userRepository.findById(id).orElseThrow(UserNotFoundException::new);
+
+        user.setName(newUser.getFirstName());
+        user.setLastName(newUser.getLastName());
+        user.setPassword(newUser.getPassword());
+
+        this.userRepository.save(user);
+
+        return UserMapper.mapToUserTransport(user);
+
+    }
 
 }
