@@ -4,7 +4,9 @@ import com.pek.ttlivescoreapi.team.exception.TeamAlreadyExistException;
 import com.pek.ttlivescoreapi.team.exception.TeamNotFoundException;
 import com.pek.ttlivescoreapi.team.service.TeamService;
 import com.pek.ttlivescoreapi.team.tansport.*;
+import com.pek.ttlivescoreapi.user.exception.UserNotFoundException;
 import com.pek.ttlivescoreapi.user.service.UserService;
+import com.pek.ttlivescoreapi.user.transport.UserShortTransport;
 import com.pek.ttlivescoreapi.user.transport.UserTransport;
 import org.springframework.web.bind.annotation.*;
 
@@ -55,6 +57,11 @@ public class TeamController {
     @PatchMapping("{teamId}")
     public TeamShortTransport update(@PathVariable() long teamId, @RequestBody TeamUpdateTransport team) throws TeamNotFoundException, TeamAlreadyExistException {
         return this.teamService.update(teamId, team);
+    }
+
+    @PostMapping("{teamId}/players")
+    public TeamShortTransport addPlayer(@PathVariable long teamId, @RequestBody UserShortTransport user) throws UserNotFoundException, TeamNotFoundException {
+        return this.teamService.addPlayer(teamId, user);
     }
 
 

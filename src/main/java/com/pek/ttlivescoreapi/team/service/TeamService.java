@@ -3,6 +3,7 @@ package com.pek.ttlivescoreapi.team.service;
 import com.pek.ttlivescoreapi.team.exception.TeamAlreadyExistException;
 import com.pek.ttlivescoreapi.team.exception.TeamNotFoundException;
 import com.pek.ttlivescoreapi.team.tansport.*;
+import com.pek.ttlivescoreapi.user.exception.UserNotFoundException;
 import com.pek.ttlivescoreapi.user.transport.UserShortTransport;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,6 @@ public interface TeamService {
 
     List<TeamShortTransport> findAll(TeamQueryTransport query);
 
-    TeamShortTransport addPlayer(long id, UserShortTransport user);
+    TeamShortTransport addPlayer(long id, UserShortTransport user) throws TeamNotFoundException, UserNotFoundException;
 
 }
