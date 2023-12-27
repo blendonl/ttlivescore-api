@@ -1,9 +1,9 @@
 package com.pek.ttlivescoreapi.team.controller;
 
-import com.pek.ttlivescoreapi.team.Team;
+import com.pek.ttlivescoreapi.team.exception.TeamAlreadyExistException;
 import com.pek.ttlivescoreapi.team.exception.TeamNotFoundException;
-import com.pek.ttlivescoreapi.team.mapper.TeamMapper;
 import com.pek.ttlivescoreapi.team.service.TeamService;
+import com.pek.ttlivescoreapi.team.tansport.TeamCreateTransport;
 import com.pek.ttlivescoreapi.team.tansport.TeamQueryTransport;
 import com.pek.ttlivescoreapi.team.tansport.TeamShortTransport;
 import com.pek.ttlivescoreapi.team.tansport.TeamTransport;
@@ -41,9 +41,7 @@ public class TeamController {
     }
 
     @PostMapping("")
-    public TeamTransport save(@RequestBody TeamTransport teamTransport) {
-        Team team = TeamMapper.mapToTeam(teamTransport);
-
+    public TeamShortTransport save(@RequestBody TeamCreateTransport team) throws TeamAlreadyExistException {
         return teamService.save(team);
     }
 

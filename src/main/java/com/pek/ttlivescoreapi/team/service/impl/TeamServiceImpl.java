@@ -1,11 +1,13 @@
 package com.pek.ttlivescoreapi.team.service.impl;
 
 import com.pek.ttlivescoreapi.team.Team;
+import com.pek.ttlivescoreapi.team.exception.TeamAlreadyExistException;
 import com.pek.ttlivescoreapi.team.exception.TeamNotFoundException;
 import com.pek.ttlivescoreapi.team.mapper.TeamMapper;
 import com.pek.ttlivescoreapi.team.mapper.TeamShortMapper;
 import com.pek.ttlivescoreapi.team.repository.TeamRepository;
 import com.pek.ttlivescoreapi.team.service.TeamService;
+import com.pek.ttlivescoreapi.team.tansport.TeamCreateTransport;
 import com.pek.ttlivescoreapi.team.tansport.TeamQueryTransport;
 import com.pek.ttlivescoreapi.team.tansport.TeamShortTransport;
 import com.pek.ttlivescoreapi.team.tansport.TeamTransport;
@@ -34,8 +36,14 @@ public class TeamServiceImpl implements TeamService {
         return TeamMapper.mapToTeamTransport(team);
     }
 
-    public TeamTransport save(Team team) {
-        return TeamMapper.mapToTeamTransport(repository.save(team));
+    public TeamShortTransport save(TeamCreateTransport newTeam) throws TeamAlreadyExistException {
+        if (this.repository.findByName(newTeam.getName()).orElse(null) != null) {
+            throw new TeamAlreadyExistException("team already exist");
+        }
+
+        Team team = TeamCreateTransport.toTeam(newTeam);
+
+        return TeamShortMapper.toTeamShort(repository.save(team));
     }
 
     public void deleteById(long id) throws TeamNotFoundException {

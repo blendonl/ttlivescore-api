@@ -1,7 +1,8 @@
 package com.pek.ttlivescoreapi.team.service;
 
-import com.pek.ttlivescoreapi.team.Team;
+import com.pek.ttlivescoreapi.team.exception.TeamAlreadyExistException;
 import com.pek.ttlivescoreapi.team.exception.TeamNotFoundException;
+import com.pek.ttlivescoreapi.team.tansport.TeamCreateTransport;
 import com.pek.ttlivescoreapi.team.tansport.TeamQueryTransport;
 import com.pek.ttlivescoreapi.team.tansport.TeamShortTransport;
 import com.pek.ttlivescoreapi.team.tansport.TeamTransport;
@@ -15,7 +16,7 @@ public interface TeamService {
 
     TeamTransport findByName(String name) throws TeamNotFoundException;
 
-    TeamTransport save(Team team);
+    TeamShortTransport save(TeamCreateTransport newTeam) throws TeamAlreadyExistException;
 
     void deleteById(long id) throws TeamNotFoundException;
 
