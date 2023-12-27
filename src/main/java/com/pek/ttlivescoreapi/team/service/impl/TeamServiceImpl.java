@@ -91,6 +91,24 @@ public class TeamServiceImpl implements TeamService {
 
         team.getUsers().add(user);
 
+
+        return TeamShortMapper.toTeamShort(this.repository.save(team));
+
+    }
+
+    @Override
+    public TeamShortTransport removePlayer(long teamId, long playerId) throws UserNotFoundException, TeamNotFoundException {
+        Team team = this.repository.findById(teamId).orElseThrow(TeamNotFoundException::new);
+
+        List<User> users = team.getUsers().stream().filter(usr -> usr.getId() == playerId).toList();
+
+        if (users.size() != 1) {
+            throw new UserNotFoundException("user doesnt exist");
+        }
+
+        team.getUsers().remove(users.get(0));
+
+
         return TeamShortMapper.toTeamShort(this.repository.save(team));
 
     }

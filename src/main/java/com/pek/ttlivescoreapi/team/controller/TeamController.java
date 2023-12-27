@@ -64,5 +64,9 @@ public class TeamController {
         return this.teamService.addPlayer(teamId, user);
     }
 
+    @DeleteMapping("{teamId}/players/{playerId}")
+    public TeamShortTransport addPlayer(@PathVariable long teamId, @PathVariable long playerId) throws UserNotFoundException, TeamNotFoundException {
+        return this.teamService.removePlayer(teamId, playerId);
+    }
 
 }

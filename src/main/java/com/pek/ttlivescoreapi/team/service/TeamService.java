@@ -27,4 +27,7 @@ public interface TeamService {
 
     TeamShortTransport addPlayer(long id, UserShortTransport user) throws TeamNotFoundException, UserNotFoundException;
 
+    TeamShortTransport removePlayer(long teamId, long playerId) throws UserNotFoundException, TeamNotFoundException;
+
+
 }
