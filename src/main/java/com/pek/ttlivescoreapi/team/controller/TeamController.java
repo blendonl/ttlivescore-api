@@ -26,6 +26,10 @@ public class TeamController {
         this.userService = userService;
     }
 
+    public TeamTransport findById(@PathVariable long id) throws TeamNotFoundException {
+        return teamService.findById(id);
+    }
+
     @GetMapping("")
     public List<TeamShortTransport> findAll(@RequestParam(required = false) TeamQueryTransport query) {
         return teamService.findAll(query);
