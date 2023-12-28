@@ -15,4 +15,6 @@ public interface LeagueRepository extends JpaRepository<League, Long> {
 
     @Query(value = "select * from league l where l.name like :#{#query.name}", nativeQuery = true)
     List<League> findAllByQuery(@Param("query") LeagueQueryTransport query);
+
+    boolean existsByName(String name);
 }

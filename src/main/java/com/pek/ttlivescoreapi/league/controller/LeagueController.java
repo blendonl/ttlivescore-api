@@ -1,13 +1,11 @@
 package com.pek.ttlivescoreapi.league.controller;
 
 import com.pek.ttlivescoreapi.league.service.LeagueService;
+import com.pek.ttlivescoreapi.league.transport.LeagueCreateTransport;
 import com.pek.ttlivescoreapi.league.transport.LeagueQueryTransport;
 import com.pek.ttlivescoreapi.league.transport.LeagueShortTransport;
 import com.pek.ttlivescoreapi.league.transport.LeagueTransport;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,5 +27,10 @@ public class LeagueController {
     @GetMapping("")
     public List<LeagueShortTransport> getAll(LeagueQueryTransport query) {
         return leagueService.findAll(query);
+    }
+
+    @PostMapping("")
+    public LeagueShortTransport create(@RequestBody LeagueCreateTransport league) {
+        return leagueService.save(league);
     }
 }

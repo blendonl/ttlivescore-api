@@ -1,14 +1,20 @@
 package com.pek.ttlivescoreapi.league.service.impl;
 
 import com.pek.ttlivescoreapi.league.League;
+import com.pek.ttlivescoreapi.league.exception.CategoryNotFoundException;
+import com.pek.ttlivescoreapi.league.exception.LeagueAlreadyExistException;
 import com.pek.ttlivescoreapi.league.exception.LeagueNotFoundException;
+import com.pek.ttlivescoreapi.league.mapper.LeagueCreateMapper;
 import com.pek.ttlivescoreapi.league.mapper.LeagueMapper;
 import com.pek.ttlivescoreapi.league.mapper.LeagueShortMapper;
+import com.pek.ttlivescoreapi.league.repository.CategoryRepository;
 import com.pek.ttlivescoreapi.league.repository.LeagueRepository;
 import com.pek.ttlivescoreapi.league.service.LeagueService;
+import com.pek.ttlivescoreapi.league.transport.LeagueCreateTransport;
 import com.pek.ttlivescoreapi.league.transport.LeagueQueryTransport;
 import com.pek.ttlivescoreapi.league.transport.LeagueShortTransport;
 import com.pek.ttlivescoreapi.league.transport.LeagueTransport;
+import com.pek.ttlivescoreapi.user.entity.Category;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,20 +23,34 @@ import java.util.List;
 public class LeagueServiceImpl implements LeagueService {
 
     private final LeagueRepository leagueRepository;
+    private final CategoryRepository categoryRepository;
 
-    public LeagueServiceImpl(LeagueRepository leagueRepository) {
+
+    public LeagueServiceImpl(LeagueRepository leagueRepository, CategoryRepository categoryRepository) {
         this.leagueRepository = leagueRepository;
+        this.categoryRepository = categoryRepository;
     }
 
 
     @Override
-    public LeagueTransport save(LeagueTransport leagueDto) {
+    public LeagueShortTransport save(LeagueCreateTransport newLeague) {
+        Category category = this.categoryRepository.findByName(newLeague.getCategory());
 
-        League league = LeagueMapper.toLeague(leagueDto);
+        if (category == null) {
+            throw new CategoryNotFoundException();
+        }
+
+        if (this.leagueRepository.existsByName(newLeague.getName())) {
+            throw new LeagueAlreadyExistException();
+        }
+
+        League league = LeagueCreateMapper.toLeague(newLeague);
+
+        league.setCategory(category);
 
         league = leagueRepository.save(league);
 
-        return LeagueMapper.toLeagueDto(league);
+        return LeagueShortMapper.toLeagueShortTransport(league);
     }
 
     @Override
@@ -57,7 +77,7 @@ public class LeagueServiceImpl implements LeagueService {
 
         League league = leagueRepository.findById(id).orElseThrow(LeagueNotFoundException::new);
 
-        return LeagueMapper.toLeagueDto(league);
+        return LeagueMapper.toLeagueTransport(league);
 
     }
 }

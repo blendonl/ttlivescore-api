@@ -5,11 +5,10 @@ import com.pek.ttlivescoreapi.league.transport.LeagueTransport;
 import com.pek.ttlivescoreapi.team.mapper.TeamShortMapper;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class LeagueMapper {
 
-    public static LeagueTransport toLeagueDto(League league) {
+    public static LeagueTransport toLeagueTransport(League league) {
         return LeagueTransport.builder()
                 .id(league.getId())
                 .name(league.getName())
@@ -17,14 +16,11 @@ public class LeagueMapper {
                 .build();
     }
 
-    public static League toLeague(LeagueTransport leagueDto) {
+    public static League toLeague(LeagueTransport leagueTransport) {
         return League
                 .builder()
-                .name(leagueDto.getName())
+                .name(leagueTransport.getName())
                 .build();
     }
 
-    public static List<LeagueTransport> toLeaguesDto(List<League> leagues) {
-        return leagues.stream().map(LeagueMapper::toLeagueDto).toList();
-    }
 }
