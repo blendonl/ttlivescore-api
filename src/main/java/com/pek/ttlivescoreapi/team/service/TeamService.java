@@ -29,5 +29,7 @@ public interface TeamService {
 
     TeamShortTransport removePlayer(long teamId, long playerId) throws UserNotFoundException, TeamNotFoundException;
 
+    List<UserShortTransport> findAllPayers(long teamId) throws TeamNotFoundException;
+
 
 }

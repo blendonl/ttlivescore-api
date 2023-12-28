@@ -11,6 +11,7 @@ import com.pek.ttlivescoreapi.team.service.TeamService;
 import com.pek.ttlivescoreapi.team.tansport.*;
 import com.pek.ttlivescoreapi.user.entity.User;
 import com.pek.ttlivescoreapi.user.exception.UserNotFoundException;
+import com.pek.ttlivescoreapi.user.mapper.UserShortMapper;
 import com.pek.ttlivescoreapi.user.repository.UserRepository;
 import com.pek.ttlivescoreapi.user.transport.UserShortTransport;
 import org.springframework.stereotype.Service;
@@ -79,6 +80,10 @@ public class TeamServiceImpl implements TeamService {
 
     @Override
     public List<TeamShortTransport> findAll(TeamQueryTransport query) {
+        System.out.println(query);
+        if (query == null) {
+            return TeamShortMapper.toTeamsShort(repository.findAll());
+        }
         return TeamShortMapper.toTeamsShort(repository.findAllByQuery(query));
 
     }
@@ -110,6 +115,17 @@ public class TeamServiceImpl implements TeamService {
 
 
         return TeamShortMapper.toTeamShort(this.repository.save(team));
+
+    }
+
+    @Override
+    public List<UserShortTransport> findAllPayers(long teamId) throws TeamNotFoundException {
+
+        if (!this.repository.existsById(teamId)) {
+            throw new TeamNotFoundException();
+        }
+
+        return UserShortMapper.mapToUserShortsTransport(this.userRepository.findAllByTeamId(teamId));
 
     }
 }

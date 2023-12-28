@@ -69,4 +69,10 @@ public class TeamController {
         return this.teamService.removePlayer(teamId, playerId);
     }
 
+    @GetMapping("{teamId}/players")
+    public List<UserShortTransport> getAllPlayers(@PathVariable long teamId) throws TeamNotFoundException {
+        return this.teamService.findAllPayers(teamId);
+    }
+
+
 }
