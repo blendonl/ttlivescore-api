@@ -10,10 +10,7 @@ import com.pek.ttlivescoreapi.league.mapper.LeagueShortMapper;
 import com.pek.ttlivescoreapi.league.repository.CategoryRepository;
 import com.pek.ttlivescoreapi.league.repository.LeagueRepository;
 import com.pek.ttlivescoreapi.league.service.LeagueService;
-import com.pek.ttlivescoreapi.league.transport.LeagueCreateTransport;
-import com.pek.ttlivescoreapi.league.transport.LeagueQueryTransport;
-import com.pek.ttlivescoreapi.league.transport.LeagueShortTransport;
-import com.pek.ttlivescoreapi.league.transport.LeagueTransport;
+import com.pek.ttlivescoreapi.league.transport.*;
 import com.pek.ttlivescoreapi.user.entity.Category;
 import org.springframework.stereotype.Service;
 
@@ -78,6 +75,16 @@ public class LeagueServiceImpl implements LeagueService {
         League league = leagueRepository.findById(id).orElseThrow(LeagueNotFoundException::new);
 
         return LeagueMapper.toLeagueTransport(league);
+
+    }
+
+    @Override
+    public LeagueShortTransport update(long id, LeagueUpdateTransport newLeague) {
+        League league = this.leagueRepository.findById(id).orElseThrow(LeagueNotFoundException::new);
+
+        league.setName(newLeague.getName());
+
+        return LeagueShortMapper.toLeagueShortTransport(league);
 
     }
 }
