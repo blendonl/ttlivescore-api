@@ -58,6 +58,8 @@ public class UserServiceImpl implements UserService {
             throw new UserAlreadyExistException("user already exist");
         }
 
+        System.out.println(newUser.getFirstName() + " " + newUser.getLastName());
+
         Team team = teamRepository.findByName(newUser.getTeamName()).orElseThrow(TeamNotFoundException::new);
 
 

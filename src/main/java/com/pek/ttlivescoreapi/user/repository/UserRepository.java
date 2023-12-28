@@ -23,7 +23,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);
 
 
-    @Query(value = "select * from users inner join team t on users.team_id = t.id where users.team_id = :teamId", nativeQuery = true)
+    @Query(value = "select * from users u inner join users_teams ut on u.id = ut.user_id where ut.team_id = :teamId", nativeQuery = true)
     List<User> findAllByTeamId(long teamId);
 
     @Query(value = "select * from users inner join team t on t.id = users.team_id where t.name = :team", nativeQuery = true)

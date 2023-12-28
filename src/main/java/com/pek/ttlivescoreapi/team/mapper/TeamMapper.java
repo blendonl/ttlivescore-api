@@ -1,9 +1,10 @@
 package com.pek.ttlivescoreapi.team.mapper;
 
 
-import com.pek.ttlivescoreapi.team.tansport.TeamTransport;
 import com.pek.ttlivescoreapi.league.League;
 import com.pek.ttlivescoreapi.team.Team;
+import com.pek.ttlivescoreapi.team.tansport.TeamTransport;
+import com.pek.ttlivescoreapi.user.mapper.UserShortMapper;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ public class TeamMapper {
                 .builder()
                 .name(team.getName())
                 .leagueName(team.getLeague().getName())
+                .users(team.getUsers().stream().map(UserShortMapper::mapToUserShortTransport).toList())
                 .build();
     }
 

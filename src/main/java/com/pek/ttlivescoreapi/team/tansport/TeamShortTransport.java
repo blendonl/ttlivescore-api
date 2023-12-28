@@ -1,17 +1,16 @@
 package com.pek.ttlivescoreapi.team.tansport;
 
-import com.pek.ttlivescoreapi.user.transport.UserShortTransport;
 import lombok.*;
-
-import java.util.List;
 
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class TeamTransport {
+
+public class TeamShortTransport {
+
+    private String id;
     private String name;
     private String leagueName;
-    private List<UserShortTransport> users;
 }

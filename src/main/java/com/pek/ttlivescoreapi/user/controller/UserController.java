@@ -30,7 +30,7 @@ public class UserController {
     }
 
     @PostMapping
-    public UserTransport saveUser(@ModelAttribute UserSignupTransport userTransport) throws TeamNotFoundException, UserAlreadyExistException {
+    public UserTransport saveUser(@RequestBody UserSignupTransport userTransport) throws TeamNotFoundException, UserAlreadyExistException {
         return userService.save(userTransport);
     }
 
