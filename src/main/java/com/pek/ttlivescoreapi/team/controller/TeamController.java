@@ -7,7 +7,6 @@ import com.pek.ttlivescoreapi.team.tansport.*;
 import com.pek.ttlivescoreapi.user.exception.UserNotFoundException;
 import com.pek.ttlivescoreapi.user.service.UserService;
 import com.pek.ttlivescoreapi.user.transport.UserShortTransport;
-import com.pek.ttlivescoreapi.user.transport.UserTransport;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -49,10 +48,10 @@ public class TeamController {
         teamService.deleteById(id);
     }
 
-    @GetMapping("{teamName}/players")
-    public List<UserTransport> findAllPlayerByTeamName(@PathVariable String teamName) {
-        return userService.findAllByTeamName(teamName);
-    }
+//    @GetMapping("{teamName}/players")
+//    public List<UserTransport> findAllPlayerByTeamName(@PathVariable String teamName) {
+//        return userService.findAllByTeamName(teamName);
+//    }
 
     @PatchMapping("{teamId}")
     public TeamShortTransport update(@PathVariable() long teamId, @RequestBody TeamUpdateTransport team) throws TeamNotFoundException, TeamAlreadyExistException {
