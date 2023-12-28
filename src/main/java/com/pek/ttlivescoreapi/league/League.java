@@ -1,8 +1,11 @@
 package com.pek.ttlivescoreapi.league;
 
+import com.pek.ttlivescoreapi.team.Team;
 import com.pek.ttlivescoreapi.user.entity.Category;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 
 @Entity
@@ -24,6 +27,9 @@ public class League {
     private Category category;
 
     private int year;
+
+    @OneToMany()
+    private List<Team> teams;
 
 
 }

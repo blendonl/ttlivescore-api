@@ -55,7 +55,7 @@ public class LeagueServiceImpl implements LeagueService {
     @Override
     public LeagueTransport findById(long id) {
 
-        League league = leagueRepository.findById(id).orElseThrow();
+        League league = leagueRepository.findById(id).orElseThrow(LeagueNotFoundException::new);
 
         return LeagueMapper.toLeagueDto(league);
 
