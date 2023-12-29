@@ -1,11 +1,12 @@
 package com.pek.ttlivescoreapi.match.controller;
 
 
+import com.pek.ttlivescoreapi.match.service.MatchService;
 import com.pek.ttlivescoreapi.match.service.PointService;
+import com.pek.ttlivescoreapi.match.transport.MatchShortTransport;
 import com.pek.ttlivescoreapi.match.transport.MatchTransport;
 import com.pek.ttlivescoreapi.match.transport.PointTransport;
 import com.pek.ttlivescoreapi.user.transport.UserTransport;
-import com.pek.ttlivescoreapi.match.service.MatchService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
@@ -23,7 +24,6 @@ public class MatchController {
     private final MatchService matchService;
 
     private final PointService pointService;
-//    private MatchPlayerService matchPlayerService;
 
 
     public MatchController(MatchService service, PointService pointService) {
@@ -31,7 +31,6 @@ public class MatchController {
         this.pointService = pointService;
 //        this.matchPlayerService = matchPlayerService;
     }
-
 
 
     @GetMapping("{matchId}/points/rt")
@@ -42,12 +41,12 @@ public class MatchController {
         System.out.println(matchId);
 
 
-
         emitter.onCompletion(() -> pointsEmitters.remove(emitter));
         emitter.onTimeout(() -> pointsEmitters.remove(emitter));
 
         return emitter;
     }
+
     @GetMapping("set/rt")
     public SseEmitter setRt() {
         SseEmitter emitter = new SseEmitter();
@@ -67,24 +66,23 @@ public class MatchController {
     }
 
 
-
     public void sendPointsToEmitters(PointTransport data) {
         for (SseEmitter emmiter :
                 pointsEmitters) {
             try {
                 emmiter.send(data);
-            }catch (Exception ignored) {
+            } catch (Exception ignored) {
 
             }
         }
     }
 
-    public void sendMatchesToEmitters(List<MatchTransport> matchTransports) {
+    public void sendMatchesToEmitters(List<MatchShortTransport> matchTransports) {
         for (SseEmitter emmiter :
                 pointsEmitters) {
             try {
                 emmiter.send(matchTransports);
-            }catch (Exception ignored) {
+            } catch (Exception ignored) {
 
             }
         }
@@ -103,7 +101,7 @@ public class MatchController {
         return matchService.save(matchTransport);
     }
 
-    @PatchMapping( )
+    @PatchMapping()
     public MatchTransport update(@RequestBody MatchTransport matchTransport) {
         return matchService.update(matchTransport);
     }
@@ -141,13 +139,9 @@ public class MatchController {
     }
 
 
-
-
     @GetMapping()
-    public List<MatchTransport> getMatches() {
-
+    public List<MatchShortTransport> getMatches() {
         return matchService.findAll();
-
     }
 
     @PostMapping("{matchId}/players")

@@ -1,19 +1,17 @@
 package com.pek.ttlivescoreapi.match.repository;
 
 import com.pek.ttlivescoreapi.match.entity.Match;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface MatchRepository extends CrudRepository<Match, Long> {
-
+public interface MatchRepository extends JpaRepository<Match, Long> {
 
 
     List<Match> findAllByEventId(long eventId);
-
 
 
     @Query(value = "SELECT m from Match m " +
@@ -25,7 +23,6 @@ public interface MatchRepository extends CrudRepository<Match, Long> {
 
     @Query(value = "SELECT m from Match m inner join Group g on m.id = g.match.id where g.player1.id = :playerId or g.player2.id = :playerId")
     List<Match> findAllByPlayerId(long playerId);
-
 
 
 }
