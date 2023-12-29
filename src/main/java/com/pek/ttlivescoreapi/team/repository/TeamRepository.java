@@ -18,4 +18,7 @@ public interface TeamRepository extends JpaRepository<Team, Long> {
 
     @Query(value = "select * from team t where t.name = :query.name", nativeQuery = true)
     List<Team> findAllByQuery(TeamQueryTransport query);
+
+    Optional<Team> findByIdAndLeagueId(long leagueId, long teamId);
+
 }

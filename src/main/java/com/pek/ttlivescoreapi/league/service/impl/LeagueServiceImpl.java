@@ -11,6 +11,11 @@ import com.pek.ttlivescoreapi.league.repository.CategoryRepository;
 import com.pek.ttlivescoreapi.league.repository.LeagueRepository;
 import com.pek.ttlivescoreapi.league.service.LeagueService;
 import com.pek.ttlivescoreapi.league.transport.*;
+import com.pek.ttlivescoreapi.team.Team;
+import com.pek.ttlivescoreapi.team.exception.TeamNotFoundException;
+import com.pek.ttlivescoreapi.team.mapper.TeamShortMapper;
+import com.pek.ttlivescoreapi.team.repository.TeamRepository;
+import com.pek.ttlivescoreapi.team.tansport.TeamShortTransport;
 import com.pek.ttlivescoreapi.user.entity.Category;
 import org.springframework.stereotype.Service;
 
@@ -21,11 +26,13 @@ public class LeagueServiceImpl implements LeagueService {
 
     private final LeagueRepository leagueRepository;
     private final CategoryRepository categoryRepository;
+    private final TeamRepository teamRepository;
 
 
-    public LeagueServiceImpl(LeagueRepository leagueRepository, CategoryRepository categoryRepository) {
+    public LeagueServiceImpl(LeagueRepository leagueRepository, CategoryRepository categoryRepository, TeamRepository teamRepository) {
         this.leagueRepository = leagueRepository;
         this.categoryRepository = categoryRepository;
+        this.teamRepository = teamRepository;
     }
 
 
@@ -62,7 +69,6 @@ public class LeagueServiceImpl implements LeagueService {
 
     @Override
     public void deleteById(long id) {
-
         if (!leagueRepository.existsById(id))
             throw new LeagueNotFoundException();
 
@@ -87,4 +93,54 @@ public class LeagueServiceImpl implements LeagueService {
         return LeagueShortMapper.toLeagueShortTransport(league);
 
     }
+
+    @Override
+    public List<TeamShortTransport> findAllTeams(long leagueId) {
+
+        if (!this.leagueRepository.existsById(leagueId)) {
+            throw new LeagueNotFoundException();
+        }
+
+        return TeamShortMapper.toTeamsShort(this.teamRepository.findAllByLeagueId(leagueId));
+
+
+    }
+
+    @Override
+    public TeamShortTransport findOneTeamById(long leagueId, long teamId) {
+
+        if (!this.leagueRepository.existsById(leagueId)) {
+            throw new LeagueNotFoundException();
+        }
+
+        Team team = this.teamRepository.findByIdAndLeagueId(leagueId, teamId).orElseThrow(TeamNotFoundException::new);
+
+        return TeamShortMapper.toTeamShort(team);
+    }
+
+    @Override
+    public TeamShortTransport addTeam(long leagueId, AddTeamToLeagueTransport newTeam) {
+        if (!this.leagueRepository.existsById(leagueId)) {
+            throw new LeagueNotFoundException();
+        }
+
+
+        Team team = this.leagueRepository.addTeam(leagueId, newTeam.getId()).orElseThrow(TeamNotFoundException::new);
+
+        return TeamShortMapper.toTeamShort(team);
+
+    }
+
+    @Override
+    public TeamShortTransport removeTeam(long leagueId, long teamId) {
+        if (!this.leagueRepository.existsById(leagueId)) {
+            throw new LeagueNotFoundException();
+        }
+
+        Team team = this.leagueRepository.removeTeam(leagueId, teamId).orElseThrow(TeamNotFoundException::new);
+
+        return TeamShortMapper.toTeamShort(team);
+    }
+
+
 }
