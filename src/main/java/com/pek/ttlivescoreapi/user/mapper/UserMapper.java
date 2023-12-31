@@ -12,26 +12,12 @@ import java.util.List;
 public class UserMapper {
 
     @SneakyThrows
-    public static UserTransport mapToUserTransport(User user) {
-
-
-        return UserTransport.builder()
-                .id(user.getId())
-                .profilePicture(user.getProfilePicture())
-                .firstName(user.getName())
-                .lastName(user.getLastName())
-                .email(user.getEmail())
-                .birthDate(user.getBirthDate())
-                .teamName(user.getTeams().get(user.getTeams().size() - 1).getName())
-                .gender(user.getGender())
-                .build();
-    }
-
-    @SneakyThrows
     public static User mapUserSignupToUser(UserSignupTransport user) {
 
         return User.builder()
-                .profilePicture(user.getProfilePicture() != null ? user.getProfilePicture().getBytes() : null)
+                .profilePicture(user.getProfilePicture() != null
+                        ? user.getProfilePicture().getBytes()
+                        : null)
                 .name(user.getFirstName())
                 .lastName(user.getLastName())
                 .teams(Arrays.stream(new Team[]{Team.builder().name(user.getTeamName()).build()}).toList())
@@ -61,6 +47,21 @@ public class UserMapper {
         return users.stream().map(UserMapper::mapToUserTransport).toList();
     }
 
+    @SneakyThrows
+    public static UserTransport mapToUserTransport(User user) {
+
+
+        return UserTransport.builder()
+                .id(user.getId())
+                .profilePicture(user.getProfilePicture())
+                .firstName(user.getName())
+                .lastName(user.getLastName())
+                .email(user.getEmail())
+                .birthDate(user.getBirthDate())
+                .teamName(user.getTeams().get(user.getTeams().size() - 1).getName())
+                .gender(user.getGender())
+                .build();
+    }
 
     @SneakyThrows
     public static User mapToUser(UserTransport userTransport) {

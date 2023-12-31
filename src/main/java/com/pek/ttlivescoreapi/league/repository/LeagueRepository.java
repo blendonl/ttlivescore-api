@@ -15,12 +15,14 @@ import java.util.Optional;
 @Repository
 public interface LeagueRepository extends JpaRepository<League, Long> {
 
-    @Query(value = "select * from league l where l.name like :#{#query.name}", nativeQuery = true)
+    @Query(value = "select * from league l where l.name like :#{#query.name};", nativeQuery = true)
     List<League> findAllByQuery(@Param("query") LeagueQueryTransport query);
 
     boolean existsByName(String name);
 
+    @Query(value = "update team set id = :teamId where league_id = :leagueId;", nativeQuery = true)
     Optional<Team> addTeam(long leagueId, long teamId);
 
-    Optional<Team> removeTeam(long leagueId, long teamId);
+    @Query(value = "update team set id = :teamId where league_id = -1;", nativeQuery = true)
+    Optional<Team> removeTeam(long teamId);
 }

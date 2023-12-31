@@ -137,7 +137,7 @@ public class LeagueServiceImpl implements LeagueService {
             throw new LeagueNotFoundException();
         }
 
-        Team team = this.leagueRepository.removeTeam(leagueId, teamId).orElseThrow(TeamNotFoundException::new);
+        Team team = this.leagueRepository.removeTeam(teamId).orElseThrow(TeamNotFoundException::new);
 
         return TeamShortMapper.toTeamShort(team);
     }
