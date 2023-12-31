@@ -3,9 +3,7 @@ package com.pek.ttlivescoreapi.match.controller;
 
 import com.pek.ttlivescoreapi.match.service.MatchService;
 import com.pek.ttlivescoreapi.match.service.PointService;
-import com.pek.ttlivescoreapi.match.transport.MatchShortTransport;
-import com.pek.ttlivescoreapi.match.transport.MatchTransport;
-import com.pek.ttlivescoreapi.match.transport.PointTransport;
+import com.pek.ttlivescoreapi.match.transport.*;
 import com.pek.ttlivescoreapi.user.transport.UserTransport;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
@@ -97,13 +95,13 @@ public class MatchController {
     }
 
     @PostMapping("")
-    public MatchTransport save(@RequestBody MatchTransport matchTransport) {
-        return matchService.save(matchTransport);
+    public MatchShortTransport save(@RequestBody MatchCreateTransport newMatch) {
+        return matchService.save(newMatch);
     }
 
-    @PatchMapping()
-    public MatchTransport update(@RequestBody MatchTransport matchTransport) {
-        return matchService.update(matchTransport);
+    @PatchMapping("{matchId}")
+    public MatchShortTransport update(@PathVariable long matchId, @RequestBody MatchUpdateTransport match) {
+        return matchService.update(matchId, match);
     }
 
     @DeleteMapping("{id}")

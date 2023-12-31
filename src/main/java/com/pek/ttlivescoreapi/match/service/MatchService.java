@@ -1,7 +1,9 @@
 package com.pek.ttlivescoreapi.match.service;
 
+import com.pek.ttlivescoreapi.match.transport.MatchCreateTransport;
 import com.pek.ttlivescoreapi.match.transport.MatchShortTransport;
 import com.pek.ttlivescoreapi.match.transport.MatchTransport;
+import com.pek.ttlivescoreapi.match.transport.MatchUpdateTransport;
 import com.pek.ttlivescoreapi.user.transport.UserTransport;
 
 import java.util.List;
@@ -11,9 +13,9 @@ public interface MatchService {
 
     MatchTransport findById(long matchId);
 
-    MatchTransport save(MatchTransport matchTransport);
+    MatchShortTransport save(MatchCreateTransport newMatch);
 
-    MatchTransport update(MatchTransport matchTransport);
+    MatchShortTransport update(long matchId, MatchUpdateTransport newMatch);
 
     void deleteById(long matchId);
 

@@ -11,15 +11,14 @@ public class MatchMapper {
     public static MatchTransport toMatchTransport(Match match) {
         return MatchTransport.builder()
                 .id(match.getId())
-                .players(match.getPlayers().stream().map(mp -> mp.getPlayer1().getEmail()).toList())
+                .players(match.getPlayers().stream().map(GroupMapper::toGroupTransport).toList())
                 .isDouble(match.isDouble())
                 .isFinished(match.isFinished())
-//                .referee(UserMapper.mapToUserTransport(match.getReferee()))
+                .referee(match.getReferee() != null ? UserMapper.mapToUserTransport(match.getReferee()) : null)
                 .build();
     }
 
     public static Match toMatch(MatchTransport matchTransport) {
-
         return Match.builder()
                 .id(matchTransport.getId())
 //                .players(matchTransport.getPlayers().stream().map(m -> Group.builder().player1()))
