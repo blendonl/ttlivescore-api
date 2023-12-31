@@ -82,7 +82,6 @@ public class MatchServiceImpl implements MatchService {
 
     @Override
     public void deleteById(long matchId) {
-
         if (!matchRepository.existsById(matchId))
             throw new MatchNotFoundException();
 
