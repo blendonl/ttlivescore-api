@@ -38,11 +38,7 @@ public class LeagueServiceImpl implements LeagueService {
 
     @Override
     public LeagueShortTransport save(LeagueCreateTransport newLeague) {
-        Category category = this.categoryRepository.findByName(newLeague.getCategory());
-
-        if (category == null) {
-            throw new CategoryNotFoundException();
-        }
+        Category category = this.categoryRepository.findByName(newLeague.getCategory()).orElseThrow(CategoryNotFoundException::new);
 
         if (this.leagueRepository.existsByName(newLeague.getName())) {
             throw new LeagueAlreadyExistException();
