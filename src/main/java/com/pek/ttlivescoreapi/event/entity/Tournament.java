@@ -1,23 +1,23 @@
 package com.pek.ttlivescoreapi.event.entity;
 
 import com.pek.ttlivescoreapi.user.entity.Category;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.ManyToOne;
-import lombok.Getter;
-import lombok.Setter;
 import jakarta.persistence.*;
+import lombok.*;
 
 
 @Entity
 @Getter
 @Setter
-public class Tournament extends Event {
-
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class Tournament {
     @Id
     @GeneratedValue
     private Long id;
 
+    @OneToOne()
+    private Event event;
 
     @ManyToOne()
     private Category category;

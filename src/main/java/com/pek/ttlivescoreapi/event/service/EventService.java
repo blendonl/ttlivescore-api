@@ -12,4 +12,7 @@ public interface EventService {
     List<EventShortTransport> findAll();
 
     EventTransport findOne(long id);
+
+    void deleteById(long id);
+
 }

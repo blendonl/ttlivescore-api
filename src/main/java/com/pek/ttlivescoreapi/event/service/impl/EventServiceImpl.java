@@ -33,4 +33,14 @@ public class EventServiceImpl implements EventService {
         return EventMapper.toEventTransport(event);
     }
 
+    @Override
+    public void deleteById(long id) {
+
+        if (!this.eventRepository.existsById(id)) {
+            throw new EventNotFoundException();
+        }
+
+        this.eventRepository.deleteById(id);
+    }
+
 }

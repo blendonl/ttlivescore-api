@@ -4,6 +4,8 @@ import com.pek.ttlivescoreapi.league.League;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 
 @Entity
 @Getter
@@ -11,12 +13,17 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Season extends Event {
+public class Season {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
     private Long id;
     @ManyToOne()
     private League league;
+
+    @OneToMany(mappedBy = "season")
+    private List<Week> weeks;
+
+    @OneToOne
+    private Event event;
 
 }
