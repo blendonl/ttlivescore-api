@@ -13,10 +13,11 @@ import lombok.*;
 @AllArgsConstructor
 public class Tournament {
     @Id
-    @GeneratedValue
+    @Column(name = "event_id")
     private Long id;
 
-    @OneToOne()
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(referencedColumnName = "id", name = "event_id")
     private Event event;
 
     @ManyToOne()

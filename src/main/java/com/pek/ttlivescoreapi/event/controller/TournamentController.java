@@ -5,9 +5,11 @@ import com.pek.ttlivescoreapi.event.transport.TournamentCreateTransport;
 import com.pek.ttlivescoreapi.event.transport.TournamentShortTransport;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController("events/tournaments")
+@RestController()
+@RequestMapping("events/tournaments")
 public class TournamentController {
 
     private final TournamentService tournamentService;

@@ -25,4 +25,7 @@ public class Event {
 
     private char gender;
 
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "event")
+    private Tournament tournament;
+
 }
