@@ -4,9 +4,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.NOT_FOUND)
-public class SeasonNotFoundException extends RuntimeException {
+public class WeekNotFoundException extends RuntimeException {
 
-    public SeasonNotFoundException() {
-        super("Season not found");
+    public WeekNotFoundException() {
+        super("Week not found");
     }
 }

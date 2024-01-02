@@ -7,7 +7,6 @@ import lombok.*;
 import java.util.List;
 
 
-@Entity
 @Getter
 @Setter
 @Builder
@@ -15,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 public class Season {
     @Id
-    @Column(name = "event_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @ManyToOne()
@@ -23,9 +22,7 @@ public class Season {
 
     @OneToMany(mappedBy = "season")
     private List<Week> weeks;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "event_id", referencedColumnName = "id")
-    private Event event;
-
 }
+
+
+

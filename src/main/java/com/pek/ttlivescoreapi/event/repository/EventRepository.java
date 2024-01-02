@@ -12,4 +12,6 @@ public interface EventRepository extends JpaRepository<Event, Long> {
 
     @Query(value = "select case when count(*) = 1 then True else False end from event where date = :date and gender = :gender", nativeQuery = true)
     boolean existsByDateAndCategory(Date date, char gender);
+
+    boolean existsByName(String name);
 }

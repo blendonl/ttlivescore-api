@@ -1,9 +1,11 @@
 package com.pek.ttlivescoreapi.event.entity;
 
+import com.pek.ttlivescoreapi.match.entity.Match;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -29,6 +31,9 @@ public class Event {
     private Tournament tournament;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "event")
-    private Season season;
+    private Week week;
+
+    @OneToMany(mappedBy = "event")
+    private List<Match> matches;
 
 }

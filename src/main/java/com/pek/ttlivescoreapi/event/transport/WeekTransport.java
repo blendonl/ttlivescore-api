@@ -10,7 +10,7 @@ import java.sql.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SeasonTransport {
+public class WeekTransport {
     private String name;
     private Date date;
     private LeagueTransport leagueTransport;
