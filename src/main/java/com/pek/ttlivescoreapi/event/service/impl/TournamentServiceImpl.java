@@ -11,10 +11,7 @@ import com.pek.ttlivescoreapi.event.mapper.TournamentShortMapper;
 import com.pek.ttlivescoreapi.event.repository.EventRepository;
 import com.pek.ttlivescoreapi.event.repository.TournamentRepository;
 import com.pek.ttlivescoreapi.event.service.TournamentService;
-import com.pek.ttlivescoreapi.event.transport.TournamentCreateTransport;
-import com.pek.ttlivescoreapi.event.transport.TournamentShortTransport;
-import com.pek.ttlivescoreapi.event.transport.TournamentTransport;
-import com.pek.ttlivescoreapi.event.transport.TournamentUpdateTransport;
+import com.pek.ttlivescoreapi.event.transport.*;
 import com.pek.ttlivescoreapi.league.exception.CategoryNotFoundException;
 import com.pek.ttlivescoreapi.league.repository.CategoryRepository;
 import com.pek.ttlivescoreapi.user.entity.Category;
@@ -74,8 +71,17 @@ public class TournamentServiceImpl implements TournamentService {
     }
 
     @Override
-    public List<TournamentShortTransport> findAll() {
-        return TournamentShortMapper.toTournamentShortsTransport(this.tournamentRepository.findAll());
+    public List<TournamentShortTransport> findAll(TournamentQueryTransport query) {
+
+        if (query.getYear() == 0 && !Character.isAlphabetic(query.getGender())) {
+            return TournamentShortMapper.toTournamentShortsTransport(this.tournamentRepository.findAll());
+        }
+
+        if (!Character.isAlphabetic(query.getGender())) {
+            query.setGender(' ');
+        }
+
+        return TournamentShortMapper.toTournamentShortsTransport(this.tournamentRepository.findAllByQuery(query));
     }
 
     @Override

@@ -1,9 +1,6 @@
 package com.pek.ttlivescoreapi.event.service;
 
-import com.pek.ttlivescoreapi.event.transport.TournamentCreateTransport;
-import com.pek.ttlivescoreapi.event.transport.TournamentShortTransport;
-import com.pek.ttlivescoreapi.event.transport.TournamentTransport;
-import com.pek.ttlivescoreapi.event.transport.TournamentUpdateTransport;
+import com.pek.ttlivescoreapi.event.transport.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,7 +13,7 @@ public interface TournamentService {
 
     TournamentShortTransport save(TournamentCreateTransport transport);
 
-    List<TournamentShortTransport> findAll();
+    List<TournamentShortTransport> findAll(TournamentQueryTransport query);
 
     TournamentShortTransport update(long id, TournamentUpdateTransport transport);
 

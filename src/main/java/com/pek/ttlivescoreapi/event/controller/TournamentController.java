@@ -1,10 +1,7 @@
 package com.pek.ttlivescoreapi.event.controller;
 
 import com.pek.ttlivescoreapi.event.service.TournamentService;
-import com.pek.ttlivescoreapi.event.transport.TournamentCreateTransport;
-import com.pek.ttlivescoreapi.event.transport.TournamentShortTransport;
-import com.pek.ttlivescoreapi.event.transport.TournamentTransport;
-import com.pek.ttlivescoreapi.event.transport.TournamentUpdateTransport;
+import com.pek.ttlivescoreapi.event.transport.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,8 +28,8 @@ public class TournamentController {
     }
 
     @GetMapping()
-    public List<TournamentShortTransport> getAll() {
-        return this.tournamentService.findAll();
+    public List<TournamentShortTransport> getAll(TournamentQueryTransport query) {
+        return this.tournamentService.findAll(query);
     }
 
     @GetMapping("{tournamentId}")
