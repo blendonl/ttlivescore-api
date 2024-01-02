@@ -15,15 +15,17 @@ import java.util.List;
 @AllArgsConstructor
 public class Season {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "event_id")
     private Long id;
+
     @ManyToOne()
     private League league;
 
     @OneToMany(mappedBy = "season")
     private List<Week> weeks;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "event_id", referencedColumnName = "id")
     private Event event;
 
 }

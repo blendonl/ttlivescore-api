@@ -28,4 +28,7 @@ public class Event {
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "event")
     private Tournament tournament;
 
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "event")
+    private Season season;
+
 }
