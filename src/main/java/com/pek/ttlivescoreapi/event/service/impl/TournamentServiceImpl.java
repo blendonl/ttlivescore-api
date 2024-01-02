@@ -98,4 +98,13 @@ public class TournamentServiceImpl implements TournamentService {
 
         return TournamentShortMapper.toTournamentShortTransport(tournament);
     }
+
+    @Override
+    public void deleteById(long id) {
+
+        if (!this.tournamentRepository.existsById(id)) {
+            throw new TournamentNotFoundException();
+        }
+        this.tournamentRepository.deleteById(id);
+    }
 }

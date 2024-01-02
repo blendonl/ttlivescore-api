@@ -20,5 +20,7 @@ public interface TournamentService {
 
     TournamentShortTransport update(long id, TournamentUpdateTransport transport);
 
+    void deleteById(long id);
+
 
 }

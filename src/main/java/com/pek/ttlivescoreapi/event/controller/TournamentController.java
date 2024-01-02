@@ -40,5 +40,10 @@ public class TournamentController {
         return this.tournamentService.findById(tournamentId);
     }
 
+    @DeleteMapping("{tournamentId}")
+    public void deleteById(@PathVariable long tournamentId) {
+        this.tournamentService.deleteById(tournamentId);
+    }
+
 
 }
