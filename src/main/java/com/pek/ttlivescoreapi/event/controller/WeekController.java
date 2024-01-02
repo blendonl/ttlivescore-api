@@ -4,6 +4,7 @@ import com.pek.ttlivescoreapi.event.service.WeekService;
 import com.pek.ttlivescoreapi.event.transport.WeekCreateTransport;
 import com.pek.ttlivescoreapi.event.transport.WeekShortTransport;
 import com.pek.ttlivescoreapi.event.transport.WeekTransport;
+import com.pek.ttlivescoreapi.event.transport.WeekUpdateTransport;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,5 +32,10 @@ public class WeekController {
     @PostMapping("")
     public WeekShortTransport save(@RequestBody WeekCreateTransport week) {
         return this.weekService.save(week);
+    }
+
+    @PostMapping("{weekId}")
+    public WeekShortTransport update(@PathVariable long weekId, @RequestBody WeekUpdateTransport week) {
+        return this.weekService.update(weekId, week);
     }
 }

@@ -14,6 +14,7 @@ import com.pek.ttlivescoreapi.event.service.WeekService;
 import com.pek.ttlivescoreapi.event.transport.WeekCreateTransport;
 import com.pek.ttlivescoreapi.event.transport.WeekShortTransport;
 import com.pek.ttlivescoreapi.event.transport.WeekTransport;
+import com.pek.ttlivescoreapi.event.transport.WeekUpdateTransport;
 import com.pek.ttlivescoreapi.league.League;
 import com.pek.ttlivescoreapi.league.exception.LeagueNotFoundException;
 import com.pek.ttlivescoreapi.league.repository.LeagueRepository;
@@ -43,11 +44,6 @@ public class WeekServiceImpl implements WeekService {
     @Override
     public List<WeekShortTransport> findAll() {
         return WeekShortMapper.toWeekShortsTransport(this.weekRepository.findAll());
-    }
-
-    @Override
-    public WeekTransport update(WeekTransport season) {
-        return null;
     }
 
     @Override
@@ -92,6 +88,16 @@ public class WeekServiceImpl implements WeekService {
     @Override
     public List<WeekShortTransport> finAllByLeagueIdAndYear(long leagueId, int year) {
         return null;
+    }
+
+    @Override
+    public WeekShortTransport update(long id, WeekUpdateTransport newWeek) {
+
+        Week week = this.weekRepository.findById(id).orElseThrow(WeekNotFoundException::new);
+
+        week.getEvent().setDate(newWeek.getDate());
+
+        return WeekShortMapper.toWeekShortTransport(this.weekRepository.save(week));
     }
 
 }
