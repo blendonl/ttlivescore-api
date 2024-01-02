@@ -18,9 +18,9 @@ public interface WeekService {
 
     WeekShortTransport save(WeekCreateTransport newWeek);
 
-    List<WeekShortTransport> findAllByLeagueId(long leagueId);
+    void deleteById(Long weekId);
 
-    List<WeekShortTransport> finAllByLeagueIdAndYear(long leagueId, int year);
+    List<WeekShortTransport> findAllByLeagueIdAndYear(long leagueId, long year);
 
 
 }

@@ -29,6 +29,13 @@ public class WeekController {
         return this.weekService.findAll();
     }
 
+    @GetMapping("league/{leagueId}")
+    public List<WeekShortTransport> getAllByLeagueId(
+            @PathVariable long leagueId,
+            @RequestParam(required = false, name = "year", defaultValue = "0") long year) {
+        return this.weekService.findAllByLeagueIdAndYear(leagueId, year);
+    }
+
     @PostMapping("")
     public WeekShortTransport save(@RequestBody WeekCreateTransport week) {
         return this.weekService.save(week);
@@ -37,5 +44,10 @@ public class WeekController {
     @PostMapping("{weekId}")
     public WeekShortTransport update(@PathVariable long weekId, @RequestBody WeekUpdateTransport week) {
         return this.weekService.update(weekId, week);
+    }
+
+    @DeleteMapping("{weekId}")
+    public void deleteById(@PathVariable long weekId) {
+        this.weekService.deleteById(weekId);
     }
 }

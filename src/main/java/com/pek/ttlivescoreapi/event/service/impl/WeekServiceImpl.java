@@ -47,6 +47,16 @@ public class WeekServiceImpl implements WeekService {
     }
 
     @Override
+    public WeekShortTransport update(long id, WeekUpdateTransport newWeek) {
+
+        Week week = this.weekRepository.findById(id).orElseThrow(WeekNotFoundException::new);
+
+        week.getEvent().setDate(newWeek.getDate());
+
+        return WeekShortMapper.toWeekShortTransport(this.weekRepository.save(week));
+    }
+
+    @Override
     public WeekShortTransport save(WeekCreateTransport newSeason) {
 
         if (this.eventRepository.existsByName(newSeason.getName())) {
@@ -81,23 +91,27 @@ public class WeekServiceImpl implements WeekService {
     }
 
     @Override
-    public List<WeekShortTransport> findAllByLeagueId(long leagueId) {
-        return null;
+    public void deleteById(Long weekId) {
+
+        if (!this.weekRepository.existsById(weekId)) {
+            throw new WeekNotFoundException();
+        }
+
+        this.weekRepository.deleteById(weekId);
     }
 
     @Override
-    public List<WeekShortTransport> finAllByLeagueIdAndYear(long leagueId, int year) {
-        return null;
-    }
+    public List<WeekShortTransport> findAllByLeagueIdAndYear(long leagueId, long query) {
 
-    @Override
-    public WeekShortTransport update(long id, WeekUpdateTransport newWeek) {
+        if (!this.leagueRepository.existsById(leagueId)) {
+            throw new LeagueNotFoundException();
+        }
 
-        Week week = this.weekRepository.findById(id).orElseThrow(WeekNotFoundException::new);
+        if (query == 0) {
+            return WeekShortMapper.toWeekShortsTransport(this.weekRepository.findAllByLeagueId(leagueId));
+        }
 
-        week.getEvent().setDate(newWeek.getDate());
-
-        return WeekShortMapper.toWeekShortTransport(this.weekRepository.save(week));
+        return WeekShortMapper.toWeekShortsTransport(this.weekRepository.findAllByLeagueIdAndYear(leagueId, query));
     }
 
 }
