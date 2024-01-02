@@ -3,6 +3,7 @@ package com.pek.ttlivescoreapi.event.service.impl;
 import com.pek.ttlivescoreapi.event.entity.Event;
 import com.pek.ttlivescoreapi.event.entity.EventType;
 import com.pek.ttlivescoreapi.event.entity.Tournament;
+import com.pek.ttlivescoreapi.event.exception.EventAlreadyExistException;
 import com.pek.ttlivescoreapi.event.exception.TournamentAlreadyExistException;
 import com.pek.ttlivescoreapi.event.exception.TournamentNotFoundException;
 import com.pek.ttlivescoreapi.event.mapper.TournamentMapper;
@@ -81,6 +82,14 @@ public class TournamentServiceImpl implements TournamentService {
     public TournamentShortTransport update(long id, TournamentUpdateTransport transport) {
 
         Tournament tournament = this.tournamentRepository.findById(id).orElseThrow(TournamentNotFoundException::new);
+
+        if (this.tournamentRepository.existsByNameAndCategoryName(transport.getName(), tournament.getCategory().getName())) {
+            throw new TournamentAlreadyExistException();
+        }
+
+        if (this.eventRepository.existsByDateAndCategory(transport.getDate(), tournament.getEvent().getGender())) {
+            throw new EventAlreadyExistException("There is already an event in that date for this category");
+        }
 
         tournament.getEvent().setName(transport.getName());
         tournament.getEvent().setDate(transport.getDate());
