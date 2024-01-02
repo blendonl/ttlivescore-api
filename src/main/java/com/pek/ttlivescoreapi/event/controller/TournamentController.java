@@ -2,6 +2,7 @@ package com.pek.ttlivescoreapi.event.controller;
 
 import com.pek.ttlivescoreapi.event.service.TournamentService;
 import com.pek.ttlivescoreapi.event.transport.*;
+import com.pek.ttlivescoreapi.match.transport.MatchShortTransport;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,6 +36,11 @@ public class TournamentController {
     @GetMapping("{tournamentId}")
     public TournamentTransport getOne(@PathVariable long tournamentId) {
         return this.tournamentService.findById(tournamentId);
+    }
+
+    @GetMapping("{tournamentId}/matches")
+    public List<MatchShortTransport> getTournamentMatches(@PathVariable long tournamentId) {
+        return this.tournamentService.findAllTournamentMatches(tournamentId);
     }
 
     @DeleteMapping("{tournamentId}")
