@@ -13,6 +13,7 @@ import com.pek.ttlivescoreapi.event.service.TournamentService;
 import com.pek.ttlivescoreapi.event.transport.TournamentCreateTransport;
 import com.pek.ttlivescoreapi.event.transport.TournamentShortTransport;
 import com.pek.ttlivescoreapi.event.transport.TournamentTransport;
+import com.pek.ttlivescoreapi.event.transport.TournamentUpdateTransport;
 import com.pek.ttlivescoreapi.league.exception.CategoryNotFoundException;
 import com.pek.ttlivescoreapi.league.repository.CategoryRepository;
 import com.pek.ttlivescoreapi.user.entity.Category;
@@ -73,6 +74,19 @@ public class TournamentServiceImpl implements TournamentService {
 
     @Override
     public List<TournamentShortTransport> findAll() {
-        return null;
+        return TournamentShortMapper.toTournamentShortsTransport(this.tournamentRepository.findAll());
+    }
+
+    @Override
+    public TournamentShortTransport update(long id, TournamentUpdateTransport transport) {
+
+        Tournament tournament = this.tournamentRepository.findById(id).orElseThrow(TournamentNotFoundException::new);
+
+        tournament.getEvent().setName(transport.getName());
+        tournament.getEvent().setDate(transport.getDate());
+
+        this.eventRepository.save(tournament.getEvent());
+
+        return TournamentShortMapper.toTournamentShortTransport(tournament);
     }
 }

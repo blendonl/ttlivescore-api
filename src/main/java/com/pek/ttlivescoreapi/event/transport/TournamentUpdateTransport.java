@@ -6,12 +6,10 @@ import java.sql.Date;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
-public class TournamentTransport {
-    private long id;
+public class TournamentUpdateTransport {
     private String name;
-    private String category;
     private Date date;
 }
