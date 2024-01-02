@@ -14,9 +14,13 @@ import com.pek.ttlivescoreapi.event.service.TournamentService;
 import com.pek.ttlivescoreapi.event.transport.*;
 import com.pek.ttlivescoreapi.league.exception.CategoryNotFoundException;
 import com.pek.ttlivescoreapi.league.repository.CategoryRepository;
+import com.pek.ttlivescoreapi.match.entity.Match;
+import com.pek.ttlivescoreapi.match.exception.MatchNotFoundException;
+import com.pek.ttlivescoreapi.match.mapper.MatchMapper;
 import com.pek.ttlivescoreapi.match.mapper.MatchShortMapper;
 import com.pek.ttlivescoreapi.match.repository.MatchRepository;
 import com.pek.ttlivescoreapi.match.transport.MatchShortTransport;
+import com.pek.ttlivescoreapi.match.transport.MatchTransport;
 import com.pek.ttlivescoreapi.user.entity.Category;
 import org.springframework.stereotype.Service;
 
@@ -99,6 +103,20 @@ public class TournamentServiceImpl implements TournamentService {
 
         return MatchShortMapper.toMatchShortsTransport(this.matchRepository.findAllByTournamentId(tournamentId));
     }
+
+    @Override
+    public MatchTransport findMatchByTournamentIdAndMatchId(long tournamentId, long matchId) {
+
+        if (!this.tournamentRepository.existsById(tournamentId)) {
+            throw new TournamentNotFoundException();
+        }
+
+        Match match = this.matchRepository.findByTournamentIdAndMatchId(tournamentId, matchId).orElseThrow(MatchNotFoundException::new);
+
+        return MatchMapper.toMatchTransport(match);
+
+    }
+
 
     @Override
     public TournamentShortTransport update(long id, TournamentUpdateTransport transport) {

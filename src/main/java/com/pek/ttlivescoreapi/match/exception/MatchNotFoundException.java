@@ -1,15 +1,17 @@
 package com.pek.ttlivescoreapi.match.exception;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+
+@ResponseStatus(HttpStatus.NOT_FOUND)
 public class MatchNotFoundException extends RuntimeException {
-    private String matchId;
+    public MatchNotFoundException(String message) {
+        super(message);
+    }
+
+    public MatchNotFoundException() {
+        super("Match not found");
+    }
 }

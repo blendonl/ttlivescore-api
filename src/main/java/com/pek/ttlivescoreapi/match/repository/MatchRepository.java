@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface MatchRepository extends JpaRepository<Match, Long> {
@@ -25,5 +26,9 @@ public interface MatchRepository extends JpaRepository<Match, Long> {
     List<Match> findAllByPlayerId(long playerId);
 
 
+    @Query(value = "select m.id, is_double, is_finished, event_id, referee_id, date, event_type, gender, name from match m left join public.event e on e.id = m.event_id where event_type = 0 and event_id = :tournamentId", nativeQuery = true)
     List<Match> findAllByTournamentId(long tournamentId);
+
+    @Query(value = "select m.id, is_double, is_finished, event_id, referee_id, date, event_type, gender, name from match m left join public.event e on e.id = m.event_id where event_type = 0 and event_id = :tournamentId and m.id = :matchId", nativeQuery = true)
+    Optional<Match> findByTournamentIdAndMatchId(long tournamentId, long matchId);
 }
