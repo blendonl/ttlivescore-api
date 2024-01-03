@@ -10,5 +10,6 @@ import lombok.*;
 public class LeagueShortTransport {
     private long id;
     private String name;
-    private char gender;
+    private String category;
+    private long year;
 }

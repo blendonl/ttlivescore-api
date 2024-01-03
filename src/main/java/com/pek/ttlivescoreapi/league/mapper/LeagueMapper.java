@@ -12,15 +12,11 @@ public class LeagueMapper {
         return LeagueTransport.builder()
                 .id(league.getId())
                 .name(league.getName())
+                .category(league.getCategory().getName())
+                .year(league.getYear())
                 .teams(league.getTeams() != null ? TeamShortMapper.toTeamsShort(league.getTeams()) : new ArrayList<>())
                 .build();
     }
 
-    public static League toLeague(LeagueTransport leagueTransport) {
-        return League
-                .builder()
-                .name(leagueTransport.getName())
-                .build();
-    }
 
 }
