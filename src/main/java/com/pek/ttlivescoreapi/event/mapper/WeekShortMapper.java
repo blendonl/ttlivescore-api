@@ -13,7 +13,6 @@ public class WeekShortMapper {
     }
 
     public static WeekShortTransport toWeekShortTransport(Week week) {
-
         return WeekShortTransport.builder()
                 .id(week.getId())
                 .name(week.getEvent().getName())
