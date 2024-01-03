@@ -6,6 +6,7 @@ import com.pek.ttlivescoreapi.user.exception.UserNotFoundException;
 import com.pek.ttlivescoreapi.user.transport.*;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -17,7 +18,7 @@ public interface UserService {
     List<UserTransport> findAllByRole(String role);
 
 
-    UserTransport save(UserSignupTransport user) throws TeamNotFoundException, UserAlreadyExistException;
+    UserTransport save(UserSignupTransport user) throws TeamNotFoundException, UserAlreadyExistException, IOException;
 
 
     void deleteById(long id) throws UserNotFoundException;
