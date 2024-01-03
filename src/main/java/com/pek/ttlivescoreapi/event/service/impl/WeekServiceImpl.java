@@ -65,10 +65,7 @@ public class WeekServiceImpl implements WeekService {
 
         SeasonType season = SeasonType.valueOf(newSeason.getSeason());
 
-        System.out.println(season);
-
         League league = this.leagueRepository.findById(newSeason.getLeagueId()).orElseThrow(LeagueNotFoundException::new);
-
 
         Event event = Event.builder()
                 .eventType(EventType.WEEK)
@@ -76,7 +73,6 @@ public class WeekServiceImpl implements WeekService {
                 .gender(newSeason.getGender())
                 .date(newSeason.getDate())
                 .build();
-
 
         event = this.eventRepository.save(event);
 
