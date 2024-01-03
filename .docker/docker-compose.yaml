@@ -6,7 +6,7 @@ services:
     image: postgres:latest
     networks:
       - my-network
-#    network_mode: host
+    #    network_mode: host
     hostname: localhost
     restart: always
     environment:
@@ -22,21 +22,21 @@ services:
     volumes:
       - .:/workspaces/postgres-data:/var/lib/postgresql/data
 
-  api:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: ttlivscore-api
-    #    network_mode: host
-    hostname: localhost
-    networks:
-      - my-network
-    ports:
-      - '8080:8080'
-    volumes:
-      - ..:/workspaces
-    depends_on:
-      - postgres
+#  api:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    container_name: ttlivscore-api
+#    #    network_mode: host
+#    hostname: localhost
+#    networks:
+#      - my-network
+#    ports:
+#      - '8080:8080'
+#    volumes:
+#      - ..:/workspaces
+#    depends_on:
+#      - postgres
 
 
 volumes:

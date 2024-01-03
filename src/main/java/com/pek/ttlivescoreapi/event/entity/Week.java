@@ -1,27 +1,29 @@
 package com.pek.ttlivescoreapi.event.entity;
 
 
-import com.pek.ttlivescoreapi.event.entity.Event;
 import com.pek.ttlivescoreapi.league.League;
 import jakarta.persistence.*;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.ManyToOne;
-import lombok.Getter;
-import lombok.Setter;
-
-import java.sql.Date;
+import lombok.*;
 
 
 @Entity
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Setter
 public class Week {
     @Id
-    @GeneratedValue()
+    @Column(name = "event_id")
     private Long id;
-    private String name;
-    private Date date;
-    @ManyToOne()
-    private Season season;
+
+    private SeasonType season;
+
+    @ManyToOne
+    private League league;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "event_id", referencedColumnName = "id")
+    private Event event;
 
 }

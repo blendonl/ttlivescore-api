@@ -1,12 +1,12 @@
 package com.pek.ttlivescoreapi.team.controller;
 
-import com.pek.ttlivescoreapi.team.tansport.TeamTransport;
+import com.pek.ttlivescoreapi.team.exception.TeamAlreadyExistException;
 import com.pek.ttlivescoreapi.team.exception.TeamNotFoundException;
-import com.pek.ttlivescoreapi.team.mapper.TeamMapper;
 import com.pek.ttlivescoreapi.team.service.TeamService;
-import com.pek.ttlivescoreapi.user.transport.UserTransport;
-import com.pek.ttlivescoreapi.team.Team;
+import com.pek.ttlivescoreapi.team.tansport.*;
+import com.pek.ttlivescoreapi.user.exception.UserNotFoundException;
 import com.pek.ttlivescoreapi.user.service.UserService;
+import com.pek.ttlivescoreapi.user.transport.UserShortTransport;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,8 +15,8 @@ import java.util.List;
 @RequestMapping("teams")
 public class TeamController {
 
-    private TeamService teamService;
-    private UserService userService;
+    private final TeamService teamService;
+    private final UserService userService;
 
 
     public TeamController(TeamService teamService, UserService userService) {
@@ -24,15 +24,22 @@ public class TeamController {
         this.userService = userService;
     }
 
-    @GetMapping("/{name}")
+    public TeamTransport findById(@PathVariable long id) throws TeamNotFoundException {
+        return teamService.findById(id);
+    }
+
+    @GetMapping("")
+    public List<TeamShortTransport> findAll(@RequestParam(required = false) TeamQueryTransport query) {
+        return teamService.findAll(query);
+    }
+
+    @GetMapping("find/{name}")
     public TeamTransport findByTeamName(@PathVariable String name) throws TeamNotFoundException {
         return teamService.findByName(name);
     }
 
     @PostMapping("")
-    public TeamTransport save(@RequestBody TeamTransport teamTransport) {
-        Team team = TeamMapper.mapToTeam(teamTransport);
-
+    public TeamShortTransport save(@RequestBody TeamCreateTransport team) throws TeamAlreadyExistException {
         return teamService.save(team);
     }
 
@@ -41,9 +48,29 @@ public class TeamController {
         teamService.deleteById(id);
     }
 
-    @GetMapping("{teamName}/players")
-    public List<UserTransport> findAllPlayerByTeamName(@PathVariable String teamName) {
-        return userService.findAllByTeamName(teamName);
+//    @GetMapping("{teamName}/players")
+//    public List<UserTransport> findAllPlayerByTeamName(@PathVariable String teamName) {
+//        return userService.findAllByTeamName(teamName);
+//    }
+
+    @PatchMapping("{teamId}")
+    public TeamShortTransport update(@PathVariable() long teamId, @RequestBody TeamUpdateTransport team) throws TeamNotFoundException, TeamAlreadyExistException {
+        return this.teamService.update(teamId, team);
+    }
+
+    @PostMapping("{teamId}/players")
+    public TeamShortTransport addPlayer(@PathVariable long teamId, @RequestBody UserShortTransport user) throws UserNotFoundException, TeamNotFoundException {
+        return this.teamService.addPlayer(teamId, user);
+    }
+
+    @DeleteMapping("{teamId}/players/{playerId}")
+    public TeamShortTransport addPlayer(@PathVariable long teamId, @PathVariable long playerId) throws UserNotFoundException, TeamNotFoundException {
+        return this.teamService.removePlayer(teamId, playerId);
+    }
+
+    @GetMapping("{teamId}/players")
+    public List<UserShortTransport> getAllPlayers(@PathVariable long teamId) throws TeamNotFoundException {
+        return this.teamService.findAllPayers(teamId);
     }
 
 

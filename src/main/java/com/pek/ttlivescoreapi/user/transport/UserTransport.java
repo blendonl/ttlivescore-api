@@ -24,11 +24,9 @@ public class UserTransport {
     private String firstName;
     private String lastName;
     private String email;
-    private String password;
     private Date birthDate;
     private char gender;
     private String teamName;
-    private List<PlayerMatchTransport> matches = new ArrayList<>();
 
 
 }
