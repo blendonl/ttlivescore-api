@@ -55,7 +55,7 @@ public class LeagueServiceImpl implements LeagueService {
 
     @Override
     public List<LeagueShortTransport> findAll(LeagueQueryTransport query) {
-        if (query == null) {
+        if (query.getName() == null || !Character.isAlphabetic(query.getGender())) {
             return LeagueShortMapper.toLeagueShortTransports(leagueRepository.findAll());
         }
 
