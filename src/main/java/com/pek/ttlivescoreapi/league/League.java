@@ -23,13 +23,24 @@ public class League {
 
     private String name;
 
-    @ManyToOne()
+    @Enumerated(EnumType.STRING)
     private Category category;
 
     private int year;
 
-    @OneToMany()
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "team",
+            joinColumns = {
+                    @JoinColumn(name = "league_id")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "id")
+            }
+    )
     private List<Team> teams;
+
+    private boolean isActive;
 
 
 }

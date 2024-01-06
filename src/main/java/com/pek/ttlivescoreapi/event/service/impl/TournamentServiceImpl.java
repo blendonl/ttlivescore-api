@@ -12,8 +12,6 @@ import com.pek.ttlivescoreapi.event.repository.EventRepository;
 import com.pek.ttlivescoreapi.event.repository.TournamentRepository;
 import com.pek.ttlivescoreapi.event.service.TournamentService;
 import com.pek.ttlivescoreapi.event.transport.*;
-import com.pek.ttlivescoreapi.league.exception.CategoryNotFoundException;
-import com.pek.ttlivescoreapi.league.repository.CategoryRepository;
 import com.pek.ttlivescoreapi.match.entity.Match;
 import com.pek.ttlivescoreapi.match.exception.MatchNotFoundException;
 import com.pek.ttlivescoreapi.match.mapper.MatchMapper;
@@ -30,14 +28,14 @@ import java.util.List;
 public class TournamentServiceImpl implements TournamentService {
     private final TournamentRepository tournamentRepository;
     private final EventRepository eventRepository;
-    private final CategoryRepository categoryRepository;
+//    private final CategoryRepository categoryRepository;
 
     private final MatchRepository matchRepository;
 
-    public TournamentServiceImpl(TournamentRepository tournamentRepository, EventRepository eventRepository, CategoryRepository categoryRepository, MatchRepository matchRepository) {
+    public TournamentServiceImpl(TournamentRepository tournamentRepository, EventRepository eventRepository, MatchRepository matchRepository) {
         this.tournamentRepository = tournamentRepository;
         this.eventRepository = eventRepository;
-        this.categoryRepository = categoryRepository;
+//        this.categoryRepository = categoryRepository;
         this.matchRepository = matchRepository;
     }
 
@@ -51,8 +49,9 @@ public class TournamentServiceImpl implements TournamentService {
     @Override
     public TournamentShortTransport save(TournamentCreateTransport newTournament) {
 
-        Category category = this.categoryRepository.findByName(newTournament.getCategory()).orElseThrow(CategoryNotFoundException::new);
+//        Category category = this.categoryRepository.findByName(newTournament.getCategory()).orElseThrow(CategoryNotFoundException::new);
 
+        Category category = Category.valueOf(newTournament.getCategory().toUpperCase());
 
         if (this.tournamentRepository.existsByNameAndCategoryName(newTournament.getName(), newTournament.getCategory())) {
             throw new TournamentAlreadyExistException();
@@ -61,8 +60,7 @@ public class TournamentServiceImpl implements TournamentService {
         Event event = Event.builder()
                 .eventType(EventType.TOURNAMENT)
                 .name(newTournament.getName())
-                .gender(newTournament.getGender())
-                .date(newTournament.getDate())
+                .gender(newTournament.getGender()).date(newTournament.getDate())
                 .build();
 
 
@@ -123,7 +121,7 @@ public class TournamentServiceImpl implements TournamentService {
 
         Tournament tournament = this.tournamentRepository.findById(id).orElseThrow(TournamentNotFoundException::new);
 
-        if (this.tournamentRepository.existsByNameAndCategoryName(transport.getName(), tournament.getCategory().getName())) {
+        if (this.tournamentRepository.existsByNameAndCategoryName(transport.getName(), tournament.getCategory().name())) {
             throw new TournamentAlreadyExistException();
         }
 

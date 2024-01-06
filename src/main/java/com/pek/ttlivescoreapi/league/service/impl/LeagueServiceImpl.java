@@ -1,13 +1,11 @@
 package com.pek.ttlivescoreapi.league.service.impl;
 
 import com.pek.ttlivescoreapi.league.League;
-import com.pek.ttlivescoreapi.league.exception.CategoryNotFoundException;
 import com.pek.ttlivescoreapi.league.exception.LeagueAlreadyExistException;
 import com.pek.ttlivescoreapi.league.exception.LeagueNotFoundException;
 import com.pek.ttlivescoreapi.league.mapper.LeagueCreateMapper;
 import com.pek.ttlivescoreapi.league.mapper.LeagueMapper;
 import com.pek.ttlivescoreapi.league.mapper.LeagueShortMapper;
-import com.pek.ttlivescoreapi.league.repository.CategoryRepository;
 import com.pek.ttlivescoreapi.league.repository.LeagueRepository;
 import com.pek.ttlivescoreapi.league.service.LeagueService;
 import com.pek.ttlivescoreapi.league.transport.*;
@@ -19,26 +17,31 @@ import com.pek.ttlivescoreapi.team.tansport.TeamShortTransport;
 import com.pek.ttlivescoreapi.user.entity.Category;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Service
 public class LeagueServiceImpl implements LeagueService {
 
     private final LeagueRepository leagueRepository;
-    private final CategoryRepository categoryRepository;
+    //    private final CategoryRepository categoryRepository;
     private final TeamRepository teamRepository;
 
 
-    public LeagueServiceImpl(LeagueRepository leagueRepository, CategoryRepository categoryRepository, TeamRepository teamRepository) {
+    public LeagueServiceImpl(LeagueRepository leagueRepository, TeamRepository teamRepository) {
         this.leagueRepository = leagueRepository;
-        this.categoryRepository = categoryRepository;
+//        this.categoryRepository = categoryRepository;
         this.teamRepository = teamRepository;
     }
 
 
     @Override
     public LeagueShortTransport save(LeagueCreateTransport newLeague) {
-        Category category = this.categoryRepository.findByName(newLeague.getCategory()).orElseThrow(CategoryNotFoundException::new);
+//        Category category = this.categoryRepository.findByName(newLeague.getCategory()).orElseThrow(CategoryNotFoundException::new);
+
+        Category category = Category.valueOf(newLeague.getCategory().toUpperCase());
 
         if (this.leagueRepository.existsByName(newLeague.getName())) {
             throw new LeagueAlreadyExistException();
@@ -48,6 +51,11 @@ public class LeagueServiceImpl implements LeagueService {
 
         league.setCategory(category);
 
+        Calendar calendar = Calendar.getInstance();
+
+        calendar.setTime(Date.from(Instant.now()));
+        league.setYear(calendar.get(Calendar.YEAR));
+
         league = leagueRepository.save(league);
 
         return LeagueShortMapper.toLeagueShortTransport(league);
@@ -55,7 +63,7 @@ public class LeagueServiceImpl implements LeagueService {
 
     @Override
     public List<LeagueShortTransport> findAll(LeagueQueryTransport query) {
-        if (query == null) {
+        if (query.getName() == null || !Character.isAlphabetic(query.getGender())) {
             return LeagueShortMapper.toLeagueShortTransports(leagueRepository.findAll());
         }
 
