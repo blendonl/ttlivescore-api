@@ -5,6 +5,7 @@ import com.pek.ttlivescoreapi.team.Team;
 import com.pek.ttlivescoreapi.team.tansport.TeamTransport;
 import com.pek.ttlivescoreapi.user.mapper.UserShortMapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TeamMapper {
@@ -17,7 +18,7 @@ public class TeamMapper {
         return TeamTransport.builder()
                 .id(team.getId())
                 .name(team.getName())
-                .leagueName(team.getLeague() != null ? team.getLeague().getName() : "")
+                .leagues(team.getLeagues() != null ? TeamLeagueMapper.toTeamLeagueTransports(team.getLeagues()) : new ArrayList<>())
                 .users(team.getUsers().stream().map(UserShortMapper::mapToUserShortTransport).toList())
                 .build();
     }

@@ -1,6 +1,6 @@
 package com.pek.ttlivescoreapi.league;
 
-import com.pek.ttlivescoreapi.team.Team;
+import com.pek.ttlivescoreapi.team.entity.TeamLeague;
 import com.pek.ttlivescoreapi.user.entity.Category;
 import jakarta.persistence.*;
 import lombok.*;
@@ -28,17 +28,8 @@ public class League {
 
     private int year;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "team",
-            joinColumns = {
-                    @JoinColumn(name = "league_id")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "id")
-            }
-    )
-    private List<Team> teams;
+    @OneToMany(mappedBy = "league")
+    private List<TeamLeague> teams;
 
     private boolean isActive;
 

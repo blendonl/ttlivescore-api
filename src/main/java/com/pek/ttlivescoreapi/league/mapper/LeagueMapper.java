@@ -2,6 +2,7 @@ package com.pek.ttlivescoreapi.league.mapper;
 
 import com.pek.ttlivescoreapi.league.League;
 import com.pek.ttlivescoreapi.league.transport.LeagueTransport;
+import com.pek.ttlivescoreapi.team.entity.TeamLeague;
 import com.pek.ttlivescoreapi.team.mapper.TeamShortMapper;
 
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ public class LeagueMapper {
                 .name(league.getName())
                 .category(league.getCategory().name())
                 .year(league.getYear())
-                .teams(league.getTeams() != null ? TeamShortMapper.toTeamsShort(league.getTeams()) : new ArrayList<>())
+                .teams(league.getTeams() != null ? TeamShortMapper.toTeamsShort(league.getTeams().stream().map(TeamLeague::getTeam).toList()) : new ArrayList<>())
                 .build();
     }
 
