@@ -31,5 +31,7 @@ public class League {
     @OneToMany()
     private List<Team> teams;
 
+    private boolean active;
+
 
 }

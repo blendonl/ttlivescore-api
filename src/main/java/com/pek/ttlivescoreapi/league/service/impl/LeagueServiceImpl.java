@@ -19,6 +19,9 @@ import com.pek.ttlivescoreapi.team.tansport.TeamShortTransport;
 import com.pek.ttlivescoreapi.user.entity.Category;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -47,6 +50,11 @@ public class LeagueServiceImpl implements LeagueService {
         League league = LeagueCreateMapper.toLeague(newLeague);
 
         league.setCategory(category);
+
+        Calendar calendar = Calendar.getInstance();
+
+        calendar.setTime(Date.from(Instant.now()));
+        league.setYear(calendar.get(Calendar.YEAR));
 
         league = leagueRepository.save(league);
 
