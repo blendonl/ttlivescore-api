@@ -20,6 +20,7 @@ public class LeagueShortMapper {
                 .name(league.getName())
                 .category(league.getCategory().getName())
                 .year(league.getYear())
+                .teamsLength(league.getTeams().size())
                 .build();
 
     }
