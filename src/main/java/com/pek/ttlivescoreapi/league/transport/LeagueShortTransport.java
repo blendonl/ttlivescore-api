@@ -11,6 +11,6 @@ public class LeagueShortTransport {
     private long id;
     private String name;
     private String category;
-    private long year;
+    private long yearCreated;
     private long teamsLength;
 }

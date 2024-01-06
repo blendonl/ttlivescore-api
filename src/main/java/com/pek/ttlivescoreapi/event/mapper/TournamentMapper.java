@@ -9,7 +9,7 @@ public class TournamentMapper {
         return TournamentTransport.builder()
                 .id(tournament.getId())
                 .date(tournament.getEvent().getDate())
-                .category(tournament.getCategory().getName())
+                .category(tournament.getCategory().name())
                 .name(tournament.getEvent().getName())
                 .build();
     }

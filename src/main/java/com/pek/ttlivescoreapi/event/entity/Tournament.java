@@ -20,7 +20,7 @@ public class Tournament {
     @JoinColumn(referencedColumnName = "id", name = "event_id")
     private Event event;
 
-    @ManyToOne()
+    @Enumerated(EnumType.STRING)
     private Category category;
 
 }

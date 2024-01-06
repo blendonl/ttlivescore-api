@@ -18,9 +18,9 @@ public class LeagueShortMapper {
         return LeagueShortTransport.builder()
                 .id(league.getId())
                 .name(league.getName())
-                .category(league.getCategory().getName())
-                .year(league.getYear())
-                .teamsLength(league.getTeams().size())
+                .category(league.getCategory().name())
+                .yearCreated(league.getYear())
+                .teamsLength(league.getTeams() != null ? league.getTeams().size() : 0)
                 .build();
 
     }

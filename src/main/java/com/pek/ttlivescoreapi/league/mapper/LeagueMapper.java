@@ -12,7 +12,7 @@ public class LeagueMapper {
         return LeagueTransport.builder()
                 .id(league.getId())
                 .name(league.getName())
-                .category(league.getCategory().getName())
+                .category(league.getCategory().name())
                 .year(league.getYear())
                 .teams(league.getTeams() != null ? TeamShortMapper.toTeamsShort(league.getTeams()) : new ArrayList<>())
                 .build();
