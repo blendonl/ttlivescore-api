@@ -20,9 +20,12 @@ public interface LeagueRepository extends JpaRepository<League, Long> {
 
     boolean existsByName(String name);
 
-    @Query(value = "update team set id = :teamId where league_id = :leagueId;", nativeQuery = true)
-    Optional<Team> addTeam(long leagueId, long teamId);
+    @Query(value = "insert into team_league(year, league_id, team_id) values (date_part('year', date(now())),:leagueId, :teamId); select * from team where team.id = :teamId", nativeQuery = true)
+    void addTeam(long leagueId, long teamId);
 
     @Query(value = "update team set id = :teamId where league_id = -1;", nativeQuery = true)
     Optional<Team> removeTeam(long teamId);
+
+    @Query(value = "select case when count(*) = 1 then TRUE else FALSE end from team_league tl where tl.year = :year and tl.league_id = :leagueId and tl.team_id = :teamId", nativeQuery = true)
+    boolean teamExists(long leagueId, long teamId, int year);
 }

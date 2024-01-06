@@ -10,6 +10,7 @@ import com.pek.ttlivescoreapi.league.repository.LeagueRepository;
 import com.pek.ttlivescoreapi.league.service.LeagueService;
 import com.pek.ttlivescoreapi.league.transport.*;
 import com.pek.ttlivescoreapi.team.Team;
+import com.pek.ttlivescoreapi.team.exception.TeamAlreadyExistException;
 import com.pek.ttlivescoreapi.team.exception.TeamNotFoundException;
 import com.pek.ttlivescoreapi.team.mapper.TeamShortMapper;
 import com.pek.ttlivescoreapi.team.repository.TeamRepository;
@@ -127,9 +128,21 @@ public class LeagueServiceImpl implements LeagueService {
         if (!this.leagueRepository.existsById(leagueId)) {
             throw new LeagueNotFoundException();
         }
+        Team team = this.teamRepository.findByName(newTeam.getTeamName()).orElseThrow(TeamNotFoundException::new);
 
 
-        Team team = this.leagueRepository.addTeam(leagueId, newTeam.getId()).orElseThrow(TeamNotFoundException::new);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(Date.from(Instant.now()));
+
+        int year = calendar.get(Calendar.YEAR);
+
+
+        if (this.leagueRepository.teamExists(leagueId, team.getId(), year)) {
+            throw new TeamAlreadyExistException("Team already exist in league");
+
+        }
+
+        this.leagueRepository.addTeam(leagueId, team.getId());
 
         return TeamShortMapper.toTeamShort(team);
 

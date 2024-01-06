@@ -14,7 +14,7 @@ import java.util.Optional;
 public interface TeamRepository extends JpaRepository<Team, Long> {
     Optional<Team> findByName(String name);
 
-    @Query(value = "Select t.id, t.name, league_id, l.category, l.is_active, l.name, l.year from team t left join team_league tl on tl.team_id = t.id left join league l on l.id = tl.league_id where tl.league_id = :leagueId", nativeQuery = true)
+    @Query(value = "Select t.id, t.name, league_id, l.category, l.is_active, l.name league_name, l.year from team t left join team_league tl on tl.team_id = t.id left join league l on l.id = tl.league_id where tl.league_id = :leagueId", nativeQuery = true)
     List<Team> findAllByLeagueId(long leagueId);
 
     @Query(value = "select * from team t where t.name = :#{#query.name}", nativeQuery = true)
