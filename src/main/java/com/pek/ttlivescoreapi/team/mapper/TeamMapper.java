@@ -10,19 +10,18 @@ import java.util.List;
 
 public class TeamMapper {
 
-    public static TeamTransport mapToTeamTransport(Team team) {
-        return TeamTransport
-                .builder()
-                .name(team.getName())
-                .leagueName(team.getLeague().getName())
-                .users(team.getUsers().stream().map(UserShortMapper::mapToUserShortTransport).toList())
-                .build();
-    }
-
     public static List<TeamTransport> mapToTeamsTransport(List<Team> team) {
         return team.stream().map(TeamMapper::mapToTeamTransport).toList();
     }
 
+    public static TeamTransport mapToTeamTransport(Team team) {
+        return TeamTransport
+                .builder()
+                .name(team.getName())
+                .leagueName(team.getLeague() != null ? team.getLeague().getName() : "")
+                .users(team.getUsers().stream().map(UserShortMapper::mapToUserShortTransport).toList())
+                .build();
+    }
 
     public static Team mapToTeam(TeamTransport teamTransport) {
         return Team

@@ -80,7 +80,6 @@ public class TeamServiceImpl implements TeamService {
 
     @Override
     public List<TeamShortTransport> findAll(TeamQueryTransport query) {
-        System.out.println(query);
         if (query == null) {
             return TeamShortMapper.toTeamsShort(repository.findAll());
         }
