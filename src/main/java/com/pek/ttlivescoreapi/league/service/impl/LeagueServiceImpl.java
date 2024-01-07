@@ -17,6 +17,7 @@ import com.pek.ttlivescoreapi.team.repository.TeamRepository;
 import com.pek.ttlivescoreapi.team.tansport.TeamShortTransport;
 import com.pek.ttlivescoreapi.user.entity.Category;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.util.Calendar;
@@ -149,12 +150,15 @@ public class LeagueServiceImpl implements LeagueService {
     }
 
     @Override
+    @Transactional
     public TeamShortTransport removeTeam(long leagueId, long teamId) {
         if (!this.leagueRepository.existsById(leagueId)) {
             throw new LeagueNotFoundException();
         }
 
-        Team team = this.leagueRepository.removeTeam(teamId).orElseThrow(TeamNotFoundException::new);
+        Team team = this.teamRepository.findById(teamId).orElseThrow(TeamNotFoundException::new);
+
+        this.leagueRepository.removeTeam(leagueId, teamId);
 
         return TeamShortMapper.toTeamShort(team);
     }

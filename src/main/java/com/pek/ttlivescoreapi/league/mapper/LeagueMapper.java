@@ -14,7 +14,7 @@ public class LeagueMapper {
                 .id(league.getId())
                 .name(league.getName())
                 .category(league.getCategory().name())
-                .year(league.getYear())
+                .yearCreated(league.getYear())
                 .teams(league.getTeams() != null ? TeamShortMapper.toTeamsShort(league.getTeams().stream().map(TeamLeague::getTeam).toList()) : new ArrayList<>())
                 .build();
     }
