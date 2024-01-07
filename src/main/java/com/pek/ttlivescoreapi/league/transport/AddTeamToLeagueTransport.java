@@ -8,5 +8,5 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class AddTeamToLeagueTransport {
-    private long id;
+    private String teamName;
 }

@@ -24,6 +24,7 @@ public class TeamController {
         this.userService = userService;
     }
 
+    @GetMapping("{id}")
     public TeamTransport findById(@PathVariable long id) throws TeamNotFoundException {
         return teamService.findById(id);
     }
@@ -43,7 +44,7 @@ public class TeamController {
         return teamService.save(team);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     public void deleteById(@PathVariable long id) throws TeamNotFoundException {
         teamService.deleteById(id);
     }
