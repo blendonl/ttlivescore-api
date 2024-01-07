@@ -52,7 +52,7 @@ public class LeagueController {
         return leagueService.findOneTeamById(teamId, leagueId);
     }
 
-    @PostMapping("{leagueId}/teams/")
+    @PostMapping("{leagueId}/teams")
     public TeamShortTransport addTeam(@PathVariable long leagueId, @RequestBody AddTeamToLeagueTransport team) {
         return leagueService.addTeam(leagueId, team);
     }

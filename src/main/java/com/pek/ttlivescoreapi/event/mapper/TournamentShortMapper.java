@@ -16,7 +16,7 @@ public class TournamentShortMapper {
                 .id(tournament.getId())
                 .date(tournament.getEvent().getDate())
                 .name(tournament.getEvent().getName())
-                .category(tournament.getCategory().getName())
+                .category(tournament.getCategory().name())
                 .build();
 
     }
