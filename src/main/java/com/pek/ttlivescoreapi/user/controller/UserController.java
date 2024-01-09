@@ -26,7 +26,7 @@ public class UserController {
     }
 
     @GetMapping
-    public List<UserShortTransport> findAll(@RequestParam(required = false) UserQueryTransport query) throws Exception {
+    public List<UserShortTransport> findAll(UserQueryTransport query) throws Exception {
         return this.userService.findAll(query);
     }
 

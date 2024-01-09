@@ -15,19 +15,8 @@ public class UserShortMapper {
 
         return UserShortTransport.builder()
                 .id(user.getId().toString())
-
-
+                .birthDate(user.getBirthDate())
                 .firstName(user.getName())
-                .lastName(user.getLastName())
-                .email(user.getEmail())
-                .gender(user.getGender())
-                .build();
-    }
-
-    public static User toUser(UserShortTransport user) {
-        return User.builder()
-                .id(Long.parseLong(user.getId()))
-                .name(user.getFirstName())
                 .lastName(user.getLastName())
                 .email(user.getEmail())
                 .gender(user.getGender())
