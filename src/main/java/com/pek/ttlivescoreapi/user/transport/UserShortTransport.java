@@ -3,6 +3,7 @@ package com.pek.ttlivescoreapi.user.transport;
 import lombok.*;
 
 import java.sql.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -17,5 +18,6 @@ public class UserShortTransport {
     private char gender;
     private String email;
     private Date birthDate;
+    private List<String> roles;
 
 }

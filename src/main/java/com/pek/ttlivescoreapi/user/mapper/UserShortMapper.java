@@ -1,5 +1,6 @@
 package com.pek.ttlivescoreapi.user.mapper;
 
+import com.pek.ttlivescoreapi.user.entity.Role;
 import com.pek.ttlivescoreapi.user.entity.User;
 import com.pek.ttlivescoreapi.user.transport.UserShortTransport;
 
@@ -20,6 +21,7 @@ public class UserShortMapper {
                 .lastName(user.getLastName())
                 .email(user.getEmail())
                 .gender(user.getGender())
+                .roles(user.getRoles().stream().map(Role::getName).toList())
                 .build();
     }
 }

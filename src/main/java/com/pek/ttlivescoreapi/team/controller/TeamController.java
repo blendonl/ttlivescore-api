@@ -24,6 +24,7 @@ public class TeamController {
         this.userService = userService;
     }
 
+    @GetMapping("{id}")
     public TeamTransport findById(@PathVariable long id) throws TeamNotFoundException {
         return teamService.findById(id);
     }
