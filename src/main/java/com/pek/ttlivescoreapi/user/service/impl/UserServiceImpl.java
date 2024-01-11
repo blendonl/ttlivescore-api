@@ -34,9 +34,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserShortTransport> findAll(UserQueryTransport query) throws Exception {
-        if (query.getEmail() == null && query.getFirstName() == null && query.getLastName() == null) {
+        if (query.getEmail() == null && query.getFirstName() == null && query.getLastName() == null && query.getNt() == 0) {
             return UserShortMapper.mapToUserShortsTransport(this.userRepository.findAll());
         }
+
+        query.setEmail(query.getEmail() != null ? query.getEmail() : "");
+        query.setFirstName(query.getFirstName() != null ? query.getFirstName() : "");
+        query.setLastName(query.getLastName() != null ? query.getLastName() : "");
 
         return UserShortMapper.mapToUserShortsTransport(userRepository.findAllWithQuery(query));
 

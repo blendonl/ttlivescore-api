@@ -11,4 +11,5 @@ public class UserQueryTransport {
     private String firstName;
     private String lastName;
     private String email;
+    private long nt;
 }
