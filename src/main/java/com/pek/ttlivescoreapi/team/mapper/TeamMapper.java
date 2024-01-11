@@ -17,6 +17,7 @@ public class TeamMapper {
     public static TeamTransport mapToTeamTransport(Team team) {
         return TeamTransport
                 .builder()
+                .id(team.getId())
                 .name(team.getName())
                 .leagueName(team.getLeague() != null ? team.getLeague().getName() : "")
                 .users(team.getUsers() != null ? team.getUsers().stream().map(UserShortMapper::mapToUserShortTransport).toList() : new ArrayList<>())

@@ -60,7 +60,7 @@ public class TeamController {
     }
 
     @PostMapping("{teamId}/players")
-    public TeamShortTransport addPlayer(@PathVariable long teamId, @RequestBody UserShortTransport user) throws UserNotFoundException, TeamNotFoundException {
+    public TeamShortTransport addPlayer(@PathVariable long teamId, @RequestBody AddUserToTeamTransport user) throws UserNotFoundException, TeamNotFoundException {
         return this.teamService.addPlayer(teamId, user);
     }
 

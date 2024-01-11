@@ -1,6 +1,5 @@
 package com.pek.ttlivescoreapi.team;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pek.ttlivescoreapi.league.League;
 import com.pek.ttlivescoreapi.user.entity.User;
 import jakarta.persistence.*;
@@ -25,7 +24,9 @@ public class Team {
     @ManyToOne()
     private League league;
 
-    @ManyToMany(mappedBy = "teams", cascade = {CascadeType.MERGE})
+    @ManyToMany(cascade = {CascadeType.MERGE})
+    @JoinTable(name = "users_teams", joinColumns = {@JoinColumn(name = "team_id")},
+            inverseJoinColumns = {@JoinColumn(name = "user_id")})
     private List<User> users;
 
 }

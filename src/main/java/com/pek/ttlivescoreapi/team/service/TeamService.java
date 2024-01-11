@@ -25,7 +25,7 @@ public interface TeamService {
 
     List<TeamShortTransport> findAll(TeamQueryTransport query);
 
-    TeamShortTransport addPlayer(long id, UserShortTransport user) throws TeamNotFoundException, UserNotFoundException;
+    TeamShortTransport addPlayer(long id, AddUserToTeamTransport user) throws TeamNotFoundException, UserNotFoundException;
 
     TeamShortTransport removePlayer(long teamId, long playerId) throws UserNotFoundException, TeamNotFoundException;
 
