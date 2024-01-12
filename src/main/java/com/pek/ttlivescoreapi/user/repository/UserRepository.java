@@ -16,7 +16,7 @@ import java.util.Optional;
 @Transactional
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    @Query(value = "select * from users where users.name = :#{#query.firstName} or users.last_name = :#{#query.lastName} or users.email = :#{#query.email}", nativeQuery = true)
+    @Query(value = "select * from users left join public.users_teams ut on users.id = ut.user_id where users.name = :#{#query.firstName} or users.last_name = :#{#query.lastName} or users.email = :#{#query.email} or (ut.team_id != :#{#query.nt} or users.id not in (select ut1.user_id from users_teams ut1 where ut1.user_id = users.id))", nativeQuery = true)
     List<User> findAllWithQuery(@Param("query") UserQueryTransport query);
 
     List<User> findAllByRolesContaining(Role role);

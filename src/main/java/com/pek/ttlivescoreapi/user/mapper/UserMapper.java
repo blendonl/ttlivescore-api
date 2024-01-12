@@ -26,7 +26,7 @@ public class UserMapper {
                 .lastName(user.getLastName())
                 .email(user.getEmail())
                 .birthDate(user.getBirthDate())
-                .teamName(user.getTeams().get(user.getTeams().size() - 1).getName())
+                .teamName((user.getTeams() != null && !user.getTeams().isEmpty()) ? user.getTeams().get(user.getTeams().size() - 1).getName() : "")
                 .gender(user.getGender())
                 .build();
     }

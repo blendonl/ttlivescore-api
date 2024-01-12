@@ -1,15 +1,15 @@
 package com.pek.ttlivescoreapi.user.service.impl;
 
-import com.pek.ttlivescoreapi.match.service.MatchService;
-import com.pek.ttlivescoreapi.team.Team;
 import com.pek.ttlivescoreapi.team.exception.TeamNotFoundException;
-import com.pek.ttlivescoreapi.team.repository.TeamRepository;
+import com.pek.ttlivescoreapi.user.entity.Role;
 import com.pek.ttlivescoreapi.user.entity.User;
+import com.pek.ttlivescoreapi.user.exception.RoleNotFoundException;
 import com.pek.ttlivescoreapi.user.exception.UserAlreadyExistException;
 import com.pek.ttlivescoreapi.user.exception.UserNotFoundException;
 import com.pek.ttlivescoreapi.user.mapper.UserMapper;
 import com.pek.ttlivescoreapi.user.mapper.UserShortMapper;
 import com.pek.ttlivescoreapi.user.mapper.UserSignupMapper;
+import com.pek.ttlivescoreapi.user.repository.RoleRepository;
 import com.pek.ttlivescoreapi.user.repository.UserRepository;
 import com.pek.ttlivescoreapi.user.service.UserService;
 import com.pek.ttlivescoreapi.user.transport.*;
@@ -18,28 +18,29 @@ import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 
 public class UserServiceImpl implements UserService {
-
-    private final TeamRepository teamRepository;
     private final UserRepository userRepository;
-    private final MatchService matchService;
+    private final RoleRepository roleRepository;
 
-    public UserServiceImpl(UserRepository userRepository, MatchService matchService,
-                           TeamRepository teamRepository) {
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
-        this.matchService = matchService;
-        this.teamRepository = teamRepository;
+        this.roleRepository = roleRepository;
     }
 
     @Override
     public List<UserShortTransport> findAll(UserQueryTransport query) throws Exception {
-        if (query == null) {
-            throw new Exception("bad query");
+        if (query.getEmail() == null && query.getFirstName() == null && query.getLastName() == null && query.getNt() == 0) {
+            return UserShortMapper.mapToUserShortsTransport(this.userRepository.findAll());
         }
+
+        query.setEmail(query.getEmail() != null ? query.getEmail() : "");
+        query.setFirstName(query.getFirstName() != null ? query.getFirstName() : "");
+        query.setLastName(query.getLastName() != null ? query.getLastName() : "");
 
         return UserShortMapper.mapToUserShortsTransport(userRepository.findAllWithQuery(query));
 
@@ -54,15 +55,18 @@ public class UserServiceImpl implements UserService {
 
 
     public UserTransport save(UserSignupTransport newUser) throws TeamNotFoundException, UserAlreadyExistException, IOException {
-        User user = UserSignupMapper.mapUserSignupToUser(newUser);
 
-        if (userRepository.existsByEmail(user.getEmail())) {
+        Role role = this.roleRepository.findById((long) Integer.parseInt(newUser.getRole())).orElseThrow(RoleNotFoundException::new);
+
+        if (userRepository.existsByEmail(newUser.getEmail())) {
             throw new UserAlreadyExistException("user already exist");
         }
 
-        Team team = teamRepository.findByName(newUser.getTeamName()).orElseThrow(TeamNotFoundException::new);
+        User user = UserSignupMapper.mapUserSignupToUser(newUser);
 
-        user.getTeams().add(team);
+        user.setRoles(new ArrayList<>());
+
+        user.getRoles().add(role);
 
         return UserMapper.mapToUserTransport(userRepository.save(user));
 

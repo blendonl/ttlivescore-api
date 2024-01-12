@@ -88,10 +88,10 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
-    public TeamShortTransport addPlayer(long id, UserShortTransport newUser) throws TeamNotFoundException, UserNotFoundException {
+    public TeamShortTransport addPlayer(long id, AddUserToTeamTransport newUser) throws TeamNotFoundException, UserNotFoundException {
         Team team = this.repository.findById(id).orElseThrow(TeamNotFoundException::new);
 
-        User user = this.userRepository.findByEmail(newUser.getEmail()).orElseThrow(UserNotFoundException::new);
+        User user = this.userRepository.findById(newUser.getUserId()).orElseThrow(UserNotFoundException::new);
 
         team.getUsers().add(user);
 

@@ -12,8 +12,8 @@ import java.util.List;
 @Service
 public interface UserService {
 
-    List<UserShortTransport> findAll(UserQueryTransport query) throws Exception;
 
+    List<UserShortTransport> findAll(UserQueryTransport query) throws Exception;
 
     List<UserTransport> findAllByRole(String role);
 

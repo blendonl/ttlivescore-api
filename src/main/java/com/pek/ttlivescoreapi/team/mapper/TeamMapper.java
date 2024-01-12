@@ -15,6 +15,7 @@ public class TeamMapper {
     }
 
     public static TeamTransport mapToTeamTransport(Team team) {
+
         return TeamTransport.builder()
                 .id(team.getId())
                 .name(team.getName())
