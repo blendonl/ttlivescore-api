@@ -11,9 +11,8 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class TeamTransport {
-
     private long id;
     private String name;
-    private String leagueName;
+    private List<TeamLeagueTransport> leagues;
     private List<UserShortTransport> users;
 }

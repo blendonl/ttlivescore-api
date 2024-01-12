@@ -15,12 +15,12 @@ public class TeamMapper {
     }
 
     public static TeamTransport mapToTeamTransport(Team team) {
-        return TeamTransport
-                .builder()
+
+        return TeamTransport.builder()
                 .id(team.getId())
                 .name(team.getName())
-                .leagueName(team.getLeague() != null ? team.getLeague().getName() : "")
-                .users(team.getUsers() != null ? team.getUsers().stream().map(UserShortMapper::mapToUserShortTransport).toList() : new ArrayList<>())
+                .leagues(team.getLeagues() != null ? TeamLeagueMapper.toTeamLeagueTransports(team.getLeagues()) : new ArrayList<>())
+                .users(team.getUsers().stream().map(UserShortMapper::mapToUserShortTransport).toList())
                 .build();
     }
 
